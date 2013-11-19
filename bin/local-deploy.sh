@@ -31,11 +31,31 @@ function copy {
   # if target does not exist, do it unless excluded host
   # if they are different 
   echo -- cp $FROM $TO [$DO]
-  if [ "$DO" == "do" ]; then
-     cp -p $FROM $TO 
-     echo "   chown $OWNER $TO"
-     echo "   chmod $PERMS $TO"
-     ls -la $TO
+  if [ -f $TO ]; then
+     # it exists - reapply permissions
+     sudo chown $OWNER $TO
+     sudo chmod $PERMS $TO
+     DIFF=`sudo diff -C0 $FROM $TO`
+     if [ "$DIFF" == "" ]; then
+         echo "   Exists and is identical - good."
+     else
+         echo "   *****************"
+         echo "   * MANUAL ACTION * Please resolve DIFFERENCES and commit changes to the local repo. Differences:"
+         echo "   *****************"
+         sudo diff -C0 $FROM $TO
+         ls -la $FROM $TO
+     fi
+  else
+       # it doesn't exist
+       if [ "$DO" == "do" ]; then
+          echo "   Creating with $OWNER $PERMS"
+          sudo cp $FROM $TO
+          sudo chown $OWNER $TO
+          sudo chmod $PERMS $TO
+          ls -la $TO
+       else
+       echo "   To be created with $OWNER $PERMS"
+       fi
   fi
 }
 
