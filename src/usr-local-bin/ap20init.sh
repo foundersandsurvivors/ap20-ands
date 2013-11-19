@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Deployed copy of ap20-ands/src/usr-local-bin/ap20init.sh
 # www-data can run this once only as root to set up web security
 . /etc/environment
 
@@ -29,18 +30,24 @@ if [ -L index.html ]; then
    echo ".. index.html is symlink"
    IDX=`readlink -f index.html`
    ls -la index.html
-   echo "..IDX[$IDX] removing symlink"
-   sudo rm index.html
+   if [ "$IDX" == "$WEBROOT/index-local.html" ]; then
+      echo ".. retaining symlink to index-local.html"
+   else
+      echo ".. IDX[$IDX] removing symlink"
+      sudo rm index.html
+      ln -s index-app.html index.html
+   fi
 else
    if [ -f index.html ]; then
-      echo "..index.html exists is file, saving as index-prev.html"
+      echo ".. index.html exists is file, saving as index-prev.html"
       sudo mv index.html index-prev.html
+      ln -s index-app.html index.html
    else
-      echo "..index.html does not exist, can proceed"
+      echo ".. index.html does not exist, can proceed"
+      ln -s index-app.html index.html
    fi
 fi
 
-ln -s index-app.html index.html
 ls -la $WEBROOT/index.html
 echo ""
 echo "$DELIM /srv/.first contains credentials:"

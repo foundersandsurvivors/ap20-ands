@@ -42,3 +42,8 @@ copy ../src/cgi-bin/first             $YGGDEP_CGIBIN_DIR/first         $YGGDEP_D
 copy ../src/usr-local-bin/ap20init.sh /usr/local/bin/ap20init.sh       root:root             700 "$1"
 copy ../src/www/index-first.html      $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html        $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
+
+# manual copies/ancilliary web stuff
+echo ""
+echo "-- (web support files) rsync -ax ../src/www/css $YGGDEP_WEBROOT"
+rsync -ax ../src/www/css $YGGDEP_WEBROOT                  
