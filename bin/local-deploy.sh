@@ -46,4 +46,4 @@ copy ../src/www/index-app.html        $YGGDEP_WEBROOT/index-app.html   root:root
 # manual copies/ancilliary web stuff
 echo ""
 echo "-- (web support files) rsync -ax ../src/www/css $YGGDEP_WEBROOT"
-rsync -ax ../src/www/css $YGGDEP_WEBROOT                  
+sudo rsync -ax ../src/www/css $YGGDEP_WEBROOT                  
