@@ -6,16 +6,22 @@ use CGI;
 use CGI::Carp qw(fatalsToBrowser);
 use POSIX qw(strftime);
 my $now = strftime('%Y-%m-%dT%H:%M:%S', localtime);
+my $semaphore = "/srv/.first";
 $proceed = 0;
 $info = '';
 $title = "First time configuration of ". $ENV{'SERVER_ADDR'}."<h2>By script: ".$ENV{'HTTP_REFERER'}."</h2>";
-if ( -w "/srv/.first" ) {
-    $info .= "/srv/.first found!<h1>Proceeding with configuration...</h1>";
+my $configuration_completed = -s $semaphore;
+if ( $configuration_completed ) {
+    $info .= '';
+    $title = "Configuration completed!";
+}
+elsif ( -w $semaphore ) {
+    $info .= "$semaphore found, writable and empty!<h1>Proceeding with configuration...fs[$configuration_completed]</h1>";
     $proceed = 1; 
 }
 else {
     $info .= '';
-    $title = "";
+    $title = "ERROR: $semaphore not writable; not proceeding. fs[$configuration_completed]. Ensure $semaphore is writable and zero size.";
 }
 
 ($bad,$good,$form,$user,$pass1,$pass2) = '';
@@ -43,7 +49,7 @@ if ($proceed) {
              
         }
     }
-    $environment = '<h2>Important info about this Yggdrasil server:</h2><h3>Web server environment variables are:</h3><pre>';
+    $environment = '<h2>Important technical info about this Yggdrasil server:</h2><h3>Web server environment variables are:</h3><pre>';
     foreach my $key (sort(keys(%ENV))) {
         $environment .= "  $key = [$ENV{$key}]\n";
     }
@@ -72,10 +78,11 @@ if ($proceed) {
     $environment .= "</pre>";
 
     if ($good) {
-        open (F,">/srv/.first"); print F "$user $pass1\n"; close(F);
+        open (F,">$semaphore"); print F "$user $pass1\n"; close(F);
         my $rc = system('sudo /usr/local/bin/ap20init.sh > /tmp/ap20init.sh.log 2>&1');
         $info .= "== Processing .... /usr/local/bin/ap20init.sh .....rc[$rc]:\n";
         open(H,"/tmp/ap20init.sh.log"); while (<H>) { $info .= $_; } close(H); 
+        my $rc = system("chmod 600 $semaphore");
     }
     else {
         $info .= "\nPlease enter credentials into this form. This will enable you to access the system administration documentation.";
@@ -98,8 +105,10 @@ configFORM
 }
 
 if ($good) { 
-    $uri = "http://".$ENV{'SERVER_NAME'}."/documentation/first/log.html";
-    $showLog = "<hr/><address>This report retained at: <a href=\"$uri\">$uri</a>"; 
+    $uri = "http://".$ENV{'SERVER_NAME'}."/documentation/first_log.html";
+    $homeuri = "http://".$ENV{'SERVER_NAME'}."/";
+    $showLog = "<hr/><address>This report saved at: <a href=\"$uri\">$uri</a> (restricted to the username/password set here)</address>".
+               "<h3>Proceed to your home page:  <a href=\"$homeuri\">$homeuri</a></h3>";
 }
 
 my $content = <<"EOF";
@@ -110,8 +119,8 @@ my $content = <<"EOF";
 <link href="/pub/xsl/useit_style.css" rel="stylesheet" type="text/css">
 <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 <script type="text/javascript">
-$( document ).ready(function() {
-    $('#F1').validator();
+\$( document ).ready(function() {
+    \$('#F1').validator();
 });
 </script>
 <TITLE>$title</TITLE>
@@ -134,7 +143,7 @@ $showLog
 EOF
 
 if ($good) {
-    open (LOG,">$webroot/documentation/first/log.html");
+    open (LOG,">$webroot/documentation/first_log.html");
     print LOG $content;
     close(LOG);
 }

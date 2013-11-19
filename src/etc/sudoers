@@ -1,0 +1,4 @@
+# Allow web server to run the following script
+# See usr/lib/cgi-bin/first
+www-data ALL=NOPASSWD: /usr/local/bin/ap20init.sh
+

@@ -1,0 +1,4 @@
+# required environment variables for ap20 yggdrasil
+AP20_WEBROOT="/var/www"
+AP20_HOME="/var/ydev"
+FASHOST=""
