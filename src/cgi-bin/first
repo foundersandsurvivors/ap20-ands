@@ -1,0 +1,143 @@
+#!/usr/bin/perl
+
+# first time run to configure access security for nectar yggdrasil vm
+
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+use POSIX qw(strftime);
+my $now = strftime('%Y-%m-%dT%H:%M:%S', localtime);
+$proceed = 0;
+$info = '';
+$title = "First time configuration of ". $ENV{'SERVER_ADDR'}."<h2>By script: ".$ENV{'HTTP_REFERER'}."</h2>";
+if ( -w "/srv/.first" ) {
+    $info .= "/srv/.first found!<h1>Proceeding with configuration...</h1>";
+    $proceed = 1; 
+}
+else {
+    $info .= '';
+    $title = "";
+}
+
+($bad,$good,$form,$user,$pass1,$pass2) = '';
+if ($proceed) {
+    my $q = new CGI;
+    if ($q->param()) {
+        $user = $q->param('user');
+        $pass1 = $q->param('password1');
+        $pass2 = $q->param('password2');
+        # server side kill bad chars and validation
+        $bad = '';
+        if ( $user =~ s/[^a-zA-Z0-9]//g       ) { $bad .= "    Bad characters in user\n"; }
+        if ( $pass1 =~ s/[^a-zA-Z0-9\#\$\%\@\!]//g ) { $bad .= "    Bad characters in password1\n"; }
+        if ( $pass2 =~ s/[^a-zA-Z0-9\#\$\%\@\!]//g ) { $bad .= "    Bad characters in password2\n"; }
+        if ( $pass1 ne $pass2 ) { $bad .= "    Password 1 and 2 are not the same\n"; }
+        if ( !$user || !$pass1 || !$pass2 ) { $bad .= "Not all fields submitted\n"; }
+        if (!$bad) {
+            if ( length($user) < 7 || length($user) > 10 ) { $bad .= "user length=".length($user).". Must be 7-10 chars long.\n"; }
+            if ( length($pass1) < 7 || length($pass) > 20 ) { $bad .= "password length=".length($pass1).". Must be 7-20 chars long.\n"; }
+        }
+        $info .= "\nYou entered user[$user] pass1[$pass1] pass2[$pass2]\n\n";
+        if ($bad) { $bad = "<pre class=\"error\">ERROR IN SUBMISSION:\n$bad</pre>"; }  
+        else { 
+            $good = 1; 
+             
+        }
+    }
+    $environment = '<h2>Important info about this Yggdrasil server:</h2><h3>Web server environment variables are:</h3><pre>';
+    foreach my $key (sort(keys(%ENV))) {
+        $environment .= "  $key = [$ENV{$key}]\n";
+    }
+    $environment .= "</pre>";
+
+    $environment .= '<h3>Your /etc/hosts on this VM contains:</h3><pre>';
+    open(H,"/etc/hosts"); while (<H>) { $environment .= $_; } close(H);
+    $environment .= "</pre>";
+
+    $webroot = "/var/www";
+    $environment .= "<h3>Your WEBROOT at $webroot contains:</h3><pre>";
+    system("cd $webroot;find . -maxdepth 1 -ls > /tmp/webroot.txt 2>&1");
+    open(H,"/tmp/webroot.txt"); while (<H>) { $environment .= $_; } close(H);
+    $environment .= "</pre>";
+
+    $approot = "ap20/khrd-dev";
+    $environment .= "<h3>Your Yggdrasil WEBAPP at $webroot/$approot contains:</h3><pre>";
+    system("cd $webroot/$approot; find . -maxdepth 1 -ls > /tmp/approot.txt 2>&1");
+    open(H,"/tmp/approot.txt"); while (<H>) { $environment .= $_; } close(H);
+    $environment .= "</pre>";
+
+    $webwork = "/var/webwork/ap20";
+    $environment .= "<h3>Your Yggdrasil WEBWORK location at $webwork (writable by web server user) contains:</h3><pre>";
+    system("cd $webwork; find . -ls > /tmp/webwork.txt 2>&1");
+    open(H,"/tmp/webwork.txt"); while (<H>) { $environment .= $_; } close(H);
+    $environment .= "</pre>";
+
+    if ($good) {
+        open (F,">/srv/.first"); print F "$user $pass1\n"; close(F);
+        my $rc = system('sudo /usr/local/bin/ap20init.sh > /tmp/ap20init.sh.log 2>&1');
+        $info .= "== Processing .... /usr/local/bin/ap20init.sh .....rc[$rc]:\n";
+        open(H,"/tmp/ap20init.sh.log"); while (<H>) { $info .= $_; } close(H); 
+    }
+    else {
+        $info .= "\nPlease enter credentials into this form. This will enable you to access the system administration documentation.";
+        $form = <<"configFORM";
+<form id="F1" method="post" action="/cgi-bin/first" enctype="application/x-www-form-urlencoded">
+Your username: <input type="text" name="user" value="$user"
+                title="username: start with letter, contains letters/numbers 7-10 characters"
+                pattern="^[a-zA-Z0-9]{7,10}\$" required="required" minlength="7"
+                size="10" maxlength="10" /><br/>
+Your password (1): <input type="password" name="password1" required="required" 
+                          title="password string: letters, numbers #\$\%@! 7-20 characters long" pattern="^[a-zA-Z0-9#\$\%@!]{7,20}\$" 
+                          value="$pass1" minlength="7" size="20" maxlength="20" /><br/>
+Your password (2): <input type="password" name="password2"  required="required"
+                          title="password string as above: letters, numbers #\$\%@! 7-20 characters long" pattern="^[a-zA-Z0-9#\$\%@!]{7,20}\$" 
+                          value="$pass2" minlength="7" size="20" maxlength="20" /><br/>
+<input type="submit" name="Submit configuration" value="Submit" />
+<form>
+configFORM
+    }
+}
+
+if ($good) { 
+    $uri = "http://".$ENV{'SERVER_NAME'}."/documentation/first/log.html";
+    $showLog = "<hr/><address>This report retained at: <a href=\"$uri\">$uri</a>"; 
+}
+
+my $content = <<"EOF";
+<HTML>
+
+<HEAD>
+<meta charset="UTF-8"/>
+<link href="/pub/xsl/useit_style.css" rel="stylesheet" type="text/css">
+<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('#F1').validator();
+});
+</script>
+<TITLE>$title</TITLE>
+</HEAD>
+
+<BODY>
+<p>Generated at: $now</p>
+<H1>$title</H1>
+<pre>$info</pre>
+$bad
+$form
+<hr/>
+$environment
+
+$showLog
+
+</BODY>
+
+</HTML>
+EOF
+
+if ($good) {
+    open (LOG,">$webroot/documentation/first/log.html");
+    print LOG $content;
+    close(LOG);
+}
+
+print "Content-type: text/html\n\n";
+print $content

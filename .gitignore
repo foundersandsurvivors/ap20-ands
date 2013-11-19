@@ -1,0 +1,9 @@
+# Local environment  #
+######################
+.env
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
