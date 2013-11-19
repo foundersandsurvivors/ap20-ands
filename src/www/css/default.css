@@ -1,0 +1,23 @@
+@import(url'y-default.css');
+/* as per yggdrasil but without the blue gif in body */
+body {
+    background-color: WhiteSmoke; /* Lavender; WhiteSmoke; #ffffff; */
+    color: #000000;
+    padding : 0;
+    margin : 0;
+    font:normal normal 100%/1.0 tahoma, verdana, humanist san-serif; 
+}
+
+p.linked:before { content: "Linked: " }
+p.found:before { content: "Found: " }
+.hide { display: none; }
+/* used in restxq/findpartback for index of found births */
+table.kgb    { border:1px solid; padding: 2px; }
+table.kgb th,td { text-align:left; padding: 2px; border-right:thin solid; }
+p.dbg { font-size: small; font-style: italic; }
+span.gazcat { font-style: italic; }
+.digger-name-row {border-top: solid 2px green; padding: 1ex; border-bottom:none; }
+.error {border: solid 1px red; padding: 1ex; color: red; }
+.linkage {border: solid 3px green; padding: 1ex; color: green; font-weight: bold; }
+.highlight { color: green; font-weight: bold; }
+#help {border: solid 1px green; padding: 1ex; color: green; }

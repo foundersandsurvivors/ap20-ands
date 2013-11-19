@@ -1,0 +1,51 @@
+body {font-family: calibri,verdana,arial,helvetica,geneva,sans-serif ; background: white; color: black;}
+code {font-family: "courier new",courier,monaco,monospace;}
+pre {font-family: "courier new",courier,monaco,monospace;}
+hr {color: gray ;}
+
+.maintext {max-width: 50em; margin: auto; line-height: 130%;}
+@media only screen and (max-device-width: 500px){
+	.maintext {max-width: 100em; margin: auto; line-height: 120%; font-size: 140%;}
+	}
+
+.navbar {font-size: 100%; font-family: verdana,calibri,arial,helvetica,geneva,sans-serif; background: #ffff66 ; border-style: none none solid none; border-width: thin; padding: 2px;}
+.navarea { background: #ffff66;}
+.notrecommended {color: #666666;}
+.deemphasized {color: #666666;}
+table.densetable {font-size: 80%;}
+tr.summaryrow { font-size: 90%; background: #00ffff;}
+table.icd10 { border-width: thin; }
+tr.gshead { font-size: 90%; background: #C0C0C0;}
+caption {font-size: 100%;}
+.embeddedfloat {float: right; margin-left: 3em;}
+h1, h2, h3, h4, h5, h6 {font-family: verdana,calibri,arial,helvetica,geneva,sans-serif, sans-serif; line-height: normal;}
+h4 {margin-bottom: 0.5em;}
+h5, h6 {margin-bottom: 0.2em;}
+ul.referencelist, .footnote {margin-left: 4em; text-indent: -4em ; font-size: 83%; font-family: verdana,calibri,arial,helvetica,geneva,sans-serif; list-style: none;}
+a:link, .simulatedlink {color: blue;}
+a.old:link {color: #2222ff;}
+a.new:link {color: #0000ff;}
+a:visited {color: purple;}
+a:active {color: red;}
+a.notrecommended:link {color: #6666ff;}
+a.notrecommended:visited {color: #cc66cc;}
+a.deemphasized:link {color: #6666ff;}
+a.deemphasized:visited {color: #cc66cc;}
+.overline {font-family: verdana,calibri,arial,helvetica,geneva,sans-serif; margin-bottom: -2ex;}
+.updatecomment {font-size: 100%; background: #00ffff;}
+.outsidecomment {font-size: 100%; background: #e9e9e9;}
+.microtext {font-size: 10% ; }
+.useem {color: #cc0000 ;}
+.csssmallgray {font-size: xx-small; color: #999999;}
+.boxquote {border: solid 1px gray; padding: 1ex;}
+.error {border: solid 1px red; padding: 1ex; color: red; }
+.attributes {font-style:italic; font-size: small; color: grey; }
+li.notA:before {
+   content: "Not aboriginal: "
+}
+li.notA {
+   background: #ffffcc;
+}
+[localType]:before { content: attr(localType) ":"; 
+                     padding: 2pt; background: grey; color: white; font-style:italic; font-size: small; }
+[localType]:after { content: attr(aft) }
