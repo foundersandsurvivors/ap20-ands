@@ -39,10 +39,11 @@ makedir $YGGDEP_WEBROOT/test          $YGGDEP_DEFAULT_PERMS             775
 # copy files
 
 cd $DIR
-copy ../src/cgi-bin/first             $YGGDEP_CGIBIN_DIR/first         $YGGDEP_DEFAULT_PERMS 775 "$1"
-copy ../src/usr-local-bin/ap20init.sh /usr/local/bin/ap20init.sh       root:root             700 "$1"
-copy ../src/www/index-first.html      $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
-copy ../src/www/index-app.html        $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
+copy ../src/cgi-bin/first              $YGGDEP_CGIBIN_DIR/first         $YGGDEP_DEFAULT_PERMS 775 "$1"
+copy ../src/usr-local-bin/ap20init.sh  /usr/local/bin/ap20init.sh       root:root             700 "$1"
+copy ../src/usr-local-bin/ycodegrep.sh /usr/local/bin/ycodegrep.sh      $YGGDEP_DEFAULT_PERMS 775 "$1"
+copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
+copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
 # manual copies/ancilliary web stuff
 echo ""
