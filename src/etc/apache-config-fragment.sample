@@ -1,0 +1,51 @@
+##======================================================================== sample start: 
+## Sample apache2 config showing how Yggdrasil expects a domain to be configured.
+## This example assumes YGGDEP_WEBROOT=/var/www and YGGDEP_PHPAPP=$YGGDEP_WEBROOT/ap20/yggdrasil
+
+    #############################################################################
+    # Yggdrasil configuration for apache2
+    #############################################################################
+
+    # do NOT allow direct access to where the code lives -- must come via an alias below, which forces appropriate authzn
+    Alias /ap20/yggdrasil/      /var/www/ap20/noaccess.html
+
+    <Macro YGGDRASIL_DOMAIN $domain >
+        Alias /$domain/db/     /var/www/ap20/yggdrasil-demo/
+        Alias /$domain/dbdev/  /var/www/ap20/yggdrasil-demo/
+        Alias /$domain/dbtest/ /var/www/ap20/yggdrasil-demo/
+        <Location /$domain/ >
+            Options +Includes
+            Order Allow,Deny
+            Allow from all
+            AuthUserFile /var/webwork/htpasswd
+            AuthType Basic
+            AuthName "ap20-yggdrasil [$domain] access"
+            Require valid-user
+            #Require user "tcdrweb"
+        </Location>
+    </Macro>
+    Use YGGDRASIL_DOMAIN demo
+
+    # the FASPROT macro should be used when a domain is part of the founders-and-survivors project
+    # and its ipnumber is defined as a subdomain in founders-and-survivors.org
+    # It uses thge Fas single sign on system where the domain-name identifies an ldap group
+
+    <Macro YGGDRASIL_FASPROT_DOMAIN $domain>
+        Alias /$domain/db/     /var/www/ap20/yggdrasil/
+        Alias /$domain/dbdev/  /var/www/ap20/yggdrasil/
+        Alias /$domain/dbtest/ /var/www/ap20/yggdrasil/
+        <Location /$domain/ >
+            Options +Includes
+            AuthType mod_auth_pubtkt
+            TKTAuthLoginURL http://www.founders-and-survivors.org/cgi-bin/vjs-login.pl
+            TKTAuthTimeoutURL http://www.founders-and-survivors.org/cgi-bin/vjs-login.pl?timeout=1
+            TKTAuthUnauthURL http://www.founders-and-survivors.org/cgi-bin/vjs-login.pl?unauth=1
+            TKTAuthToken "$domain"
+            require valid-user
+        </Location>
+    </Macro>
+    Use YGGDRASIL_FASPROT_DOMAIN khrd
+    Use YGGDRASIL_FASPROT_DOMAIN diggers
+    Use YGGDRASIL_FASPROT_DOMAIN ngaitahu
+
+##======================================================================== sample end.
