@@ -45,7 +45,32 @@ copy ../src/usr-local-bin/ycodegrep.sh /usr/local/bin/ycodegrep.sh      $YGGDEP_
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
+# xquery
+for F in ../src/xml/xquery-lib/*
+do
+   B=`basename $F`
+   copy $F $YGGDEP_XQUERYLIB/$B $YGGDEP_DEFAULT_PERMS 664 "$1"
+done
+
 # manual copies/ancilliary web stuff
 echo ""
 echo "-- (web support files) rsync -ax ../src/www/css $YGGDEP_WEBROOT"
 sudo rsync -ax ../src/www/css $YGGDEP_WEBROOT                  
+
+# make a bunch of symlinks for the xquery modules
+cd $YGGDEP_XQUERYLIB
+symlink ap20        yggdrasil-load-2012-lib.xq
+symlink bdm         bdmUtils-1.0.xq
+symlink condig      vdlbdm-load-2013-lib.xq
+symlink dd          ddUtils-1.0.xqm
+symlink fr          fasrecode-1.0.xqm
+symlink fu          fasutil-1.0.xqm
+symlink fui         fasuserinterface-1.0.xqm
+symlink functx      functx-1.0.xqm
+symlink psql        psql-1.0.xqm
+symlink ssana       spreadsheet-ana-utils.xqm
+symlink str-compare str-compare-1.0.xqm
+symlink vjs-ss      vjs-spreadsheet-ana-utils.xqm
+
+echo "# eoj"
+

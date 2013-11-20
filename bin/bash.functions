@@ -33,6 +33,22 @@ function ap20info {
   set|grep ^YGG|sort
 }
 
+# make a symlink (MUST have moved to the right dir first)
+function symlink {
+   LINKNAME=$1
+   FILENAME=$2
+   if ! [ -L $LINKNAME ]; then
+       if [ -f $FILENAME ]; then
+           ln -s $FILENAME $LINKNAME
+           ls -la $LINKNAME
+       else
+           echo "BUG: symlink FILENAME[$FILENAME] does not exist!"
+           exit 4
+       fi
+   fi
+}
+
+
 # make a directory and set ownership/permissions is requested
 function makedir {
   D=$1

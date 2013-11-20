@@ -1,0 +1,20 @@
+(: fas-ENVIRONMENT_y1.xqm
+
+   Host specific variable definitions for BaseX
+
+   ==========================================================
+   MODIFY AS REQUIRED FOR EACH HOST RUNNING BASEX 
+   AND CREATE A SYMLINK in /usr/local/lib/xquery "fenv" to it 
+   ==========================================================
+   NB: Code should be re-written to read envt directly or from Xml Db collection("00config/config.xml")
+:)
+module namespace  fenv = "http://fas/fenv";
+
+declare variable $fenv:system_admin_ipnos := collection("00config/config.xml")/configuration/global-defaults/authorised-clients/ipno/text();
+declare variable $fenv:system_administrators := ("****");
+declare variable $fenv:users_who_can_update := ("****","****");
+declare variable $fenv:fasgaz-service := "http://y1.founders-and-survivors.org/restxq/ap20/fasgaz?pn=";
+declare variable $fenv:default-yggdrasil-database := ("demo");
+declare variable $fenv:logToDir := "/data/bx/log/";
+declare variable $fenv:ERRORLOG := $fenv:logToDir || "basex-fui-errors.log";
+
