@@ -31,7 +31,7 @@ From the repo as a user with sudo permissions:
 * cp .env.sample ,env and edit .env as required
 * run bin/local-deploy.sh (copies from repo to deployment locations and sets user/permissions)
 * add the fragment in src/etc/sudoers to your /etc/sudoers file (allows user www-data to run a setup script)
-* add the fragment in src/etc/environemnt to your /etc/environemnt (sets env vars AP20_HOME, AP20_WEBROOT and FASHOST)
+* add the fragment in src/etc/environment to your /etc/environment (sets env vars AP20_HOME, AP20_DISTRO, AP20_WEBROOT and FASHOST)
 * To enable the first time web config script to run, as root:
 <pre>
    echo -n "" > /srv/.first

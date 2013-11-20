@@ -1,4 +1,39 @@
 # bash functions used in deploy script
+# usage: . /etc/environment (to get directory location of ap20 yggdrasil distro)
+#        . $AP20_DISTRO/bin/bash.functions
+
+# source the distro's .env (a LOCAL file derived from .env.sample)
+
+. /etc/environment
+
+if [ "$AP20_DISTRO" == "" ]; then
+   echo "ERROR: envt variable AP20_DISTRO is not defined."
+   echo "Please update your /etc/environment with the directory you cloned ap20-yggdrasil into."
+   exit 1
+fi
+
+if ! [ -f $AP20_DISTRO/bin/.env ]; then
+   echo "ERROR: .env does not exist!"
+   echo "Create $DIR/.env by copying/symlinking to $DIR/.env.sample and modify as required."
+   exit 1
+fi
+. $AP20_DISTRO/bin/.env
+
+# we need a hostname
+if [ -z $HOSTNAME ]; then
+   echo "ERROR: environemnt variable HOSTNAME is not defined!"
+   exit 2
+fi
+
+# info
+function ap20info {
+  echo "-- AP20 environment vars:"
+  printenv|grep AP20 
+  echo "-- Yggdrasil deployment vars:"
+  set|grep ^YGG|sort
+}
+
+# make a directory and set ownership/permissions is requested
 function makedir {
   D=$1
   OWNER=$2
@@ -13,6 +48,7 @@ function makedir {
   fi
 }
 
+# copy a file and set ownership/permissions is requested
 function copy {
   FROM=$1
   TO=$2

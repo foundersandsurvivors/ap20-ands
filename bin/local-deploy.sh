@@ -31,6 +31,7 @@ fi
 # ensure dirs exist
 
 makedir $YGGDEP_WEBWORK               root:root                         755
+makedir $YGGDEP_WEBLOGS               ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBWORK/ap20          ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBROOT/documentation ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBROOT/test          $YGGDEP_DEFAULT_PERMS             775
