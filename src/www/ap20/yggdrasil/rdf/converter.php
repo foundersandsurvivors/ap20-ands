@@ -1,0 +1,146 @@
+<?php
+    /**
+     * Convert RDF from one format to another
+     *
+     * The source RDF data can either be fetched from the web
+     * or typed into the Input box.
+     *
+     * The first thing that this script does is make a list the names of the
+     * supported input and output formats. These options are then
+     * displayed on the HTML form.
+     *
+     * The input data is loaded or parsed into an EasyRdf_Graph.
+     * That graph is than outputted again in the desired output format.
+     *
+     * @package    EasyRdf
+     * @copyright  Copyright (c) 2009-2012 Nicholas J Humfrey
+     * @license    http://unlicense.org/
+     */
+
+    set_include_path(get_include_path() . PATH_SEPARATOR . '../x/easyrdf/lib/');
+    require_once "EasyRdf.php";
+    require_once "html_tag_helpers.php";
+
+    $default_uri = "http://convix.org/rdf/foaf.rdf";
+    $default_uri = "http://y1.founders-and-survivors.org/rx/rdf/fas1.xml";
+    $filename_output = "/tmp/rdfConverter.out";
+    EasyRdf_Namespace::set('f', 'http://convix.org/fas/1.0/');
+    EasyRdf_Namespace::set('bio', 'http://purl.org/vocab/bio/0.1/');
+    //EasyRdf_Namespace::setDefault("http://convix.org/fas/1.0/");
+
+    $input_format_options = array('Guess' => 'guess');
+    $output_format_options = array();
+    foreach (EasyRdf_Format::getFormats() as $format) {
+        if ($format->getSerialiserClass()) {
+            $output_format_options[$format->getLabel()] = $format->getName();
+        }
+        if ($format->getParserClass()) {
+            $input_format_options[$format->getLabel()] = $format->getName();
+        }
+    }
+
+    // Stupid PHP :(
+    if (get_magic_quotes_gpc() and isset($_REQUEST['data'])) {
+        $_REQUEST['data'] = stripslashes($_REQUEST['data']);
+    }
+
+    // Default to Guess input and Turtle output
+    if (!isset($_REQUEST['output_format'])) {
+        $_REQUEST['output_format'] = 'turtle';
+    }
+    if (!isset($_REQUEST['input_format'])) {
+        $_REQUEST['input_format'] = 'guess';
+    }
+
+    // Display the form, if raw option isn't set
+    if (!isset($_REQUEST['raw'])) {
+        print "<html>\n";
+        print "<head><title>EasyRdf Converter</title>\n";
+        print "<script src='../x/viz.js'></script>\n";
+        print "</head>\n";
+        print "<body>\n";
+        print "<h1>EasyRdf Converter</h1>\n";
+
+        print "<div style='margin: 10px'>\n";
+        print form_tag();
+        print label_tag('data', 'Input Data: ').'<br />'.text_area_tag('data', '', array('cols'=>80, 'rows'=>10)) . "<br />\n";
+        // was http://www.dajobe.org/foaf.rdf
+        print label_tag('uri', 'or Uri: ').text_field_tag('uri', $default_uri, array('size'=>80)) . "<br />\n";
+        print label_tag('input_format', 'Input Format: ').select_tag('input_format', $input_format_options) . "<br />\n";
+        print label_tag('output_format', 'Output Format: ').select_tag('output_format', $output_format_options) . "<br />\n";
+        print label_tag('raw', 'Raw Output: ').check_box_tag('raw') . "<br />\n";
+        print reset_tag() . submit_tag();
+        print form_end_tag();
+        print "</div>\n";
+print "<hr/><pre>Examples to use in Uri field:\n
+http://convix.org/rdf/oc1-rdf.xml (=RDF from open calais)
+http://convix.org/rdf/henry.n3 (=Turtle Terse)
+http://y1.founders-and-survivors.org/rx/rdf/henry.xml (=above converted to XML/RDF served from Basex)
+http://y1.founders-and-survivors.org/rx/rdf/fas2.xml (XML/RDF served from Basex)
+http://y1.founders-and-survivors.org/rx/ccc_mediaflux/?run=q/rdf.xq&ID=ccc86788 (generated RDF for a ccc rec from BaseX)
+    Other cccids to try: ccc113910
+</pre>";
+print "<hr/><pre>namespaces:\n ". var_dump(EasyRdf_Namespace::get("fas"))." </pre>";
+    }
+
+    if (isset($_REQUEST['uri']) or isset($_REQUEST['data'])) {
+        // Parse the input
+        $graph = new EasyRdf_Graph($_REQUEST['uri']);
+        if (empty($_REQUEST['data'])) {
+            $graph->load($_REQUEST['uri'], $_REQUEST['input_format']);
+        } else {
+            $graph->parse($_REQUEST['data'], $_REQUEST['input_format'], $_REQUEST['uri']);
+        }
+
+        // Lookup the output format
+        $format = EasyRdf_Format::getFormat($_REQUEST['output_format']);
+
+        // Serialise to the new output format
+        $output = $graph->serialise($format);
+        if (!is_scalar($output)) {
+            $output = var_export($output, true);
+        }
+
+        // Send the output back to the client
+        if (isset($_REQUEST['raw'])) {
+            header('Content-Type: '.$format->getDefaultMimeType());
+            print $output;
+        } else {
+            print '<pre>'.htmlspecialchars($output).'</pre>';
+        }
+        // print file to tmp
+        file_put_contents ( $filename_output , $output);
+        //print '<pre>[DEBUG: See file: '.$filename_output.'] format['.$format.']</pre>';
+        if ( $format == "dot" ) {
+            print '<pre>to do viz.js</pre>';
+print "<script>
+var graphviz_text = '".$output."';
+document.body.innerHTML += Viz(graphviz_text, 'svg');
+</script>";
+
+
+        }
+//        // if output is graphviz i.e. dot, generate the image
+//        if ( $format == "dot" ) {
+//            // Create a GraphViz serialiser
+//            $gv = new EasyRdf_Serialiser_GraphViz();
+//            $gv->setUseLabels( isset($_REQUEST['ul']) );
+//            $gv->setOnlyLabelled( isset($_REQUEST['ol']) );
+//            $png = imagepng ( resource $image [, string $filename [, int $quality [, int $filters ]]] )
+//
+//    // If this is a request for the image, just render it and exit
+//    if (isset($_REQUEST['image']))
+//    {
+//        header("Content-Type: ".$format->getDefaultMimeType());
+//        echo $gv->renderImage($graph, $format);
+//        exit;
+//    }
+//        }
+
+
+    }
+
+    if (!isset($_REQUEST['raw'])) {
+        print "</body>\n";
+        print "</html>\n";
+    }

@@ -1,0 +1,3197 @@
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 22 February 1862 p 2
+MAINTENANCE. - Amelia Woodhall summoned John Woodhall, her husband, for leaving her without means of support.
+Defendant said he had a house and five acres of land, and was willing to receive his wife and children.
+Mr. Lees, for the complainant, said defendant went away eleven months ago with a young woman and had since brought her to live in the immediate neighborhood ; he lived a life of idleness, and lived on the labor of his wife.
+Defendant referred to the profits of his trade, and the stock of trees he had on his ground.
+The Bench under the circumstances said they could not make any order.
+Complainant then claimed the protection of the court against defendant's violence, and The Police Magistrate said that was a matter for another proceeding ; she had her remedy if she had any ground to fear his violence.
+Complainant protested that she would not live with her husband again.
+The Bench told her she might obtain protection for her earnings by resorting to the proper tribunal.
+Mr. Lees intimated that this course would be adopted.
+................. callAPIsms
+..line: [#Relations: GenericRelations]
+..line: [#City: Hobart]
+..line: [#Organization: UN Court]
+..line: [#Person: Amelia Woodhall, John Woodhall]
+..line: [#Position: The Police Magistrate]
+..line: [@prefix c:       <http://s.opencalais.com/1/pred/> .]
+..line: [@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/f1da837a-4125-3767-bb7b-5a6f8da736db>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "his ground" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:verb  "have on" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[her without means of support. Defendant said ]he had a house[ and five acres of land, and was willing to]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he had a house" ;]
+..line: [      c:length "14" ;]
+..line: [      c:offset "203" ;]
+..line: [      c:prefix "her without means of support. Defendant said " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9dc5e599-b14d-337f-aa6b-dd62a8d9fd1b> ;]
+..line: [      c:suffix " and five acres of land, and was willing to" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ the profits of his trade, and the stock of trees ]he had on his ground[. The Bench under the circumstances said they]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he had on his ground" ;]
+..line: [      c:length "20" ;]
+..line: [      c:offset "587" ;]
+..line: [      c:prefix " the profits of his trade, and the stock of trees " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/f1da837a-4125-3767-bb7b-5a6f8da736db> ;]
+..line: [      c:suffix ". The Bench under the circumstances said they" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/16>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Saturday 22 February 1862 p 2 MAINTENANCE. - ]Amelia Woodhall[ summoned John Woodhall, her husband, for leaving]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "Amelia Woodhall" ;]
+..line: [      c:length "15" ;]
+..line: [      c:offset "93" ;]
+..line: [      c:prefix "Saturday 22 February 1862 p 2 MAINTENANCE. - " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " summoned John Woodhall, her husband, for leaving" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/26>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[live with her husband again. The Bench told her ]she[ might obtain protection for her earnings by]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "988" ;]
+..line: [      c:prefix "live with her husband again. The Bench told her " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " might obtain protection for her earnings by" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/12>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[his wife. Defendant referred to the profits of ]his[ trade, and the stock of trees he had on his]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "553" ;]
+..line: [      c:prefix "his wife. Defendant referred to the profits of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " trade, and the stock of trees he had on his" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Amelia Woodhall" ;]
+..line: [      c:name  "Amelia Woodhall" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/22>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[for another proceeding ; she had her remedy if ]she[ had any ground to fear his violence. Complainant]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "858" ;]
+..line: [      c:prefix "for another proceeding ; she had her remedy if " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " had any ground to fear his violence. Complainant" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:relevance "0.166" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/0051543f-fc37-3638-a99e-02cd87fb2270> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/9>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[five acres of land, and was willing to receive ]his[ wife and children. Mr. Lees, for the]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "269" ;]
+..line: [      c:prefix "five acres of land, and was willing to receive " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " wife and children. Mr. Lees, for the" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/30db214f-5053-3a16-9ef4-a19b36f9e667>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Organization> ;]
+..line: [      c:name  "UN Court" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:organizationtype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9c097835-7ca6-3bd1-a0f8-d20ef4ce2b23>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "a life of idleness" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:verb  "live" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/meta>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfoMeta> ;]
+..line: [      c:contentType "text/html" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:emVer "7.1.1103.5" ;]
+..line: [      c:langIdVer "DefaultLangId" ;]
+..line: [      c:language "English" ;]
+..line: [      c:processingVer "CalaisJob01" ;]
+..line: [      c:signature "digestalg-1|PhNDlOnTbBgCYLuV3v71Ti2ern0=|VXmFbW8OKfXc+WotgP4WkQR1CR97xWNJAYeJNpm1muRtBv6doCYCPg==" ;]
+..line: [      c:stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25" ;]
+..line: [      c:submissionDate "2013-10-16 02:42:04.240" ;]
+..line: [      c:submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[said that was a matter for another proceeding ; ]she had her remedy[ if she had any ground to fear his violence.]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she had her remedy" ;]
+..line: [      c:length "18" ;]
+..line: [      c:offset "836" ;]
+..line: [      c:prefix "said that was a matter for another proceeding ; " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/bb1dc171-904f-3e43-b46e-5dcf9ffce434> ;]
+..line: [      c:suffix " if she had any ground to fear his violence." .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Saturday 22 February 1862 p 2 MAINTENANCE. - ]Amelia Woodhall summoned John Woodhall[, her husband, for leaving her without means of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "Amelia Woodhall summoned John Woodhall" ;]
+..line: [      c:length "38" ;]
+..line: [      c:offset "93" ;]
+..line: [      c:prefix "Saturday 22 February 1862 p 2 MAINTENANCE. - " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/c6d08a6b-1403-3697-a1f2-c7e4df7d23a4> ;]
+..line: [      c:suffix ", her husband, for leaving her without means of" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/cat/1>]
+..line: [      a       <http://s.opencalais.com/1/type/cat/DocCat> ;]
+..line: [      c:category <http://d.opencalais.com/cat/Calais/Law_Crime> ;]
+..line: [      c:categoryName "Law_Crime" ;]
+..line: [      c:classifierName "Calais" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:score "0.921" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/27>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Bench told her she might obtain protection for ]her[ earnings by resorting to the proper tribunal.]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "1020" ;]
+..line: [      c:prefix "Bench told her she might obtain protection for " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " earnings by resorting to the proper tribunal." .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/0051543f-fc37-3638-a99e-02cd87fb2270>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Position> ;]
+..line: [      c:name  "The Police Magistrate" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/17>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[- Amelia Woodhall summoned John Woodhall, ]her[ husband, for leaving her without means of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "133" ;]
+..line: [      c:prefix "- Amelia Woodhall summoned John Woodhall, " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " husband, for leaving her without means of" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/13>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ the profits of his trade, and the stock of trees ]he[ had on his ground. The Bench under the]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he" ;]
+..line: [      c:length "2" ;]
+..line: [      c:offset "587" ;]
+..line: [      c:prefix " the profits of his trade, and the stock of trees " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " had on his ground. The Bench under the" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "John Woodhall" ;]
+..line: [      c:name  "John Woodhall" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/3775b838-8bcc-3b40-b60e-98ed8b6bf5a9>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "her husband" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:verb  "not live with" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:relevance "0.690" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/1>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Legal terms" ;]
+..line: [      c:originalValue "Legal terms" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/20c0c6e4-23d1-3b45-97b2-44e063391fca> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9dc5e599-b14d-337f-aa6b-dd62a8d9fd1b>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "a house" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:verb  "have" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfo> ;]
+..line: [      c:allowDistribution "false" ;]
+..line: [      c:allowSearch "false" ;]
+..line: [      c:calaisRequestID "73bd11f9-3d9b-b72b-141c-036e1d04ae6a" ;]
+..line: [      c:docDate "2013-10-16 02:42:04.599" ;]
+..line: [      c:docTitle "" ;]
+..line: [      c:document "<body> The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 22 February 1862 p 2 MAINTENANCE. - Amelia Woodhall summoned John Woodhall, her husband, for leaving her without means of support. Defendant said he had a house and five acres of land, and was willing to receive his wife and children. Mr. Lees, for the complainant, said defendant went away eleven months ago with a young woman and had since brought her to live in the immediate neighborhood ; he lived a life of idleness, and lived on the labor of his wife. Defendant referred to the profits of his trade, and the stock of trees he had on his ground. The Bench under the circumstances said they could not make any order. Complainant then claimed the protection of the court against defendant's violence, and The Police Magistrate said that was a matter for another proceeding ; she had her remedy if she had any ground to fear his violence. Complainant protested that she would not live with her husband again. The Bench told her she might obtain protection for her earnings by resorting to the proper tribunal. Mr. Lees intimated that this course would be adopted.</body>" ;]
+..line: [      c:externalMetadata "" ;]
+..line: [      c:id    "http://id.opencalais.com/3JzByO2zGaMODfTrbSKrBw" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/23>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ to fear his violence. Complainant protested that ]she[ would not live with her husband again. The Bench]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "926" ;]
+..line: [      c:prefix " to fear his violence. Complainant protested that " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " would not live with her husband again. The Bench" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/24>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[protested that she would not live with ]her[ husband again. The Bench told her she might]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "950" ;]
+..line: [      c:prefix "protested that she would not live with " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " husband again. The Bench told her she might" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[<body> The Mercury (]Hobart[, Tas. : 1860 - 1954) Saturday 22 February 1862 p]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "Hobart" ;]
+..line: [      c:length "6" ;]
+..line: [      c:offset "20" ;]
+..line: [      c:prefix "<body> The Mercury (" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> ;]
+..line: [      c:suffix ", Tas. : 1860 - 1954) Saturday 22 February 1862 p" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/30>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[live with her husband again. The Bench told her ]she might obtain protection for her earnings[ by resorting to the proper tribunal. Mr. Lees]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she might obtain protection for her earnings" ;]
+..line: [      c:length "44" ;]
+..line: [      c:offset "988" ;]
+..line: [      c:prefix "live with her husband again. The Bench told her " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/5ab5cf3f-f93e-3e98-99a1-13941f1aaf07> ;]
+..line: [      c:suffix " by resorting to the proper tribunal. Mr. Lees" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/18>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ summoned John Woodhall, her husband, for leaving ]her[ without means of support. Defendant said he had]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "158" ;]
+..line: [      c:prefix " summoned John Woodhall, her husband, for leaving " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " without means of support. Defendant said he had" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/3>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Law_Crime" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/ea31334e-799c-3064-82e9-c2772a373029> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/7>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ 1862 p 2 MAINTENANCE. - Amelia Woodhall summoned ]John Woodhall[, her husband, for leaving her without means of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "John Woodhall" ;]
+..line: [      c:length "13" ;]
+..line: [      c:offset "118" ;]
+..line: [      c:prefix " 1862 p 2 MAINTENANCE. - Amelia Woodhall summoned " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix ", her husband, for leaving her without means of" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/28>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ to fear his violence. Complainant protested that ]she would not live with her husband[ again. The Bench told her she might obtain]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she would not live with her husband" ;]
+..line: [      c:length "35" ;]
+..line: [      c:offset "926" ;]
+..line: [      c:prefix " to fear his violence. Complainant protested that " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/3775b838-8bcc-3b40-b60e-98ed8b6bf5a9> ;]
+..line: [      c:suffix " again. The Bench told her she might obtain" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/14>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[of his trade, and the stock of trees he had on ]his[ ground. The Bench under the circumstances said]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "597" ;]
+..line: [      c:prefix "of his trade, and the stock of trees he had on " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " ground. The Bench under the circumstances said" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/bb1dc171-904f-3e43-b46e-5dcf9ffce434>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "her remedy" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:verb  "have" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/lid/DefaultLangId>]
+..line: [      a       <http://s.opencalais.com/1/type/lid/DefaultLangId> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:lang  <http://d.opencalais.com/lid/DefaultLangId/English> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/20>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[said that was a matter for another proceeding ; ]she[ had her remedy if she had any ground to fear his]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "she" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "836" ;]
+..line: [      c:prefix "said that was a matter for another proceeding ; " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " had her remedy if she had any ground to fear his" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:relevance "0.796" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/10>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[her to live in the immediate neighborhood ; ]he[ lived a life of idleness, and lived on the labor]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he" ;]
+..line: [      c:length "2" ;]
+..line: [      c:offset "451" ;]
+..line: [      c:prefix "her to live in the immediate neighborhood ; " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " lived a life of idleness, and lived on the labor" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/19>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ago with a young woman and had since brought ]her[ to live in the immediate neighborhood ; he lived]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "407" ;]
+..line: [      c:prefix "ago with a young woman and had since brought " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " to live in the immediate neighborhood ; he lived" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/25>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[not live with her husband again. The Bench told ]her[ she might obtain protection for her earnings by]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "984" ;]
+..line: [      c:prefix "not live with her husband again. The Bench told " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " she might obtain protection for her earnings by" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/31>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[her to live in the immediate neighborhood ; ]he lived a life of idleness[, and lived on the labor of his wife. Defendant]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he lived a life of idleness" ;]
+..line: [      c:length "27" ;]
+..line: [      c:offset "451" ;]
+..line: [      c:prefix "her to live in the immediate neighborhood ; " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9c097835-7ca6-3bd1-a0f8-d20ef4ce2b23> ;]
+..line: [      c:suffix ", and lived on the labor of his wife. Defendant" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[of the court against defendant's violence, and ]The Police Magistrate[ said that was a matter for another proceeding ;]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "The Police Magistrate" ;]
+..line: [      c:length "21" ;]
+..line: [      c:offset "766" ;]
+..line: [      c:prefix "of the court against defendant's violence, and " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/0051543f-fc37-3638-a99e-02cd87fb2270> ;]
+..line: [      c:suffix " said that was a matter for another proceeding ;" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/2>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Plaintiff" ;]
+..line: [      c:originalValue "Plaintiff" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/7729eeb6-62c5-3460-bb67-a979a0858073> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/29>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Complainant then claimed the protection of ]the court[ against defendant's violence, and The Police]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "the court" ;]
+..line: [      c:length "9" ;]
+..line: [      c:offset "722" ;]
+..line: [      c:prefix "Complainant then claimed the protection of " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/30db214f-5053-3a16-9ef4-a19b36f9e667> ;]
+..line: [      c:suffix " against defendant's violence, and The Police" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/15>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ she had her remedy if she had any ground to fear ]his[ violence. Complainant protested that she would]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "885" ;]
+..line: [      c:prefix " she had her remedy if she had any ground to fear " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " violence. Complainant protested that she would" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/8>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[her without means of support. Defendant said ]he[ had a house and five acres of land, and was]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "he" ;]
+..line: [      c:length "2" ;]
+..line: [      c:offset "203" ;]
+..line: [      c:prefix "her without means of support. Defendant said " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " had a house and five acres of land, and was" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/c6d08a6b-1403-3697-a1f2-c7e4df7d23a4>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:verb  "summon" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:relevance "0.166" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/30db214f-5053-3a16-9ef4-a19b36f9e667> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:relevance "0.327" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/City> ;]
+..line: [      c:name  "Hobart" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/5ab5cf3f-f93e-3e98-99a1-13941f1aaf07>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "protection for her earnings" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:verb  "obtain" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/21>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[was a matter for another proceeding ; she had ]her[ remedy if she had any ground to fear his]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "844" ;]
+..line: [      c:prefix "was a matter for another proceeding ; she had " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " remedy if she had any ground to fear his" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/11>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[a life of idleness, and lived on the labor of ]his[ wife. Defendant referred to the profits of his]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "506" ;]
+..line: [      c:prefix "a life of idleness, and lived on the labor of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " wife. Defendant referred to the profits of his" .]
+..line: []
+
+<entity-type>#Relations</entity-type>
+<ul>
+  <li>GenericRelations</li>
+</ul>
+
+
+<entity-type>#City</entity-type>
+<ul>
+  <li>Hobart</li>
+</ul>
+
+
+<entity-type>#Organization</entity-type>
+<ul>
+  <li>UN Court</li>
+</ul>
+
+
+<entity-type>#Person</entity-type>
+<ul>
+  <li>Amelia Woodhall</li>
+  <li>John Woodhall</li>
+</ul>
+
+
+<entity-type>#Position</entity-type>
+<ul>
+  <li>The Police Magistrate</li>
+</ul>
+
+
+<entity-type>@prefix c</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type>@prefix rdf</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type><http</entity-type>
+<ul>
+  <li>//d.opencalais.com/genericHasher-1/f1da837a-4125-3767-bb7b-5a6f8da736db></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/5></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/1></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/16></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/26></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/12></li>
+  <li>//d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/22></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/2></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/9></li>
+  <li>//d.opencalais.com/genericHasher-1/30db214f-5053-3a16-9ef4-a19b36f9e667></li>
+  <li>//d.opencalais.com/genericHasher-1/9c097835-7ca6-3bd1-a0f8-d20ef4ce2b23></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/meta></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/2></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/6></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/cat/1></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/27></li>
+  <li>//d.opencalais.com/genericHasher-1/0051543f-fc37-3638-a99e-02cd87fb2270></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/17></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/13></li>
+  <li>//d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9></li>
+  <li>//d.opencalais.com/genericHasher-1/3775b838-8bcc-3b40-b60e-98ed8b6bf5a9></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/3></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/1></li>
+  <li>//d.opencalais.com/genericHasher-1/9dc5e599-b14d-337f-aa6b-dd62a8d9fd1b></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/23></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/24></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/3></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/30></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/18></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/3></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/7></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/28></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/14></li>
+  <li>//d.opencalais.com/genericHasher-1/bb1dc171-904f-3e43-b46e-5dcf9ffce434></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/lid/DefaultLangId></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/20></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/4></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/10></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/19></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/25></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/31></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/4></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/SocialTag/2></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/29></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/15></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/8></li>
+  <li>//d.opencalais.com/genericHasher-1/c6d08a6b-1403-3697-a1f2-c7e4df7d23a4></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/5></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Relevance/1></li>
+  <li>//d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70></li>
+  <li>//d.opencalais.com/genericHasher-1/5ab5cf3f-f93e-3e98-99a1-13941f1aaf07></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/21></li>
+  <li>//d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843/Instance/11></li>
+</ul>
+
+
+<entity-type>      a       <http</entity-type>
+<ul>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Organization> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfoMeta> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/cat/DocCat> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Position> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/lid/DefaultLangId> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/City> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+</ul>
+
+
+<entity-type>      c</entity-type>
+<ul>
+  <li>relationobject "his ground" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "have on" .</li>
+  <li>detection "[her without means of support. Defendant said ]he had a house[ and five acres of land</li>
+  <li>and was willing to]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he had a house" ;</li>
+  <li>length "14" ;</li>
+  <li>offset "203" ;</li>
+  <li>prefix "her without means of support. Defendant said " ;</li>
+  <li>subject <http</li>
+  <li>suffix " and five acres of land</li>
+  <li>and was willing to" .</li>
+  <li>detection "[ the profits of his trade</li>
+  <li>and the stock of trees ]he had on his ground[. The Bench under the circumstances said they]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he had on his ground" ;</li>
+  <li>length "20" ;</li>
+  <li>offset "587" ;</li>
+  <li>prefix " the profits of his trade</li>
+  <li>and the stock of trees " ;</li>
+  <li>subject <http</li>
+  <li>suffix ". The Bench under the circumstances said they" .</li>
+  <li>detection "[Saturday 22 February 1862 p 2 MAINTENANCE. - ]Amelia Woodhall[ summoned John Woodhall</li>
+  <li>her husband</li>
+  <li>for leaving]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Amelia Woodhall" ;</li>
+  <li>length "15" ;</li>
+  <li>offset "93" ;</li>
+  <li>prefix "Saturday 22 February 1862 p 2 MAINTENANCE. - " ;</li>
+  <li>subject <http</li>
+  <li>suffix " summoned John Woodhall</li>
+  <li>her husband</li>
+  <li>for leaving" .</li>
+  <li>detection "[live with her husband again. The Bench told her ]she[ might obtain protection for her earnings by]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "988" ;</li>
+  <li>prefix "live with her husband again. The Bench told her " ;</li>
+  <li>subject <http</li>
+  <li>suffix " might obtain protection for her earnings by" .</li>
+  <li>detection "[his wife. Defendant referred to the profits of ]his[ trade</li>
+  <li>and the stock of trees he had on his]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "553" ;</li>
+  <li>prefix "his wife. Defendant referred to the profits of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " trade</li>
+  <li>and the stock of trees he had on his" .</li>
+  <li>commonname "Amelia Woodhall" ;</li>
+  <li>name  "Amelia Woodhall" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>detection "[for another proceeding ; she had her remedy if ]she[ had any ground to fear his violence. Complainant]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "858" ;</li>
+  <li>prefix "for another proceeding ; she had her remedy if " ;</li>
+  <li>subject <http</li>
+  <li>suffix " had any ground to fear his violence. Complainant" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.166" ;</li>
+  <li>subject <http</li>
+  <li>detection "[five acres of land</li>
+  <li>and was willing to receive ]his[ wife and children. Mr. Lees</li>
+  <li>for the]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "269" ;</li>
+  <li>prefix "five acres of land</li>
+  <li>and was willing to receive " ;</li>
+  <li>subject <http</li>
+  <li>suffix " wife and children. Mr. Lees</li>
+  <li>for the" .</li>
+  <li>name  "UN Court" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>organizationtype "N/A" .</li>
+  <li>relationobject "a life of idleness" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "live" .</li>
+  <li>contentType "text/html" ;</li>
+  <li>docId <http</li>
+  <li>emVer "7.1.1103.5" ;</li>
+  <li>langIdVer "DefaultLangId" ;</li>
+  <li>language "English" ;</li>
+  <li>processingVer "CalaisJob01" ;</li>
+  <li>signature "digestalg-1|PhNDlOnTbBgCYLuV3v71Ti2ern0=|VXmFbW8OKfXc+WotgP4WkQR1CR97xWNJAYeJNpm1muRtBv6doCYCPg==" ;</li>
+  <li>stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23</li>
+  <li>submissionDate "2013-10-16 02</li>
+  <li>submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .</li>
+  <li>detection "[said that was a matter for another proceeding ; ]she had her remedy[ if she had any ground to fear his violence.]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she had her remedy" ;</li>
+  <li>length "18" ;</li>
+  <li>offset "836" ;</li>
+  <li>prefix "said that was a matter for another proceeding ; " ;</li>
+  <li>subject <http</li>
+  <li>suffix " if she had any ground to fear his violence." .</li>
+  <li>detection "[Saturday 22 February 1862 p 2 MAINTENANCE. - ]Amelia Woodhall summoned John Woodhall[</li>
+  <li>her husband</li>
+  <li>for leaving her without means of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Amelia Woodhall summoned John Woodhall" ;</li>
+  <li>length "38" ;</li>
+  <li>offset "93" ;</li>
+  <li>prefix "Saturday 22 February 1862 p 2 MAINTENANCE. - " ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>her husband</li>
+  <li>for leaving her without means of" .</li>
+  <li>category <http</li>
+  <li>categoryName "Law_Crime" ;</li>
+  <li>classifierName "Calais" ;</li>
+  <li>docId <http</li>
+  <li>score "0.921" .</li>
+  <li>detection "[Bench told her she might obtain protection for ]her[ earnings by resorting to the proper tribunal.]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "1020" ;</li>
+  <li>prefix "Bench told her she might obtain protection for " ;</li>
+  <li>subject <http</li>
+  <li>suffix " earnings by resorting to the proper tribunal." .</li>
+  <li>name  "The Police Magistrate" .</li>
+  <li>detection "[- Amelia Woodhall summoned John Woodhall</li>
+  <li>]her[ husband</li>
+  <li>for leaving her without means of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "133" ;</li>
+  <li>prefix "- Amelia Woodhall summoned John Woodhall</li>
+  <li>" ;</li>
+  <li>subject <http</li>
+  <li>suffix " husband</li>
+  <li>for leaving her without means of" .</li>
+  <li>detection "[ the profits of his trade</li>
+  <li>and the stock of trees ]he[ had on his ground. The Bench under the]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he" ;</li>
+  <li>length "2" ;</li>
+  <li>offset "587" ;</li>
+  <li>prefix " the profits of his trade</li>
+  <li>and the stock of trees " ;</li>
+  <li>subject <http</li>
+  <li>suffix " had on his ground. The Bench under the" .</li>
+  <li>commonname "John Woodhall" ;</li>
+  <li>name  "John Woodhall" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>relationobject "her husband" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "not live with" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.690" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Legal terms" ;</li>
+  <li>originalValue "Legal terms" ;</li>
+  <li>socialtag <http</li>
+  <li>relationobject "a house" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "have" .</li>
+  <li>allowDistribution "false" ;</li>
+  <li>allowSearch "false" ;</li>
+  <li>calaisRequestID "73bd11f9-3d9b-b72b-141c-036e1d04ae6a" ;</li>
+  <li>docDate "2013-10-16 02</li>
+  <li>docTitle "" ;</li>
+  <li>document "<body> The Mercury (Hobart</li>
+  <li>Tas.</li>
+  <li>externalMetadata "" ;</li>
+  <li>id    "http</li>
+  <li>detection "[ to fear his violence. Complainant protested that ]she[ would not live with her husband again. The Bench]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "926" ;</li>
+  <li>prefix " to fear his violence. Complainant protested that " ;</li>
+  <li>subject <http</li>
+  <li>suffix " would not live with her husband again. The Bench" .</li>
+  <li>detection "[protested that she would not live with ]her[ husband again. The Bench told her she might]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "950" ;</li>
+  <li>prefix "protested that she would not live with " ;</li>
+  <li>subject <http</li>
+  <li>suffix " husband again. The Bench told her she might" .</li>
+  <li>detection "[<body> The Mercury (]Hobart[</li>
+  <li>Tas.</li>
+  <li>docId <http</li>
+  <li>exact "Hobart" ;</li>
+  <li>length "6" ;</li>
+  <li>offset "20" ;</li>
+  <li>prefix "<body> The Mercury (" ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>Tas.</li>
+  <li>detection "[live with her husband again. The Bench told her ]she might obtain protection for her earnings[ by resorting to the proper tribunal. Mr. Lees]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she might obtain protection for her earnings" ;</li>
+  <li>length "44" ;</li>
+  <li>offset "988" ;</li>
+  <li>prefix "live with her husband again. The Bench told her " ;</li>
+  <li>subject <http</li>
+  <li>suffix " by resorting to the proper tribunal. Mr. Lees" .</li>
+  <li>detection "[ summoned John Woodhall</li>
+  <li>her husband</li>
+  <li>for leaving ]her[ without means of support. Defendant said he had]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "158" ;</li>
+  <li>prefix " summoned John Woodhall</li>
+  <li>her husband</li>
+  <li>for leaving " ;</li>
+  <li>subject <http</li>
+  <li>suffix " without means of support. Defendant said he had" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Law_Crime" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[ 1862 p 2 MAINTENANCE. - Amelia Woodhall summoned ]John Woodhall[</li>
+  <li>her husband</li>
+  <li>for leaving her without means of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "John Woodhall" ;</li>
+  <li>length "13" ;</li>
+  <li>offset "118" ;</li>
+  <li>prefix " 1862 p 2 MAINTENANCE. - Amelia Woodhall summoned " ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>her husband</li>
+  <li>for leaving her without means of" .</li>
+  <li>detection "[ to fear his violence. Complainant protested that ]she would not live with her husband[ again. The Bench told her she might obtain]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she would not live with her husband" ;</li>
+  <li>length "35" ;</li>
+  <li>offset "926" ;</li>
+  <li>prefix " to fear his violence. Complainant protested that " ;</li>
+  <li>subject <http</li>
+  <li>suffix " again. The Bench told her she might obtain" .</li>
+  <li>detection "[of his trade</li>
+  <li>and the stock of trees he had on ]his[ ground. The Bench under the circumstances said]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "597" ;</li>
+  <li>prefix "of his trade</li>
+  <li>and the stock of trees he had on " ;</li>
+  <li>subject <http</li>
+  <li>suffix " ground. The Bench under the circumstances said" .</li>
+  <li>relationobject "her remedy" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "have" .</li>
+  <li>docId <http</li>
+  <li>lang  <http</li>
+  <li>detection "[said that was a matter for another proceeding ; ]she[ had her remedy if she had any ground to fear his]" ;</li>
+  <li>docId <http</li>
+  <li>exact "she" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "836" ;</li>
+  <li>prefix "said that was a matter for another proceeding ; " ;</li>
+  <li>subject <http</li>
+  <li>suffix " had her remedy if she had any ground to fear his" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.796" ;</li>
+  <li>subject <http</li>
+  <li>detection "[her to live in the immediate neighborhood ; ]he[ lived a life of idleness</li>
+  <li>and lived on the labor]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he" ;</li>
+  <li>length "2" ;</li>
+  <li>offset "451" ;</li>
+  <li>prefix "her to live in the immediate neighborhood ; " ;</li>
+  <li>subject <http</li>
+  <li>suffix " lived a life of idleness</li>
+  <li>and lived on the labor" .</li>
+  <li>detection "[ago with a young woman and had since brought ]her[ to live in the immediate neighborhood ; he lived]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "407" ;</li>
+  <li>prefix "ago with a young woman and had since brought " ;</li>
+  <li>subject <http</li>
+  <li>suffix " to live in the immediate neighborhood ; he lived" .</li>
+  <li>detection "[not live with her husband again. The Bench told ]her[ she might obtain protection for her earnings by]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "984" ;</li>
+  <li>prefix "not live with her husband again. The Bench told " ;</li>
+  <li>subject <http</li>
+  <li>suffix " she might obtain protection for her earnings by" .</li>
+  <li>detection "[her to live in the immediate neighborhood ; ]he lived a life of idleness[</li>
+  <li>and lived on the labor of his wife. Defendant]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he lived a life of idleness" ;</li>
+  <li>length "27" ;</li>
+  <li>offset "451" ;</li>
+  <li>prefix "her to live in the immediate neighborhood ; " ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>and lived on the labor of his wife. Defendant" .</li>
+  <li>detection "[of the court against defendant's violence</li>
+  <li>and ]The Police Magistrate[ said that was a matter for another proceeding ;]" ;</li>
+  <li>docId <http</li>
+  <li>exact "The Police Magistrate" ;</li>
+  <li>length "21" ;</li>
+  <li>offset "766" ;</li>
+  <li>prefix "of the court against defendant's violence</li>
+  <li>and " ;</li>
+  <li>subject <http</li>
+  <li>suffix " said that was a matter for another proceeding ;" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Plaintiff" ;</li>
+  <li>originalValue "Plaintiff" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[Complainant then claimed the protection of ]the court[ against defendant's violence</li>
+  <li>and The Police]" ;</li>
+  <li>docId <http</li>
+  <li>exact "the court" ;</li>
+  <li>length "9" ;</li>
+  <li>offset "722" ;</li>
+  <li>prefix "Complainant then claimed the protection of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " against defendant's violence</li>
+  <li>and The Police" .</li>
+  <li>detection "[ she had her remedy if she had any ground to fear ]his[ violence. Complainant protested that she would]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "885" ;</li>
+  <li>prefix " she had her remedy if she had any ground to fear " ;</li>
+  <li>subject <http</li>
+  <li>suffix " violence. Complainant protested that she would" .</li>
+  <li>detection "[her without means of support. Defendant said ]he[ had a house and five acres of land</li>
+  <li>and was]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he" ;</li>
+  <li>length "2" ;</li>
+  <li>offset "203" ;</li>
+  <li>prefix "her without means of support. Defendant said " ;</li>
+  <li>subject <http</li>
+  <li>suffix " had a house and five acres of land</li>
+  <li>and was" .</li>
+  <li>relationobject <http</li>
+  <li>relationsubject <http</li>
+  <li>verb  "summon" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.166" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>relevance "0.327" ;</li>
+  <li>subject <http</li>
+  <li>name  "Hobart" .</li>
+  <li>relationobject "protection for her earnings" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "obtain" .</li>
+  <li>detection "[was a matter for another proceeding ; she had ]her[ remedy if she had any ground to fear his]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "844" ;</li>
+  <li>prefix "was a matter for another proceeding ; she had " ;</li>
+  <li>subject <http</li>
+  <li>suffix " remedy if she had any ground to fear his" .</li>
+  <li>detection "[a life of idleness</li>
+  <li>and lived on the labor of ]his[ wife. Defendant referred to the profits of his]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "506" ;</li>
+  <li>prefix "a life of idleness</li>
+  <li>and lived on the labor of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " wife. Defendant referred to the profits of his" .</li>
+</ul>
+
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Friday 9 January 1863 p 2
+Assault.-Catherine Whittaker charged John Woodhall with assaulting her on 29th December last.
+The complainant deposed that the defendant assaulted her near the door of her father's house.
+Defendant at first commenced kicking up a row with witness's father. He then called witness names and struck her with his fist under the ear and knocked her down. Witness then threw a stone at him which hit him.
+Cross-examined: Did not strike defendant first.
+Richard Whittaker corroborated the complainant's evidence.
+A little boy named Michael Whittaker was called but the Bench did not think it fit to receive his evidence.
+The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then
+the complainant hit defendant who then hit her and then she threw stones. The dispute began about a fence which Woodhall said was on his ground and he went to pull it down.
+John Crowther was next called but knew nothing of the alleged assault.
+The Bench dismissed the information, but cautioned defendant not to go on Whittakers premises again.
+................. callAPIsms
+..line: [#Relations: GenericRelations, Indictment, Quotation]
+..line: [#City: Hobart]
+..line: [#Person: John Crowther, John Woodhall, Michael Whittaker, Richard Whittaker, Thomas Coates]
+..line: [@prefix c:       <http://s.opencalais.com/1/pred/> .]
+..line: [@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/17>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[knocked her down. Witness then threw a stone at ]him[ which hit him. Cross-examined: Did not strike]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "him" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "455" ;]
+..line: [      c:prefix "knocked her down. Witness then threw a stone at " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " which hit him. Cross-examined: Did not strike" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[corroborated the complainant's evidence. ]A little boy named Michael Whittaker[ was called but the Bench did not think it fit to]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "A little boy named Michael Whittaker" ;]
+..line: [      c:length "36" ;]
+..line: [      c:offset "581" ;]
+..line: [      c:prefix "corroborated the complainant's evidence. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/01559fca-1b83-349e-8f1f-0ef1e0a3908d> ;]
+..line: [      c:suffix " was called but the Bench did not think it fit to" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/27>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[was on his ground and he went to pull it down. ]John Crowther[ was next called but knew nothing of the alleged]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "John Crowther" ;]
+..line: [      c:length "13" ;]
+..line: [      c:offset "973" ;]
+..line: [      c:prefix "was on his ground and he went to pull it down. " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/29839517-8e2c-3a14-a35b-fed4c8be956d> ;]
+..line: [      c:suffix " was next called but knew nothing of the alleged" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/4>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Law_Crime" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/ea31334e-799c-3064-82e9-c2772a373029> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/20>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[began about a fence which Woodhall said was on ]his[ ground and he went to pull it down. John]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "933" ;]
+..line: [      c:prefix "began about a fence which Woodhall said was on " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " ground and he went to pull it down. John" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Michael Whittaker" ;]
+..line: [      c:name  "Michael Whittaker" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/1796a305-132c-3f3c-a75f-d117c7d9bc0b>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/Quotation> ;]
+..line: [      c:person <http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24> ;]
+..line: [      c:persondescription "defendant" ;]
+..line: [      c:quote "Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones." .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/13>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[kicking up a row with witness's father. ]He[ then called witness names and struck her with]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "He" ;]
+..line: [      c:length "2" ;]
+..line: [      c:offset "331" ;]
+..line: [      c:prefix "kicking up a row with witness's father. " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " then called witness names and struck her with" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/a5265d13-35fe-313f-89ae-3cd742289bcb>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/Indictment> ;]
+..line: [      c:person <http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/10>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Whittaker charged John Woodhall with assaulting ]her[ on 29th December last. The complainant deposed]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "141" ;]
+..line: [      c:prefix "Whittaker charged John Woodhall with assaulting " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " on 29th December last. The complainant deposed" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Cross-examined: Did not strike defendant first. ]Richard Whittaker[ corroborated the complainant's evidence. A]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Richard Whittaker" ;]
+..line: [      c:length "17" ;]
+..line: [      c:offset "522" ;]
+..line: [      c:prefix "Cross-examined: Did not strike defendant first. " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4> ;]
+..line: [      c:suffix " corroborated the complainant's evidence. A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.327" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/2ea59057-ba7b-38a3-9b9d-d5a5b9703608>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "the complainant's evidence" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4> ;]
+..line: [      c:verb  "corroborate" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/d85012d1-23f0-3788-a073-824c2294088e>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:relationsubject "2 Assault.-Catherine Whittaker" ;]
+..line: [      c:verb  "charge" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[<body> The Mercury (]Hobart[, Tas. : 1860 - 1954) Friday 9 January 1863 p 2]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Hobart" ;]
+..line: [      c:length "6" ;]
+..line: [      c:offset "20" ;]
+..line: [      c:prefix "<body> The Mercury (" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> ;]
+..line: [      c:suffix ", Tas. : 1860 - 1954) Friday 9 January 1863 p 2" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/24>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Tas. : 1860 - 1954) Friday 9 January 1863 p ]2 Assault.-Catherine Whittaker charged John Woodhall[ with assaulting her on 29th December last. The]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "2 Assault.-Catherine Whittaker charged John Woodhall" ;]
+..line: [      c:length "52" ;]
+..line: [      c:offset "72" ;]
+..line: [      c:prefix "Tas. : 1860 - 1954) Friday 9 January 1863 p " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/d85012d1-23f0-3788-a073-824c2294088e> ;]
+..line: [      c:suffix " with assaulting her on 29th December last. The" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/cat/1>]
+..line: [      a       <http://s.opencalais.com/1/type/cat/DocCat> ;]
+..line: [      c:category <http://d.opencalais.com/cat/Calais/Law_Crime> ;]
+..line: [      c:categoryName "Law_Crime" ;]
+..line: [      c:classifierName "Calais" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:score "0.982" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/18>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Witness then threw a stone at him which hit ]him[. Cross-examined: Did not strike defendant first.]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "him" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "469" ;]
+..line: [      c:prefix "Witness then threw a stone at him which hit " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix ". Cross-examined: Did not strike defendant first." .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/28>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates[ who said that Whittaker and defendant had some]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "The defendant called Thomas Coates" ;]
+..line: [      c:length "34" ;]
+..line: [      c:offset "689" ;]
+..line: [      c:prefix "did not think it fit to receive his evidence. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/a5265d13-35fe-313f-89ae-3cd742289bcb> ;]
+..line: [      c:suffix " who said that Whittaker and defendant had some" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/14>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[father. He then called witness names and struck ]her[ with his fist under the ear and knocked her]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "371" ;]
+..line: [      c:prefix "father. He then called witness names and struck " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " with his fist under the ear and knocked her" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "John Woodhall" ;]
+..line: [      c:name  "John Woodhall" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ The defendant called Thomas Coates who said that ]Whittaker[ and defendant had some words about a fence and]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Whittaker" ;]
+..line: [      c:length "9" ;]
+..line: [      c:offset "738" ;]
+..line: [      c:prefix " The defendant called Thomas Coates who said that " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4> ;]
+..line: [      c:suffix " and defendant had some words about a fence and" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/29839517-8e2c-3a14-a35b-fed4c8be956d>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "John Crowther" ;]
+..line: [      c:name  "John Crowther" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/01559fca-1b83-349e-8f1f-0ef1e0a3908d>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject <http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7> ;]
+..line: [      c:relationsubject "A little boy" ;]
+..line: [      c:verb  "name" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.141" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/a38fcb5f-a7fc-37e5-8ab8-72a5fbe2286b>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "it" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:verb  "pull" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/lid/DefaultLangId>]
+..line: [      a       <http://s.opencalais.com/1/type/lid/DefaultLangId> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:lang  <http://d.opencalais.com/lid/DefaultLangId/English> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Richard Whittaker" ;]
+..line: [      c:name  "Richard Whittaker" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/1>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Legal terms" ;]
+..line: [      c:originalValue "Legal terms" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/20c0c6e4-23d1-3b45-97b2-44e063391fca> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/7>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates[ who said that Whittaker and defendant had some]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "The defendant called Thomas Coates" ;]
+..line: [      c:length "34" ;]
+..line: [      c:offset "689" ;]
+..line: [      c:prefix "did not think it fit to receive his evidence. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fd3734a-2851-324b-9b3d-a154360486c7> ;]
+..line: [      c:suffix " who said that Whittaker and defendant had some" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/23>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones.[ The dispute began about a fence which Woodhall]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones." ;]
+..line: [      c:length "184" ;]
+..line: [      c:offset "689" ;]
+..line: [      c:prefix "did not think it fit to receive his evidence. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/1796a305-132c-3f3c-a75f-d117c7d9bc0b> ;]
+..line: [      c:suffix " The dispute began about a fence which Woodhall" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9fd3734a-2851-324b-9b3d-a154360486c7>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject <http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24> ;]
+..line: [      c:relationsubject "The defendant" ;]
+..line: [      c:verb  "call" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/19>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[stones. The dispute began about a fence which ]Woodhall[ said was on his ground and he went to pull it]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Woodhall" ;]
+..line: [      c:length "8" ;]
+..line: [      c:offset "912" ;]
+..line: [      c:prefix "stones. The dispute began about a fence which " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " said was on his ground and he went to pull it" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/25>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[the complainant's evidence. A little boy named ]Michael Whittaker was called but the Bench[ did not think it fit to receive his evidence.]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Michael Whittaker was called but the Bench" ;]
+..line: [      c:length "42" ;]
+..line: [      c:offset "600" ;]
+..line: [      c:prefix "the complainant's evidence. A little boy named " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/47778626-8ac3-3b0b-a6a7-4dcfcc84a438> ;]
+..line: [      c:suffix " did not think it fit to receive his evidence." .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/22>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[fence which Woodhall said was on his ground and ]he went to pull it[ down. John Crowther was next called but knew]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "he went to pull it" ;]
+..line: [      c:length "18" ;]
+..line: [      c:offset "948" ;]
+..line: [      c:prefix "fence which Woodhall said was on his ground and " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/a38fcb5f-a7fc-37e5-8ab8-72a5fbe2286b> ;]
+..line: [      c:suffix " down. John Crowther was next called but knew" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.242" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/15>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ He then called witness names and struck her with ]his[ fist under the ear and knocked her down. Witness]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "380" ;]
+..line: [      c:prefix " He then called witness names and struck her with " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " fist under the ear and knocked her down. Witness" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/47778626-8ac3-3b0b-a6a7-4dcfcc84a438>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject <http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7> ;]
+..line: [      c:verb  "call" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/12>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[the defendant assaulted her near the door of ]her[ father's house. Defendant at first commenced]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "242" ;]
+..line: [      c:prefix "the defendant assaulted her near the door of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " father's house. Defendant at first commenced" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[the complainant's evidence. A little boy named ]Michael Whittaker[ was called but the Bench did not think it fit to]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Michael Whittaker" ;]
+..line: [      c:length "17" ;]
+..line: [      c:offset "600" ;]
+..line: [      c:prefix "the complainant's evidence. A little boy named " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7> ;]
+..line: [      c:suffix " was called but the Bench did not think it fit to" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.857" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/2>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Whittaker" ;]
+..line: [      c:originalValue "Whittaker" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/2dfa1391-1a29-31c9-8edf-3dcaa8ad5ce6> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/8>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[to receive his evidence. The defendant called ]Thomas Coates[ who said that Whittaker and defendant had some]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Thomas Coates" ;]
+..line: [      c:length "13" ;]
+..line: [      c:offset "710" ;]
+..line: [      c:prefix "to receive his evidence. The defendant called " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24> ;]
+..line: [      c:suffix " who said that Whittaker and defendant had some" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/meta>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfoMeta> ;]
+..line: [      c:contentType "text/html" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:emVer "7.1.1103.5" ;]
+..line: [      c:langIdVer "DefaultLangId" ;]
+..line: [      c:language "English" ;]
+..line: [      c:processingVer "CalaisJob01" ;]
+..line: [      c:signature "digestalg-1|diZ6g/mjXQIxOFLli5K70WnBlMY=|ekuE9LnEXXBhPvmNZiYmOrJYhTBoigj3GiitJXL3mTeRVNy7Dkhu9Q==" ;]
+..line: [      c:stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25" ;]
+..line: [      c:submissionDate "2013-10-16 02:40:14.027" ;]
+..line: [      c:submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Thomas Coates" ;]
+..line: [      c:name  "Thomas Coates" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/21>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[fence which Woodhall said was on his ground and ]he[ went to pull it down. John Crowther was next]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "he" ;]
+..line: [      c:length "2" ;]
+..line: [      c:offset "948" ;]
+..line: [      c:prefix "fence which Woodhall said was on his ground and " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " went to pull it down. John Crowther was next" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/26>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Cross-examined: Did not strike defendant first. ]Richard Whittaker corroborated the complainant's evidence[. A little boy named Michael Whittaker was called]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "Richard Whittaker corroborated the complainant's evidence" ;]
+..line: [      c:length "57" ;]
+..line: [      c:offset "522" ;]
+..line: [      c:prefix "Cross-examined: Did not strike defendant first. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/2ea59057-ba7b-38a3-9b9d-d5a5b9703608> ;]
+..line: [      c:suffix ". A little boy named Michael Whittaker was called" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/11>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[ complainant deposed that the defendant assaulted ]her[ near the door of her father's house. Defendant]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "221" ;]
+..line: [      c:prefix " complainant deposed that the defendant assaulted " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " near the door of her father's house. Defendant" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.183" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/16>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[her with his fist under the ear and knocked ]her[ down. Witness then threw a stone at him which]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "415" ;]
+..line: [      c:prefix "her with his fist under the ear and knocked " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " down. Witness then threw a stone at him which" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[but the Bench did not think it fit to receive ]his[ evidence. The defendant called Thomas Coates who]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "his" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "675" ;]
+..line: [      c:prefix "but the Bench did not think it fit to receive " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7> ;]
+..line: [      c:suffix " evidence. The defendant called Thomas Coates who" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/City> ;]
+..line: [      c:name  "Hobart" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:relevance "0.097" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/29839517-8e2c-3a14-a35b-fed4c8be956d> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/9>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[1863 p 2 Assault.-Catherine Whittaker charged ]John Woodhall[ with assaulting her on 29th December last. The]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:exact "John Woodhall" ;]
+..line: [      c:length "13" ;]
+..line: [      c:offset "111" ;]
+..line: [      c:prefix "1863 p 2 Assault.-Catherine Whittaker charged " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9> ;]
+..line: [      c:suffix " with assaulting her on 29th December last. The" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/3>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Plaintiff" ;]
+..line: [      c:originalValue "Plaintiff" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/7729eeb6-62c5-3460-bb67-a979a0858073> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfo> ;]
+..line: [      c:allowDistribution "false" ;]
+..line: [      c:allowSearch "false" ;]
+..line: [      c:calaisRequestID "f9c693cb-434a-2441-141c-035334b539d1" ;]
+..line: [      c:docDate "2013-10-16 02:40:14.463" ;]
+..line: [      c:docTitle "" ;]
+..line: [      c:document "<body> The Mercury (Hobart, Tas. : 1860 - 1954) Friday 9 January 1863 p 2 Assault.-Catherine Whittaker charged John Woodhall with assaulting her on 29th December last. The complainant deposed that the defendant assaulted her near the door of her father's house. Defendant at first commenced kicking up a row with witness's father. He then called witness names and struck her with his fist under the ear and knocked her down. Witness then threw a stone at him which hit him. Cross-examined: Did not strike defendant first. Richard Whittaker corroborated the complainant's evidence. A little boy named Michael Whittaker was called but the Bench did not think it fit to receive his evidence. The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones. The dispute began about a fence which Woodhall said was on his ground and he went to pull it down. John Crowther was next called but knew nothing of the alleged assault. The Bench dismissed the information, but cautioned defendant not to go on Whittakers premises again.</body>" ;]
+..line: [      c:externalMetadata "" ;]
+..line: [      c:id    "http://id.opencalais.com/fGlOF*xfgoamCLJzG7lb7w" .]
+..line: []
+
+<entity-type>#Relations</entity-type>
+<ul>
+  <li>GenericRelations</li>
+  <li>Indictment</li>
+  <li>Quotation</li>
+</ul>
+
+
+<entity-type>#City</entity-type>
+<ul>
+  <li>Hobart</li>
+</ul>
+
+
+<entity-type>#Person</entity-type>
+<ul>
+  <li>John Crowther</li>
+  <li>John Woodhall</li>
+  <li>Michael Whittaker</li>
+  <li>Richard Whittaker</li>
+  <li>Thomas Coates</li>
+</ul>
+
+
+<entity-type>@prefix c</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type>@prefix rdf</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type><http</entity-type>
+<ul>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/17></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/1></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/27></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/4></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/20></li>
+  <li>//d.opencalais.com/pershash-1/9d56ebad-b161-3e90-bf2c-80ae64b542a7></li>
+  <li>//d.opencalais.com/genericHasher-1/1796a305-132c-3f3c-a75f-d117c7d9bc0b></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/13></li>
+  <li>//d.opencalais.com/genericHasher-1/a5265d13-35fe-313f-89ae-3cd742289bcb></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/10></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/2></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/3></li>
+  <li>//d.opencalais.com/genericHasher-1/2ea59057-ba7b-38a3-9b9d-d5a5b9703608></li>
+  <li>//d.opencalais.com/genericHasher-1/d85012d1-23f0-3788-a073-824c2294088e></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/6></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/24></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/cat/1></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/18></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/28></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/14></li>
+  <li>//d.opencalais.com/pershash-1/03085d54-320d-3d6d-86d3-49c32b303fd9></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/3></li>
+  <li>//d.opencalais.com/pershash-1/29839517-8e2c-3a14-a35b-fed4c8be956d></li>
+  <li>//d.opencalais.com/genericHasher-1/01559fca-1b83-349e-8f1f-0ef1e0a3908d></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/4></li>
+  <li>//d.opencalais.com/genericHasher-1/a38fcb5f-a7fc-37e5-8ab8-72a5fbe2286b></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/lid/DefaultLangId></li>
+  <li>//d.opencalais.com/pershash-1/5a0a4f83-823c-3c19-a487-b02228bea7a4></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/1></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/7></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/23></li>
+  <li>//d.opencalais.com/genericHasher-1/9fd3734a-2851-324b-9b3d-a154360486c7></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/19></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/25></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/22></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/1></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/15></li>
+  <li>//d.opencalais.com/genericHasher-1/47778626-8ac3-3b0b-a6a7-4dcfcc84a438></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/12></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/4></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/5></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/2></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/8></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/meta></li>
+  <li>//d.opencalais.com/pershash-1/80a1d26c-137b-3cec-8109-f3adc197ab24></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/21></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/26></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/11></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/2></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/16></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/5></li>
+  <li>//d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Relevance/6></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/Instance/9></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac/SocialTag/3></li>
+  <li>//d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac></li>
+</ul>
+
+
+<entity-type>      a       <http</entity-type>
+<ul>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/Quotation> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/Indictment> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/cat/DocCat> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/lid/DefaultLangId> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfoMeta> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/City> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfo> ;</li>
+</ul>
+
+
+<entity-type>      c</entity-type>
+<ul>
+  <li>detection "[knocked her down. Witness then threw a stone at ]him[ which hit him. Cross-examined</li>
+  <li>docId <http</li>
+  <li>exact "him" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "455" ;</li>
+  <li>prefix "knocked her down. Witness then threw a stone at " ;</li>
+  <li>subject <http</li>
+  <li>suffix " which hit him. Cross-examined</li>
+  <li>detection "[corroborated the complainant's evidence. ]A little boy named Michael Whittaker[ was called but the Bench did not think it fit to]" ;</li>
+  <li>docId <http</li>
+  <li>exact "A little boy named Michael Whittaker" ;</li>
+  <li>length "36" ;</li>
+  <li>offset "581" ;</li>
+  <li>prefix "corroborated the complainant's evidence. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " was called but the Bench did not think it fit to" .</li>
+  <li>detection "[was on his ground and he went to pull it down. ]John Crowther[ was next called but knew nothing of the alleged]" ;</li>
+  <li>docId <http</li>
+  <li>exact "John Crowther" ;</li>
+  <li>length "13" ;</li>
+  <li>offset "973" ;</li>
+  <li>prefix "was on his ground and he went to pull it down. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " was next called but knew nothing of the alleged" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Law_Crime" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[began about a fence which Woodhall said was on ]his[ ground and he went to pull it down. John]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "933" ;</li>
+  <li>prefix "began about a fence which Woodhall said was on " ;</li>
+  <li>subject <http</li>
+  <li>suffix " ground and he went to pull it down. John" .</li>
+  <li>commonname "Michael Whittaker" ;</li>
+  <li>name  "Michael Whittaker" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>person <http</li>
+  <li>persondescription "defendant" ;</li>
+  <li>quote "Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones." .</li>
+  <li>detection "[kicking up a row with witness's father. ]He[ then called witness names and struck her with]" ;</li>
+  <li>docId <http</li>
+  <li>exact "He" ;</li>
+  <li>length "2" ;</li>
+  <li>offset "331" ;</li>
+  <li>prefix "kicking up a row with witness's father. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " then called witness names and struck her with" .</li>
+  <li>person <http</li>
+  <li>detection "[Whittaker charged John Woodhall with assaulting ]her[ on 29th December last. The complainant deposed]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "141" ;</li>
+  <li>prefix "Whittaker charged John Woodhall with assaulting " ;</li>
+  <li>subject <http</li>
+  <li>suffix " on 29th December last. The complainant deposed" .</li>
+  <li>detection "[Cross-examined</li>
+  <li>docId <http</li>
+  <li>exact "Richard Whittaker" ;</li>
+  <li>length "17" ;</li>
+  <li>offset "522" ;</li>
+  <li>prefix "Cross-examined</li>
+  <li>subject <http</li>
+  <li>suffix " corroborated the complainant's evidence. A" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.327" ;</li>
+  <li>subject <http</li>
+  <li>relationobject "the complainant's evidence" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "corroborate" .</li>
+  <li>relationobject <http</li>
+  <li>relationsubject "2 Assault.-Catherine Whittaker" ;</li>
+  <li>verb  "charge" .</li>
+  <li>detection "[<body> The Mercury (]Hobart[</li>
+  <li>Tas.</li>
+  <li>docId <http</li>
+  <li>exact "Hobart" ;</li>
+  <li>length "6" ;</li>
+  <li>offset "20" ;</li>
+  <li>prefix "<body> The Mercury (" ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>Tas.</li>
+  <li>detection "[Tas.</li>
+  <li>docId <http</li>
+  <li>exact "2 Assault.-Catherine Whittaker charged John Woodhall" ;</li>
+  <li>length "52" ;</li>
+  <li>offset "72" ;</li>
+  <li>prefix "Tas.</li>
+  <li>subject <http</li>
+  <li>suffix " with assaulting her on 29th December last. The" .</li>
+  <li>category <http</li>
+  <li>categoryName "Law_Crime" ;</li>
+  <li>classifierName "Calais" ;</li>
+  <li>docId <http</li>
+  <li>score "0.982" .</li>
+  <li>detection "[Witness then threw a stone at him which hit ]him[. Cross-examined</li>
+  <li>docId <http</li>
+  <li>exact "him" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "469" ;</li>
+  <li>prefix "Witness then threw a stone at him which hit " ;</li>
+  <li>subject <http</li>
+  <li>suffix ". Cross-examined</li>
+  <li>detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates[ who said that Whittaker and defendant had some]" ;</li>
+  <li>docId <http</li>
+  <li>exact "The defendant called Thomas Coates" ;</li>
+  <li>length "34" ;</li>
+  <li>offset "689" ;</li>
+  <li>prefix "did not think it fit to receive his evidence. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " who said that Whittaker and defendant had some" .</li>
+  <li>detection "[father. He then called witness names and struck ]her[ with his fist under the ear and knocked her]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "371" ;</li>
+  <li>prefix "father. He then called witness names and struck " ;</li>
+  <li>subject <http</li>
+  <li>suffix " with his fist under the ear and knocked her" .</li>
+  <li>commonname "John Woodhall" ;</li>
+  <li>name  "John Woodhall" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>detection "[ The defendant called Thomas Coates who said that ]Whittaker[ and defendant had some words about a fence and]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Whittaker" ;</li>
+  <li>length "9" ;</li>
+  <li>offset "738" ;</li>
+  <li>prefix " The defendant called Thomas Coates who said that " ;</li>
+  <li>subject <http</li>
+  <li>suffix " and defendant had some words about a fence and" .</li>
+  <li>commonname "John Crowther" ;</li>
+  <li>name  "John Crowther" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>relationobject <http</li>
+  <li>relationsubject "A little boy" ;</li>
+  <li>verb  "name" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.141" ;</li>
+  <li>subject <http</li>
+  <li>relationobject "it" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "pull" .</li>
+  <li>docId <http</li>
+  <li>lang  <http</li>
+  <li>commonname "Richard Whittaker" ;</li>
+  <li>name  "Richard Whittaker" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Legal terms" ;</li>
+  <li>originalValue "Legal terms" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates[ who said that Whittaker and defendant had some]" ;</li>
+  <li>docId <http</li>
+  <li>exact "The defendant called Thomas Coates" ;</li>
+  <li>length "34" ;</li>
+  <li>offset "689" ;</li>
+  <li>prefix "did not think it fit to receive his evidence. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " who said that Whittaker and defendant had some" .</li>
+  <li>detection "[did not think it fit to receive his evidence. ]The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones.[ The dispute began about a fence which Woodhall]" ;</li>
+  <li>docId <http</li>
+  <li>exact "The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then the complainant hit defendant who then hit her and then she threw stones." ;</li>
+  <li>length "184" ;</li>
+  <li>offset "689" ;</li>
+  <li>prefix "did not think it fit to receive his evidence. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " The dispute began about a fence which Woodhall" .</li>
+  <li>relationobject <http</li>
+  <li>relationsubject "The defendant" ;</li>
+  <li>verb  "call" .</li>
+  <li>detection "[stones. The dispute began about a fence which ]Woodhall[ said was on his ground and he went to pull it]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Woodhall" ;</li>
+  <li>length "8" ;</li>
+  <li>offset "912" ;</li>
+  <li>prefix "stones. The dispute began about a fence which " ;</li>
+  <li>subject <http</li>
+  <li>suffix " said was on his ground and he went to pull it" .</li>
+  <li>detection "[the complainant's evidence. A little boy named ]Michael Whittaker was called but the Bench[ did not think it fit to receive his evidence.]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Michael Whittaker was called but the Bench" ;</li>
+  <li>length "42" ;</li>
+  <li>offset "600" ;</li>
+  <li>prefix "the complainant's evidence. A little boy named " ;</li>
+  <li>subject <http</li>
+  <li>suffix " did not think it fit to receive his evidence." .</li>
+  <li>detection "[fence which Woodhall said was on his ground and ]he went to pull it[ down. John Crowther was next called but knew]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he went to pull it" ;</li>
+  <li>length "18" ;</li>
+  <li>offset "948" ;</li>
+  <li>prefix "fence which Woodhall said was on his ground and " ;</li>
+  <li>subject <http</li>
+  <li>suffix " down. John Crowther was next called but knew" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.242" ;</li>
+  <li>subject <http</li>
+  <li>detection "[ He then called witness names and struck her with ]his[ fist under the ear and knocked her down. Witness]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "380" ;</li>
+  <li>prefix " He then called witness names and struck her with " ;</li>
+  <li>subject <http</li>
+  <li>suffix " fist under the ear and knocked her down. Witness" .</li>
+  <li>relationobject <http</li>
+  <li>verb  "call" .</li>
+  <li>detection "[the defendant assaulted her near the door of ]her[ father's house. Defendant at first commenced]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "242" ;</li>
+  <li>prefix "the defendant assaulted her near the door of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " father's house. Defendant at first commenced" .</li>
+  <li>detection "[the complainant's evidence. A little boy named ]Michael Whittaker[ was called but the Bench did not think it fit to]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Michael Whittaker" ;</li>
+  <li>length "17" ;</li>
+  <li>offset "600" ;</li>
+  <li>prefix "the complainant's evidence. A little boy named " ;</li>
+  <li>subject <http</li>
+  <li>suffix " was called but the Bench did not think it fit to" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.857" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Whittaker" ;</li>
+  <li>originalValue "Whittaker" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[to receive his evidence. The defendant called ]Thomas Coates[ who said that Whittaker and defendant had some]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Thomas Coates" ;</li>
+  <li>length "13" ;</li>
+  <li>offset "710" ;</li>
+  <li>prefix "to receive his evidence. The defendant called " ;</li>
+  <li>subject <http</li>
+  <li>suffix " who said that Whittaker and defendant had some" .</li>
+  <li>contentType "text/html" ;</li>
+  <li>docId <http</li>
+  <li>emVer "7.1.1103.5" ;</li>
+  <li>langIdVer "DefaultLangId" ;</li>
+  <li>language "English" ;</li>
+  <li>processingVer "CalaisJob01" ;</li>
+  <li>signature "digestalg-1|diZ6g/mjXQIxOFLli5K70WnBlMY=|ekuE9LnEXXBhPvmNZiYmOrJYhTBoigj3GiitJXL3mTeRVNy7Dkhu9Q==" ;</li>
+  <li>stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23</li>
+  <li>submissionDate "2013-10-16 02</li>
+  <li>submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .</li>
+  <li>commonname "Thomas Coates" ;</li>
+  <li>name  "Thomas Coates" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>detection "[fence which Woodhall said was on his ground and ]he[ went to pull it down. John Crowther was next]" ;</li>
+  <li>docId <http</li>
+  <li>exact "he" ;</li>
+  <li>length "2" ;</li>
+  <li>offset "948" ;</li>
+  <li>prefix "fence which Woodhall said was on his ground and " ;</li>
+  <li>subject <http</li>
+  <li>suffix " went to pull it down. John Crowther was next" .</li>
+  <li>detection "[Cross-examined</li>
+  <li>docId <http</li>
+  <li>exact "Richard Whittaker corroborated the complainant's evidence" ;</li>
+  <li>length "57" ;</li>
+  <li>offset "522" ;</li>
+  <li>prefix "Cross-examined</li>
+  <li>subject <http</li>
+  <li>suffix ". A little boy named Michael Whittaker was called" .</li>
+  <li>detection "[ complainant deposed that the defendant assaulted ]her[ near the door of her father's house. Defendant]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "221" ;</li>
+  <li>prefix " complainant deposed that the defendant assaulted " ;</li>
+  <li>subject <http</li>
+  <li>suffix " near the door of her father's house. Defendant" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.183" ;</li>
+  <li>subject <http</li>
+  <li>detection "[her with his fist under the ear and knocked ]her[ down. Witness then threw a stone at him which]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "415" ;</li>
+  <li>prefix "her with his fist under the ear and knocked " ;</li>
+  <li>subject <http</li>
+  <li>suffix " down. Witness then threw a stone at him which" .</li>
+  <li>detection "[but the Bench did not think it fit to receive ]his[ evidence. The defendant called Thomas Coates who]" ;</li>
+  <li>docId <http</li>
+  <li>exact "his" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "675" ;</li>
+  <li>prefix "but the Bench did not think it fit to receive " ;</li>
+  <li>subject <http</li>
+  <li>suffix " evidence. The defendant called Thomas Coates who" .</li>
+  <li>name  "Hobart" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.097" ;</li>
+  <li>subject <http</li>
+  <li>detection "[1863 p 2 Assault.-Catherine Whittaker charged ]John Woodhall[ with assaulting her on 29th December last. The]" ;</li>
+  <li>docId <http</li>
+  <li>exact "John Woodhall" ;</li>
+  <li>length "13" ;</li>
+  <li>offset "111" ;</li>
+  <li>prefix "1863 p 2 Assault.-Catherine Whittaker charged " ;</li>
+  <li>subject <http</li>
+  <li>suffix " with assaulting her on 29th December last. The" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Plaintiff" ;</li>
+  <li>originalValue "Plaintiff" ;</li>
+  <li>socialtag <http</li>
+  <li>allowDistribution "false" ;</li>
+  <li>allowSearch "false" ;</li>
+  <li>calaisRequestID "f9c693cb-434a-2441-141c-035334b539d1" ;</li>
+  <li>docDate "2013-10-16 02</li>
+  <li>docTitle "" ;</li>
+  <li>document "<body> The Mercury (Hobart</li>
+  <li>Tas.</li>
+  <li>externalMetadata "" ;</li>
+  <li>id    "http</li>
+</ul>
+
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 30 July 1864 p 2
+WOODHALL v. WOODHALL..-An information by Amelia Woodhall against her husband for maintenance.
+The complainant deposed that on the 28th of April an order was made upon the defendant by two justices of the peace for payment to her of 10s. per week for maintenance. The money was regularly paid up to seven weeks ago, when the
+payments were discontinued. Witness was not aware of any sufficient reason for the non-payment. Hubert Day Church,Clerk of the Peace, produced the order of maintenance in question.
+The Bench dismissed the complainant, on the ground that the order had lapsed.
+................. callAPIsms
+..line: [#Relations: GenericRelations, PersonCareer]
+..line: [#City: Hobart]
+..line: [#Organization: Hubert Day Church]
+..line: [#Person: Amelia Woodhall, Church, Hubert Day]
+..line: [#Position: Clerk]
+..line: [@prefix c:       <http://s.opencalais.com/1/pred/> .]
+..line: [@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/lid/DefaultLangId>]
+..line: [      a       <http://s.opencalais.com/1/type/lid/DefaultLangId> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:lang  <http://d.opencalais.com/lid/DefaultLangId/English> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfo> ;]
+..line: [      c:allowDistribution "false" ;]
+..line: [      c:allowSearch "false" ;]
+..line: [      c:calaisRequestID "68cc5f4f-b623-3220-141c-0371faf575e7" ;]
+..line: [      c:docDate "2013-10-16 02:42:20.298" ;]
+..line: [      c:docTitle "" ;]
+..line: [      c:document "<body> The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 30 July 1864 p 2 WOODHALL v. WOODHALL..-An information by Amelia Woodhall against her husband for maintenance. The complainant deposed that on the 28th of April an order was made upon the defendant by two justices of the peace for payment to her of 10s. per week for maintenance. The money was regularly paid up to seven weeks ago, when the payments were discontinued. Witness was not aware of any sufficient reason for the non-payment. Hubert Day Church,Clerk of the Peace, produced the order of maintenance in question. The Bench dismissed the complainant, on the ground that the order had lapsed.</body>" ;]
+..line: [      c:externalMetadata "" ;]
+..line: [      c:id    "http://id.opencalais.com/xFtZ5bco6i78RStjN3RP3g" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/7>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Law_Crime" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/ea31334e-799c-3064-82e9-c2772a373029> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Amelia Woodhall" ;]
+..line: [      c:name  "Amelia Woodhall" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/meta>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfoMeta> ;]
+..line: [      c:contentType "text/html" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:emVer "7.1.1103.5" ;]
+..line: [      c:langIdVer "DefaultLangId" ;]
+..line: [      c:language "English" ;]
+..line: [      c:processingVer "CalaisJob01" ;]
+..line: [      c:signature "digestalg-1|3LCBlmJHTG83dbFQjdSTeSn4qPU=|Nq5AmlYSEtqTnzl47J16lSUWK8wopKqdghVWLvJPAJapVYj4N2jjdw==" ;]
+..line: [      c:stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25" ;]
+..line: [      c:submissionDate "2013-10-16 02:42:20.079" ;]
+..line: [      c:submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.181" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/d85b6031-6ac9-3e22-bd55-ac5f801843b0> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.181" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5fa86b03-4a95-3dd9-9ddb-c393f48305de> .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/12a65e39-4df8-3505-a4cb-457e68eca93e>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/GenericRelations> ;]
+..line: [      c:relationobject "the order of maintenance in question" ;]
+..line: [      c:relationsubject <http://d.opencalais.com/genericHasher-1/e7b2409e-4ef9-3e3a-9b94-7c6e89923750> ;]
+..line: [      c:verb  "produce" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/5fa86b03-4a95-3dd9-9ddb-c393f48305de>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Church" ;]
+..line: [      c:name  "Church" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Tas. : 1860 - 1954) Saturday 30 July 1864 p 2 ]WOODHALL[ v. WOODHALL..-An information by Amelia Woodhall]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "WOODHALL" ;]
+..line: [      c:length "8" ;]
+..line: [      c:offset "74" ;]
+..line: [      c:prefix "Tas. : 1860 - 1954) Saturday 30 July 1864 p 2 " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " v. WOODHALL..-An information by Amelia Woodhall" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/36e13578-67b0-325d-a142-6f18ead7c62a>]
+..line: [      a       <http://s.opencalais.com/1/type/em/r/PersonCareer> ;]
+..line: [      c:careertype "professional" ;]
+..line: [      c:person <http://d.opencalais.com/pershash-1/5fa86b03-4a95-3dd9-9ddb-c393f48305de> ;]
+..line: [      c:position <http://d.opencalais.com/genericHasher-1/3d4fbed2-61f4-36be-bd67-f46856cf2a21> ;]
+..line: [      c:status "current" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/d85b6031-6ac9-3e22-bd55-ac5f801843b0>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Hubert Day" ;]
+..line: [      c:name  "Hubert Day" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[p 2 WOODHALL v. WOODHALL..-An information by ]Amelia Woodhall[ against her husband for maintenance. The]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Amelia Woodhall" ;]
+..line: [      c:length "15" ;]
+..line: [      c:offset "115" ;]
+..line: [      c:prefix "p 2 WOODHALL v. WOODHALL..-An information by " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " against her husband for maintenance. The" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/8>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[by two justices of the peace for payment to ]her[ of 10s. per week for maintenance. The money was]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "299" ;]
+..line: [      c:prefix "by two justices of the peace for payment to " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " of 10s. per week for maintenance. The money was" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[reason for the non-payment. Hubert Day ]Church,Clerk[ of the Peace, produced the order of maintenance]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Church,Clerk" ;]
+..line: [      c:length "12" ;]
+..line: [      c:offset "505" ;]
+..line: [      c:prefix "reason for the non-payment. Hubert Day " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/36e13578-67b0-325d-a142-6f18ead7c62a> ;]
+..line: [      c:suffix " of the Peace, produced the order of maintenance" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.181" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/e7b2409e-4ef9-3e3a-9b94-7c6e89923750> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/4>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "2" ;]
+..line: [      c:name  "Justice of the Peace" ;]
+..line: [      c:originalValue "Justice of the Peace" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/99ad3799-1b3d-3300-9ea6-4172064d0569> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/2>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Legal terms" ;]
+..line: [      c:originalValue "Legal terms" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/20c0c6e4-23d1-3b45-97b2-44e063391fca> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/11>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[of any sufficient reason for the non-payment. ]Hubert Day Church[,Clerk of the Peace, produced the order of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Hubert Day Church" ;]
+..line: [      c:length "17" ;]
+..line: [      c:offset "494" ;]
+..line: [      c:prefix "of any sufficient reason for the non-payment. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/e7b2409e-4ef9-3e3a-9b94-7c6e89923750> ;]
+..line: [      c:suffix ",Clerk of the Peace, produced the order of" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/e7b2409e-4ef9-3e3a-9b94-7c6e89923750>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Organization> ;]
+..line: [      c:name  "Hubert Day Church" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:organizationtype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/6>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "2" ;]
+..line: [      c:name  "Plaintiff" ;]
+..line: [      c:originalValue "Plaintiff" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/7729eeb6-62c5-3460-bb67-a979a0858073> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.498" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.352" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[<body> The Mercury (]Hobart[, Tas. : 1860 - 1954) Saturday 30 July 1864 p 2]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Hobart" ;]
+..line: [      c:length "6" ;]
+..line: [      c:offset "20" ;]
+..line: [      c:prefix "<body> The Mercury (" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70> ;]
+..line: [      c:suffix ", Tas. : 1860 - 1954) Saturday 30 July 1864 p 2" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/7>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[information by Amelia Woodhall against ]her[ husband for maintenance. The complainant deposed]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "her" ;]
+..line: [      c:length "3" ;]
+..line: [      c:offset "139" ;]
+..line: [      c:prefix "information by Amelia Woodhall against " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix " husband for maintenance. The complainant deposed" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[- 1954) Saturday 30 July 1864 p 2 WOODHALL v. ]WOODHALL[..-An information by Amelia Woodhall against her]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "WOODHALL" ;]
+..line: [      c:length "8" ;]
+..line: [      c:offset "86" ;]
+..line: [      c:prefix "- 1954) Saturday 30 July 1864 p 2 WOODHALL v. " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7> ;]
+..line: [      c:suffix "..-An information by Amelia Woodhall against her" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/City> ;]
+..line: [      c:name  "Hobart" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/10>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[of any sufficient reason for the non-payment. ]Hubert Day Church,Clerk of the Peace, produced the order of maintenance in question[. The Bench dismissed the complainant, on the]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Hubert Day Church,Clerk of the Peace, produced the order of maintenance in question" ;]
+..line: [      c:length "83" ;]
+..line: [      c:offset "494" ;]
+..line: [      c:prefix "of any sufficient reason for the non-payment. " ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/12a65e39-4df8-3505-a4cb-457e68eca93e> ;]
+..line: [      c:suffix ". The Bench dismissed the complainant, on the" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:relevance "0.181" ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/3d4fbed2-61f4-36be-bd67-f46856cf2a21> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[of any sufficient reason for the non-payment. ]Hubert Day[ Church,Clerk of the Peace, produced the order of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Hubert Day" ;]
+..line: [      c:length "10" ;]
+..line: [      c:offset "494" ;]
+..line: [      c:prefix "of any sufficient reason for the non-payment. " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/d85b6031-6ac9-3e22-bd55-ac5f801843b0> ;]
+..line: [      c:suffix " Church,Clerk of the Peace, produced the order of" .]
+..line: []
+..line: [<http://d.opencalais.com/genericHasher-1/3d4fbed2-61f4-36be-bd67-f46856cf2a21>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Position> ;]
+..line: [      c:name  "Clerk" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/9>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[reason for the non-payment. Hubert Day Church,]Clerk[ of the Peace, produced the order of maintenance]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Clerk" ;]
+..line: [      c:length "5" ;]
+..line: [      c:offset "512" ;]
+..line: [      c:prefix "reason for the non-payment. Hubert Day Church," ;]
+..line: [      c:subject <http://d.opencalais.com/genericHasher-1/3d4fbed2-61f4-36be-bd67-f46856cf2a21> ;]
+..line: [      c:suffix " of the Peace, produced the order of maintenance" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/1>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Law" ;]
+..line: [      c:originalValue "Law" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/ab9f217f-a2b9-3f0d-92a1-d9c63c80639e> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/3>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Woodhall" ;]
+..line: [      c:originalValue "Woodhall" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/af063a54-bc32-3281-a061-33db308cce91> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/12>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[reason for the non-payment. Hubert Day ]Church[,Clerk of the Peace, produced the order of]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:exact "Church" ;]
+..line: [      c:length "6" ;]
+..line: [      c:offset "505" ;]
+..line: [      c:prefix "reason for the non-payment. Hubert Day " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5fa86b03-4a95-3dd9-9ddb-c393f48305de> ;]
+..line: [      c:suffix ",Clerk of the Peace, produced the order of" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/5>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:importance "2" ;]
+..line: [      c:name  "Clerk of the Peace" ;]
+..line: [      c:originalValue "Clerk of the Peace" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/9466842d-3f4e-3bcf-88b0-39249d8183b3> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/cat/1>]
+..line: [      a       <http://s.opencalais.com/1/type/cat/DocCat> ;]
+..line: [      c:category <http://d.opencalais.com/cat/Calais/Law_Crime> ;]
+..line: [      c:categoryName "Law_Crime" ;]
+..line: [      c:classifierName "Calais" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35> ;]
+..line: [      c:score "0.906" .]
+..line: []
+
+<entity-type>#Relations</entity-type>
+<ul>
+  <li>GenericRelations</li>
+  <li>PersonCareer</li>
+</ul>
+
+
+<entity-type>#City</entity-type>
+<ul>
+  <li>Hobart</li>
+</ul>
+
+
+<entity-type>#Organization</entity-type>
+<ul>
+  <li>Hubert Day Church</li>
+</ul>
+
+
+<entity-type>#Person</entity-type>
+<ul>
+  <li>Amelia Woodhall</li>
+  <li>Church</li>
+  <li>Hubert Day</li>
+</ul>
+
+
+<entity-type>#Position</entity-type>
+<ul>
+  <li>Clerk</li>
+</ul>
+
+
+<entity-type>@prefix c</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type>@prefix rdf</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type><http</entity-type>
+<ul>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/lid/DefaultLangId></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/7></li>
+  <li>//d.opencalais.com/pershash-1/5a58d251-ca99-321d-bae2-80fb3dc515d7></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/meta></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/2></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/6></li>
+  <li>//d.opencalais.com/genericHasher-1/12a65e39-4df8-3505-a4cb-457e68eca93e></li>
+  <li>//d.opencalais.com/pershash-1/5fa86b03-4a95-3dd9-9ddb-c393f48305de></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/4></li>
+  <li>//d.opencalais.com/genericHasher-1/36e13578-67b0-325d-a142-6f18ead7c62a></li>
+  <li>//d.opencalais.com/pershash-1/d85b6031-6ac9-3e22-bd55-ac5f801843b0></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/6></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/8></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/2></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/5></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/4></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/2></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/11></li>
+  <li>//d.opencalais.com/genericHasher-1/e7b2409e-4ef9-3e3a-9b94-7c6e89923750></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/6></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/3></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/1></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/1></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/7></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/5></li>
+  <li>//d.opencalais.com/genericHasher-1/9fa3fb8a-f517-32c7-8a46-3c1506ea3a70></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/10></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Relevance/4></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/3></li>
+  <li>//d.opencalais.com/genericHasher-1/3d4fbed2-61f4-36be-bd67-f46856cf2a21></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/9></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/1></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/3></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/Instance/12></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/SocialTag/5></li>
+  <li>//d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35/cat/1></li>
+</ul>
+
+
+<entity-type>      a       <http</entity-type>
+<ul>
+  <li>//s.opencalais.com/1/type/lid/DefaultLangId> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfoMeta> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/GenericRelations> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/r/PersonCareer> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Organization> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/City> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Position> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/cat/DocCat> ;</li>
+</ul>
+
+
+<entity-type>      c</entity-type>
+<ul>
+  <li>docId <http</li>
+  <li>lang  <http</li>
+  <li>allowDistribution "false" ;</li>
+  <li>allowSearch "false" ;</li>
+  <li>calaisRequestID "68cc5f4f-b623-3220-141c-0371faf575e7" ;</li>
+  <li>docDate "2013-10-16 02</li>
+  <li>docTitle "" ;</li>
+  <li>document "<body> The Mercury (Hobart</li>
+  <li>Tas.</li>
+  <li>externalMetadata "" ;</li>
+  <li>id    "http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Law_Crime" ;</li>
+  <li>socialtag <http</li>
+  <li>commonname "Amelia Woodhall" ;</li>
+  <li>name  "Amelia Woodhall" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>contentType "text/html" ;</li>
+  <li>docId <http</li>
+  <li>emVer "7.1.1103.5" ;</li>
+  <li>langIdVer "DefaultLangId" ;</li>
+  <li>language "English" ;</li>
+  <li>processingVer "CalaisJob01" ;</li>
+  <li>signature "digestalg-1|3LCBlmJHTG83dbFQjdSTeSn4qPU=|Nq5AmlYSEtqTnzl47J16lSUWK8wopKqdghVWLvJPAJapVYj4N2jjdw==" ;</li>
+  <li>stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23</li>
+  <li>submissionDate "2013-10-16 02</li>
+  <li>submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.181" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>relevance "0.181" ;</li>
+  <li>subject <http</li>
+  <li>relationobject "the order of maintenance in question" ;</li>
+  <li>relationsubject <http</li>
+  <li>verb  "produce" .</li>
+  <li>commonname "Church" ;</li>
+  <li>name  "Church" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>detection "[Tas.</li>
+  <li>docId <http</li>
+  <li>exact "WOODHALL" ;</li>
+  <li>length "8" ;</li>
+  <li>offset "74" ;</li>
+  <li>prefix "Tas.</li>
+  <li>subject <http</li>
+  <li>suffix " v. WOODHALL..-An information by Amelia Woodhall" .</li>
+  <li>careertype "professional" ;</li>
+  <li>person <http</li>
+  <li>position <http</li>
+  <li>status "current" .</li>
+  <li>commonname "Hubert Day" ;</li>
+  <li>name  "Hubert Day" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>detection "[p 2 WOODHALL v. WOODHALL..-An information by ]Amelia Woodhall[ against her husband for maintenance. The]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Amelia Woodhall" ;</li>
+  <li>length "15" ;</li>
+  <li>offset "115" ;</li>
+  <li>prefix "p 2 WOODHALL v. WOODHALL..-An information by " ;</li>
+  <li>subject <http</li>
+  <li>suffix " against her husband for maintenance. The" .</li>
+  <li>detection "[by two justices of the peace for payment to ]her[ of 10s. per week for maintenance. The money was]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "299" ;</li>
+  <li>prefix "by two justices of the peace for payment to " ;</li>
+  <li>subject <http</li>
+  <li>suffix " of 10s. per week for maintenance. The money was" .</li>
+  <li>detection "[reason for the non-payment. Hubert Day ]Church</li>
+  <li>Clerk[ of the Peace</li>
+  <li>produced the order of maintenance]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Church</li>
+  <li>Clerk" ;</li>
+  <li>length "12" ;</li>
+  <li>offset "505" ;</li>
+  <li>prefix "reason for the non-payment. Hubert Day " ;</li>
+  <li>subject <http</li>
+  <li>suffix " of the Peace</li>
+  <li>produced the order of maintenance" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.181" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>importance "2" ;</li>
+  <li>name  "Justice of the Peace" ;</li>
+  <li>originalValue "Justice of the Peace" ;</li>
+  <li>socialtag <http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Legal terms" ;</li>
+  <li>originalValue "Legal terms" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[of any sufficient reason for the non-payment. ]Hubert Day Church[</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Hubert Day Church" ;</li>
+  <li>length "17" ;</li>
+  <li>offset "494" ;</li>
+  <li>prefix "of any sufficient reason for the non-payment. " ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of" .</li>
+  <li>name  "Hubert Day Church" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>organizationtype "N/A" .</li>
+  <li>docId <http</li>
+  <li>importance "2" ;</li>
+  <li>name  "Plaintiff" ;</li>
+  <li>originalValue "Plaintiff" ;</li>
+  <li>socialtag <http</li>
+  <li>docId <http</li>
+  <li>relevance "0.498" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>relevance "0.352" ;</li>
+  <li>subject <http</li>
+  <li>detection "[<body> The Mercury (]Hobart[</li>
+  <li>Tas.</li>
+  <li>docId <http</li>
+  <li>exact "Hobart" ;</li>
+  <li>length "6" ;</li>
+  <li>offset "20" ;</li>
+  <li>prefix "<body> The Mercury (" ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>Tas.</li>
+  <li>detection "[information by Amelia Woodhall against ]her[ husband for maintenance. The complainant deposed]" ;</li>
+  <li>docId <http</li>
+  <li>exact "her" ;</li>
+  <li>length "3" ;</li>
+  <li>offset "139" ;</li>
+  <li>prefix "information by Amelia Woodhall against " ;</li>
+  <li>subject <http</li>
+  <li>suffix " husband for maintenance. The complainant deposed" .</li>
+  <li>detection "[- 1954) Saturday 30 July 1864 p 2 WOODHALL v. ]WOODHALL[..-An information by Amelia Woodhall against her]" ;</li>
+  <li>docId <http</li>
+  <li>exact "WOODHALL" ;</li>
+  <li>length "8" ;</li>
+  <li>offset "86" ;</li>
+  <li>prefix "- 1954) Saturday 30 July 1864 p 2 WOODHALL v. " ;</li>
+  <li>subject <http</li>
+  <li>suffix "..-An information by Amelia Woodhall against her" .</li>
+  <li>name  "Hobart" .</li>
+  <li>detection "[of any sufficient reason for the non-payment. ]Hubert Day Church</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of maintenance in question[. The Bench dismissed the complainant</li>
+  <li>on the]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Hubert Day Church</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of maintenance in question" ;</li>
+  <li>length "83" ;</li>
+  <li>offset "494" ;</li>
+  <li>prefix "of any sufficient reason for the non-payment. " ;</li>
+  <li>subject <http</li>
+  <li>suffix ". The Bench dismissed the complainant</li>
+  <li>on the" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.181" ;</li>
+  <li>subject <http</li>
+  <li>detection "[of any sufficient reason for the non-payment. ]Hubert Day[ Church</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Hubert Day" ;</li>
+  <li>length "10" ;</li>
+  <li>offset "494" ;</li>
+  <li>prefix "of any sufficient reason for the non-payment. " ;</li>
+  <li>subject <http</li>
+  <li>suffix " Church</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of" .</li>
+  <li>name  "Clerk" .</li>
+  <li>detection "[reason for the non-payment. Hubert Day Church</li>
+  <li>]Clerk[ of the Peace</li>
+  <li>produced the order of maintenance]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Clerk" ;</li>
+  <li>length "5" ;</li>
+  <li>offset "512" ;</li>
+  <li>prefix "reason for the non-payment. Hubert Day Church</li>
+  <li>" ;</li>
+  <li>subject <http</li>
+  <li>suffix " of the Peace</li>
+  <li>produced the order of maintenance" .</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Law" ;</li>
+  <li>originalValue "Law" ;</li>
+  <li>socialtag <http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Woodhall" ;</li>
+  <li>originalValue "Woodhall" ;</li>
+  <li>socialtag <http</li>
+  <li>detection "[reason for the non-payment. Hubert Day ]Church[</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Church" ;</li>
+  <li>length "6" ;</li>
+  <li>offset "505" ;</li>
+  <li>prefix "reason for the non-payment. Hubert Day " ;</li>
+  <li>subject <http</li>
+  <li>suffix "</li>
+  <li>Clerk of the Peace</li>
+  <li>produced the order of" .</li>
+  <li>docId <http</li>
+  <li>importance "2" ;</li>
+  <li>name  "Clerk of the Peace" ;</li>
+  <li>originalValue "Clerk of the Peace" ;</li>
+  <li>socialtag <http</li>
+  <li>category <http</li>
+  <li>categoryName "Law_Crime" ;</li>
+  <li>classifierName "Calais" ;</li>
+  <li>docId <http</li>
+  <li>score "0.906" .</li>
+</ul>
+
+
+================= CONTENT[0]:
+<aifDescendant id_ns="ccc113961.01" naa_key="3037287">
+  <surnameEnlistee>Askey</surnameEnlistee>
+  <forenameEnlistee>Clarence Bernard Samuel</forenameEnlistee>
+  <genealogy>
+    <p>
+      <l>Son of Samuel Askey (1863-1942) &amp; Sarah Louisa Gard (1862-1942),</l>
+      <l>grandson of Robert Gard (1832-1916) &amp; Ann Phillips (1835-1891),</l>
+      <l>great grandson of Henry Phillips (1795-1888) &amp; Mary Clark (1800-1863)</l>
+    </p>
+  </genealogy>
+  <anyOtherDetails>Enlisted 9 Oct 1915. Discharged 15 Oct 1919.</anyOtherDetails>
+  <otherSources>NAA Series B2455, Barcode 3037287.</otherSources>
+</aifDescendant>
+................. callAPIsms
+..line: [#Relations: ]
+..line: [#Person: Ann Phillips, Henry Phillips, Mary Clark, Robert Gard, Samuel Askey, Sarah Louisa Gard]
+..line: [@prefix c:       <http://s.opencalais.com/1/pred/> .]
+..line: [@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[        Son of Samuel Askey (1863-1942) & ]Sarah Louisa Gard[ (1862-1942),         grandson of Robert Gard]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Sarah Louisa Gard" ;]
+..line: [      c:length "17" ;]
+..line: [      c:offset "56" ;]
+..line: [      c:prefix "        Son of Samuel Askey (1863-1942) & " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/48d391a9-3ac7-32e2-8fe6-b4b81b9e90c8> ;]
+..line: [      c:suffix " (1862-1942),         grandson of Robert Gard" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[        grandson of Robert Gard (1832-1916) & ]Ann Phillips[ (1835-1891),         great grandson of Henry]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Ann Phillips" ;]
+..line: [      c:length "12" ;]
+..line: [      c:offset "137" ;]
+..line: [      c:prefix "        grandson of Robert Gard (1832-1916) & " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/8bef9101-58d0-32e6-ac3f-d8698908546d> ;]
+..line: [      c:suffix " (1835-1891),         great grandson of Henry" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/5411ab11-3ab5-32d3-9c23-b82eb01eff35>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Mary Clark" ;]
+..line: [      c:name  "Mary Clark" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/meta>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfoMeta> ;]
+..line: [      c:contentType "text/html" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:emVer "7.1.1103.5" ;]
+..line: [      c:langIdVer "DefaultLangId" ;]
+..line: [      c:language "English" ;]
+..line: [      c:processingVer "CalaisJob01" ;]
+..line: [      c:signature "digestalg-1|seGFie9f5iT3yleRqoAb4xElcKw=|AWARym5mDl+nABFpAfRABzOR0MFE46D/Ky8x+PJSV4OTuUXdqXVW9g==" ;]
+..line: [      c:stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25" ;]
+..line: [      c:submissionDate "2013-10-16 02:42:08.967" ;]
+..line: [      c:submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5411ab11-3ab5-32d3-9c23-b82eb01eff35> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/SocialTag/1>]
+..line: [      a       <http://s.opencalais.com/1/type/tag/SocialTag> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:importance "1" ;]
+..line: [      c:name  "Phillips" ;]
+..line: [      c:originalValue "Phillips (surname)" ;]
+..line: [      c:socialtag <http://d.opencalais.com/genericHasher-1/bc5725c5-67f9-3592-a9ff-661fbcc8cc3c> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/8c8124fb-3543-308b-944f-864115529e12> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/13ab4e37-0d88-3073-84d6-1b0663687a92>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Henry Phillips" ;]
+..line: [      c:name  "Henry Phillips" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/7e2aee1b-08d8-3785-b933-a3cefce81d5b> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/48d391a9-3ac7-32e2-8fe6-b4b81b9e90c8>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Sarah Louisa Gard" ;]
+..line: [      c:name  "Sarah Louisa Gard" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/lid/DefaultLangId>]
+..line: [      a       <http://s.opencalais.com/1/type/lid/DefaultLangId> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:lang  <http://d.opencalais.com/lid/DefaultLangId/English> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/8c8124fb-3543-308b-944f-864115529e12>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Robert Gard" ;]
+..line: [      c:name  "Robert Gard" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/13ab4e37-0d88-3073-84d6-1b0663687a92> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/DocInfo> ;]
+..line: [      c:allowDistribution "false" ;]
+..line: [      c:allowSearch "false" ;]
+..line: [      c:calaisRequestID "bc586a7d-3138-abd4-141c-036f4474ae6a" ;]
+..line: [      c:docDate "2013-10-16 02:42:09.154" ;]
+..line: [      c:docTitle "" ;]
+..line: [      c:document "<body><p>         Son of Samuel Askey (1863-1942) &amp; Sarah Louisa Gard (1862-1942),         grandson of Robert Gard (1832-1916) &amp; Ann Phillips (1835-1891),         great grandson of Henry Phillips (1795-1888) &amp; Mary Clark (1800-1863)      </p> Enlisted 9 Oct 1915. Discharged 15 Oct 1919.</body>" ;]
+..line: [      c:externalMetadata "" ;]
+..line: [      c:id    "http://id.opencalais.com/5yAO38qO-5mXHw4B5ts6bA" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/6>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[grandson of Henry Phillips (1795-1888) & ]Mary Clark[ (1800-1863)      </p> Enlisted 9 Oct 1915.]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Mary Clark" ;]
+..line: [      c:length "10" ;]
+..line: [      c:offset "222" ;]
+..line: [      c:prefix "grandson of Henry Phillips (1795-1888) & " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/5411ab11-3ab5-32d3-9c23-b82eb01eff35> ;]
+..line: [      c:suffix " (1800-1863)      </p> Enlisted 9 Oct 1915." .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/5>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Phillips (1835-1891),         great grandson of ]Henry Phillips[ (1795-1888) & Mary Clark (1800-1863)     ]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Henry Phillips" ;]
+..line: [      c:length "14" ;]
+..line: [      c:offset "189" ;]
+..line: [      c:prefix "Phillips (1835-1891),         great grandson of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/13ab4e37-0d88-3073-84d6-1b0663687a92> ;]
+..line: [      c:suffix " (1795-1888) & Mary Clark (1800-1863)     " .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/3>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[<body><p>         Son of ]Samuel Askey[ (1863-1942) & Sarah Louisa Gard (1862-1942),]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Samuel Askey" ;]
+..line: [      c:length "12" ;]
+..line: [      c:offset "25" ;]
+..line: [      c:prefix "<body><p>         Son of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/7e2aee1b-08d8-3785-b933-a3cefce81d5b> ;]
+..line: [      c:suffix " (1863-1942) & Sarah Louisa Gard (1862-1942)," .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/4>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/InstanceInfo> ;]
+..line: [      c:detection "[Louisa Gard (1862-1942),         grandson of ]Robert Gard[ (1832-1916) & Ann Phillips (1835-1891),     ]" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:exact "Robert Gard" ;]
+..line: [      c:length "11" ;]
+..line: [      c:offset "107" ;]
+..line: [      c:prefix "Louisa Gard (1862-1942),         grandson of " ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/8c8124fb-3543-308b-944f-864115529e12> ;]
+..line: [      c:suffix " (1832-1916) & Ann Phillips (1835-1891),     " .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/1>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/48d391a9-3ac7-32e2-8fe6-b4b81b9e90c8> .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/cat/1>]
+..line: [      a       <http://s.opencalais.com/1/type/cat/DocCat> ;]
+..line: [      c:category <http://d.opencalais.com/cat/Calais/Sports> ;]
+..line: [      c:categoryName "Sports" ;]
+..line: [      c:classifierName "Calais" ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:score "0.504" .]
+..line: []
+..line: [<http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/2>]
+..line: [      a       <http://s.opencalais.com/1/type/sys/RelevanceInfo> ;]
+..line: [      c:docId <http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2> ;]
+..line: [      c:relevance "0.393" ;]
+..line: [      c:subject <http://d.opencalais.com/pershash-1/8bef9101-58d0-32e6-ac3f-d8698908546d> .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/7e2aee1b-08d8-3785-b933-a3cefce81d5b>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Samuel Askey" ;]
+..line: [      c:name  "Samuel Askey" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+..line: [<http://d.opencalais.com/pershash-1/8bef9101-58d0-32e6-ac3f-d8698908546d>]
+..line: [      a       <http://s.opencalais.com/1/type/em/e/Person> ;]
+..line: [      c:commonname "Ann Phillips" ;]
+..line: [      c:name  "Ann Phillips" ;]
+..line: [      c:nationality "N/A" ;]
+..line: [      c:persontype "N/A" .]
+..line: []
+
+<entity-type>#Person</entity-type>
+<ul>
+  <li>Ann Phillips</li>
+  <li>Henry Phillips</li>
+  <li>Mary Clark</li>
+  <li>Robert Gard</li>
+  <li>Samuel Askey</li>
+  <li>Sarah Louisa Gard</li>
+</ul>
+
+
+<entity-type>@prefix c</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type>@prefix rdf</entity-type>
+<ul>
+  <li><http</li>
+</ul>
+
+
+<entity-type><http</entity-type>
+<ul>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/1></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/2></li>
+  <li>//d.opencalais.com/pershash-1/5411ab11-3ab5-32d3-9c23-b82eb01eff35></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/meta></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/6></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/SocialTag/1></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/4></li>
+  <li>//d.opencalais.com/pershash-1/13ab4e37-0d88-3073-84d6-1b0663687a92></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/3></li>
+  <li>//d.opencalais.com/pershash-1/48d391a9-3ac7-32e2-8fe6-b4b81b9e90c8></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/lid/DefaultLangId></li>
+  <li>//d.opencalais.com/pershash-1/8c8124fb-3543-308b-944f-864115529e12></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/5></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/6></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/5></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/3></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Instance/4></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/1></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/cat/1></li>
+  <li>//d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2/Relevance/2></li>
+  <li>//d.opencalais.com/pershash-1/7e2aee1b-08d8-3785-b933-a3cefce81d5b></li>
+  <li>//d.opencalais.com/pershash-1/8bef9101-58d0-32e6-ac3f-d8698908546d></li>
+</ul>
+
+
+<entity-type>      a       <http</entity-type>
+<ul>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfoMeta> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/tag/SocialTag> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/lid/DefaultLangId> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/DocInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/InstanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/cat/DocCat> ;</li>
+  <li>//s.opencalais.com/1/type/sys/RelevanceInfo> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+  <li>//s.opencalais.com/1/type/em/e/Person> ;</li>
+</ul>
+
+
+<entity-type>      c</entity-type>
+<ul>
+  <li>detection "[        Son of Samuel Askey (1863-1942) & ]Sarah Louisa Gard[ (1862-1942)</li>
+  <li>grandson of Robert Gard]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Sarah Louisa Gard" ;</li>
+  <li>length "17" ;</li>
+  <li>offset "56" ;</li>
+  <li>prefix "        Son of Samuel Askey (1863-1942) & " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1862-1942)</li>
+  <li>grandson of Robert Gard" .</li>
+  <li>detection "[        grandson of Robert Gard (1832-1916) & ]Ann Phillips[ (1835-1891)</li>
+  <li>great grandson of Henry]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Ann Phillips" ;</li>
+  <li>length "12" ;</li>
+  <li>offset "137" ;</li>
+  <li>prefix "        grandson of Robert Gard (1832-1916) & " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1835-1891)</li>
+  <li>great grandson of Henry" .</li>
+  <li>commonname "Mary Clark" ;</li>
+  <li>name  "Mary Clark" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>contentType "text/html" ;</li>
+  <li>docId <http</li>
+  <li>emVer "7.1.1103.5" ;</li>
+  <li>langIdVer "DefaultLangId" ;</li>
+  <li>language "English" ;</li>
+  <li>processingVer "CalaisJob01" ;</li>
+  <li>signature "digestalg-1|seGFie9f5iT3yleRqoAb4xElcKw=|AWARym5mDl+nABFpAfRABzOR0MFE46D/Ky8x+PJSV4OTuUXdqXVW9g==" ;</li>
+  <li>stagsVer "8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23</li>
+  <li>submissionDate "2013-10-16 02</li>
+  <li>submitterCode "5e44c810-57ee-b39a-10a1-26a150e7a203" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>docId <http</li>
+  <li>importance "1" ;</li>
+  <li>name  "Phillips" ;</li>
+  <li>originalValue "Phillips (surname)" ;</li>
+  <li>socialtag <http</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>commonname "Henry Phillips" ;</li>
+  <li>name  "Henry Phillips" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>commonname "Sarah Louisa Gard" ;</li>
+  <li>name  "Sarah Louisa Gard" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>docId <http</li>
+  <li>lang  <http</li>
+  <li>commonname "Robert Gard" ;</li>
+  <li>name  "Robert Gard" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>allowDistribution "false" ;</li>
+  <li>allowSearch "false" ;</li>
+  <li>calaisRequestID "bc586a7d-3138-abd4-141c-036f4474ae6a" ;</li>
+  <li>docDate "2013-10-16 02</li>
+  <li>docTitle "" ;</li>
+  <li>document "<body><p>         Son of Samuel Askey (1863-1942) &amp; Sarah Louisa Gard (1862-1942)</li>
+  <li>grandson of Robert Gard (1832-1916) &amp; Ann Phillips (1835-1891)</li>
+  <li>great grandson of Henry Phillips (1795-1888) &amp; Mary Clark (1800-1863)      </p> Enlisted 9 Oct 1915. Discharged 15 Oct 1919.</body>" ;</li>
+  <li>externalMetadata "" ;</li>
+  <li>id    "http</li>
+  <li>detection "[grandson of Henry Phillips (1795-1888) & ]Mary Clark[ (1800-1863)      </p> Enlisted 9 Oct 1915.]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Mary Clark" ;</li>
+  <li>length "10" ;</li>
+  <li>offset "222" ;</li>
+  <li>prefix "grandson of Henry Phillips (1795-1888) & " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1800-1863)      </p> Enlisted 9 Oct 1915." .</li>
+  <li>detection "[Phillips (1835-1891)</li>
+  <li>great grandson of ]Henry Phillips[ (1795-1888) & Mary Clark (1800-1863)     ]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Henry Phillips" ;</li>
+  <li>length "14" ;</li>
+  <li>offset "189" ;</li>
+  <li>prefix "Phillips (1835-1891)</li>
+  <li>great grandson of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1795-1888) & Mary Clark (1800-1863)     " .</li>
+  <li>detection "[<body><p>         Son of ]Samuel Askey[ (1863-1942) & Sarah Louisa Gard (1862-1942)</li>
+  <li>]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Samuel Askey" ;</li>
+  <li>length "12" ;</li>
+  <li>offset "25" ;</li>
+  <li>prefix "<body><p>         Son of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1863-1942) & Sarah Louisa Gard (1862-1942)</li>
+  <li>" .</li>
+  <li>detection "[Louisa Gard (1862-1942)</li>
+  <li>grandson of ]Robert Gard[ (1832-1916) & Ann Phillips (1835-1891)</li>
+  <li>]" ;</li>
+  <li>docId <http</li>
+  <li>exact "Robert Gard" ;</li>
+  <li>length "11" ;</li>
+  <li>offset "107" ;</li>
+  <li>prefix "Louisa Gard (1862-1942)</li>
+  <li>grandson of " ;</li>
+  <li>subject <http</li>
+  <li>suffix " (1832-1916) & Ann Phillips (1835-1891)</li>
+  <li>" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>category <http</li>
+  <li>categoryName "Sports" ;</li>
+  <li>classifierName "Calais" ;</li>
+  <li>docId <http</li>
+  <li>score "0.504" .</li>
+  <li>docId <http</li>
+  <li>relevance "0.393" ;</li>
+  <li>subject <http</li>
+  <li>commonname "Samuel Askey" ;</li>
+  <li>name  "Samuel Askey" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+  <li>commonname "Ann Phillips" ;</li>
+  <li>name  "Ann Phillips" ;</li>
+  <li>nationality "N/A" ;</li>
+  <li>persontype "N/A" .</li>
+</ul>
+

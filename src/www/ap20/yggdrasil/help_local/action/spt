@@ -1,0 +1,91 @@
+<h2>Local KHRD Help: Source types</h2>
+
+<p>A yggdrasil "source type" is an attribute of an Yggdrasil source, which defines the TYPE of source.</p>
+
+<p>A source type may be a Leaf or a Branch.</p>
+
+<h3>Branch sources</h3>
+<p>These only contain other Branch sources, and/or Leaf sources. Branch types include: "Page", "Chapter", "Section", "Volume", "Book",  "Jurisdiction", "Main Category", "Series", "Year", "File", "Family".</p>
+
+<h3>Leaf sources</h3>
+<p>These contain texts which can be transcripts of sources. They cannot contain other sources. Their parent source's type must be of source type Branch. Leaf types include: "Birth record", "Marriage record", "Death record", "Enumeration", "Transcript".</p>
+
+<h3>Source type contents:</h3>
+<table border="1">
+<tr><th>Label</th><th>Yggdrasil</th><th>Description</th><th>KHRD usage conventions and date entry guidelines</th></tr>
+
+<tr>
+  <th>Description</th>
+  <td>description</td>
+  <td>Description of the source type.</td>
+  <td>xxx</td>
+</tr>
+
+<tr>
+  <th>Label (en)</th>
+  <td>label_en</td>
+  <td>Label used (english)</td>
+  <td></td>
+</tr>
+
+<tr>
+  <th>Label (nb)</th>
+  <td>label_no</td>
+  <td>Label used (norwegian)</td>
+  <td></td>
+</tr>
+
+<tr>
+  <th>Is leaf</th>
+  <td>is_leaf</td>
+  <td>True/false flag indicating whether or not a source type is a leaf (true) or a branch (false).</td>
+  <td></td>
+</tr>
+
+</table>
+
+<h3>Possible organisation of the source "tree"</h3>
+
+<p>This depends very much on existing eveidence and the researchers' and project's requirements.</p>
+
+<p>KHRD Example:</p>
+<pre>
+   Label of a source:                Source type 
+   ==================                ===========
+   Birth Evidence                    ( branch type="Main category [#17]")
+       NSW                           ( branch type="Jurisdiction [#16]")
+           1850                      ( branch type="Year [#19]")
+                006289                                           ( leaf   type="Death record" )
+           1851                      ( branch type="Year [#19]")
+           etc. for each year
+       VIC                           ( branch type="Jurisdiction [#16]")
+       etc. for each jurisdiction
+
+   Marriage evidence                 ( branch type="Main category [#17]")
+       Jurisdiction / Year / leaf as shown above for Birth evidence.
+
+   Death evidence                    ( branch type="Main category [#17]")
+       Jurisdiction / Year / leaf as shown above for Birth evidence.
+
+   BPA Reports                       ( branch type="Main category [#17]")
+       State/Station/Placename       ( branch type="Jurisdiction  [#16]")
+           1851                      ( branch type="Year [#19]")
+                Station return                                    ( leaf   type="Transcript" )
+   
+</pre>
+
+<h3>Requirements under consideration</h3>
+
+<ul>
+<li>Add types for supported external cross-references:
+   <ul>
+   <li>100: FAS Ship xref : (Branch) External cross reference to FAS convict ship ( generates a "leaf" for each convict transported on that ship)</li>
+   <li>110: FAS Convict xref : (Leaf) External cross reference to FAS convict search</li>
+   <li>180: NAA WWI service record : (Leaf) External cross reference to NAA WWI service record</li>
+   </ul>
+</li>
+<li>Have branch sources (and source types) loaded and defined from XML.</li>
+</ul>
+
+<hr />
+<p>sms Mon Oct 29 13:57:08 EST 2012</p>

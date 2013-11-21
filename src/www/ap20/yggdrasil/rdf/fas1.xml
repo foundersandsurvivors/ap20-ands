@@ -1,0 +1,19 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:fas="http://convix.org/ns/fas/0.1/" xmlns:bio="http://purl.org/vocab/bio/0.1/">
+  <foaf:Person rdf:about="http://convix.org/fas#me">
+    <foaf:name>Joseph Bloggs</foaf:name>
+    <foaf:title>Mr</foaf:title>
+    <foaf:nick>Joe</foaf:nick>
+    <foaf:homepage rdf:resource="http://example.com/joe/"/>
+    <foaf:dateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1980-09-08</foaf:dateOfBirth>
+    <foaf:dateOfDeath rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1999-10-13</foaf:dateOfDeath>
+    <fas:dateOfTransportation rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1990-10-13</fas:dateOfTransportation>
+    <foaf:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.82</foaf:height>
+    <bio:mother>Mary Bloggs</bio:mother>
+    <bio:father>Jim Bloggs</bio:father>
+    <foaf:currentProject>
+      <foaf:Project>
+        <foaf:name>Joe's current project</foaf:name>
+      </foaf:Project>
+    </foaf:currentProject>
+  </foaf:Person>
+</rdf:RDF>

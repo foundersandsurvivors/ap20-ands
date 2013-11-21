@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class EasyRdf_ParsedUri</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class EasyRdf_ParsedUri</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A RFC3986 compliant URI parser</p>
+	<ul class="tags">
+				<li><span class="field">copyright:</span> Copyright (c) 2009-2012 Nicholas J Humfrey</li>
+				<li><span class="field">link:</span> <a href="http://www.ietf.org/rfc/rfc3986.txt">http://www.ietf.org/rfc/rfc3986.txt</a></li>
+				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_EasyRdf---ParsedUri.php.html">/EasyRdf/ParsedUri.php</a> (line <span class="field">48</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<a href="#URI_REGEX" title="details" class="const-name">URI_REGEX</a> = 					<span class="var-type"> &quot;|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|&quot;</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result"><a href="../EasyRdf/EasyRdf_ParsedUri.html">object EasyRdf_ParsedUri</a></span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$uristr</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAuthority" title="details" class="method-name">getAuthority</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getFragment" title="details" class="method-name">getFragment</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPath" title="details" class="method-name">getPath</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getQuery" title="details" class="method-name">getQuery</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getScheme" title="details" class="method-name">getScheme</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isAbsolute" title="details" class="method-name">isAbsolute</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isRelative" title="details" class="method-name">isRelative</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../EasyRdf/EasyRdf_ParsedUri.html">object EasyRdf_ParsedUri</a></span>
+										<a href="#normalise" title="details" class="method-name">normalise</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#resolve" title="details" class="method-name">resolve</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$relUri</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAuthority" title="details" class="method-name">setAuthority</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$authority</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setFragment" title="details" class="method-name">setFragment</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$fragment</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setPath" title="details" class="method-name">setPath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setQuery" title="details" class="method-name">setQuery</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setScheme" title="details" class="method-name">setScheme</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$scheme</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#toString" title="details" class="method-name">toString</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor for creating a new parsed URI</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../EasyRdf/EasyRdf_ParsedUri.html">object EasyRdf_ParsedUri</a></span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span> = <span class="var-default">NULL</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$uristr</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uristr</span><span class="var-description">: The URI as a string</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$uri</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAuthority" id="getAuthority"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthority</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the authority of the URI (e.g. www.example.com:8080)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAuthority
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetFragment" id="getFragment"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFragment</span> (line <span class="line-number">177</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the fragment part of the URI (i.e. after the #)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getFragment
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPath" id="getPath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPath</span> (line <span class="line-number">145</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the path of the URI (e.g. /foo/bar)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetQuery" id="getQuery"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getQuery</span> (line <span class="line-number">161</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the query string part of the URI (e.g. foo=bar)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getQuery
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetScheme" id="getScheme"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getScheme</span> (line <span class="line-number">113</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the scheme of the URI (e.g. http)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getScheme
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisAbsolute" id="isAbsolute"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isAbsolute</span> (line <span class="line-number">97</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns true if this is an absolute (complete) URI</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isAbsolute
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisRelative" id="isRelative"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isRelative</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns true if this is an relative (partial) URI</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isRelative
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodnormalise" id="normalise"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">normalise</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Normalises the path of this URI if it has one. Normalising a path means</p>
+<p class="description"><p>that any unnecessary '.' and '..' segments are removed. For example, the  URI http://example.com/a/b/../c/./d would be normalised to  http://example.com/a/c/d</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../EasyRdf/EasyRdf_ParsedUri.html">object EasyRdf_ParsedUri</a></span>
+		<span class="method-name">
+			normalise
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodresolve" id="resolve"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">resolve</span> (line <span class="line-number">249</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Resolves a relative URI using this URI as the base URI.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			resolve
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$relUri</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$relUri</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAuthority" id="setAuthority"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAuthority</span> (line <span class="line-number">137</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the authority of the URI (e.g. www.example.com:8080)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAuthority
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$authority</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$authority</span><span class="var-description">: The new value for the authority component of the URI</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetFragment" id="setFragment"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setFragment</span> (line <span class="line-number">185</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the fragment of the URI (i.e. after the #)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setFragment
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$fragment</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$fragment</span><span class="var-description">: The new value for the fragment component of the URI</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetPath" id="setPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setPath</span> (line <span class="line-number">153</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the path of the URI (e.g. /foo/bar)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: The new value for the path component of the URI</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetQuery" id="setQuery"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setQuery</span> (line <span class="line-number">169</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the query string of the URI (e.g. foo=bar)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setQuery
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span><span class="var-description">: The new value for the query string component of the URI</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetScheme" id="setScheme"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setScheme</span> (line <span class="line-number">121</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the scheme of the URI (e.g. http)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setScheme
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$scheme</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$scheme</span><span class="var-description">: The new value for the scheme of the URI</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoString" id="toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">toString</span> (line <span class="line-number">308</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Convert the parsed URI back into a string</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The URI as a string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">__toString</span> (line <span class="line-number">327</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Magic method to convert the URI, when casted, back to a string</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The URI as a string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constURI_REGEX" id="URI_REGEX"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">URI_REGEX</span>
+			 = <span class="const-default"> &quot;|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|&quot;</span>
+			(line <span class="line-number">59</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 16 Jan 2013 19:16:38 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>

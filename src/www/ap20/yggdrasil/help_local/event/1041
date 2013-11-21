@@ -1,0 +1,12 @@
+<h2>Local KHRD Help: About event type 1041 (Matricle)</h2>
+
+<p>The Matricle event is system generated; its represents an experiment to provide access to KHRD legacy data:</p>
+<ul>
+<li>The Matricle gives a standard linkage between a person in the KHRD and a single, aggregated "legacy" source for that person</li>
+<li>the Matricle event's note_text provides a recognisable label for the person in the OHRM/Generations legacy format:  AAAA999</li>
+<li>the "legacy" source which is the citation for the matricle event contains all the various documents which appeared for that userid, with duplicates removed.</li>
+</ul>
+
+<p>An alternative under consideration is to employ the epiteth field on each person. In a scenario where ALL legacy sources can be stored distinctly as unique sources, as opposed to being repeated under each person they provide some evidence about, then removing the Matricle might be desirable.</p>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

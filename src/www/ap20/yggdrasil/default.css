@@ -1,0 +1,404 @@
+body {
+    background-image: url("./graphics/blue.gif"); /* left bar, color #006699 */
+    background-repeat: repeat-y;
+    /* background-color: #f0f0dc; #ccffff; */
+    background-color: #ffffff;
+    color: #000000;
+    padding : 0;
+    margin : 0;
+}
+
+/* class "normal" is used to push contents off left colored field */
+
+.normal {
+    margin-left : 150px;
+    margin-right : 10px;
+}
+
+div.normal {
+    margin-left : 150px;
+    margin-right : 10px;
+    margin-top : 0;
+    padding-top : 0;
+}
+
+h1, h2 {
+    font-style : italic;
+    padding-top : 10px;
+    padding-bottom : 3px;
+    margin-top : 0;
+    border-style : solid;
+    border-width : 0px;
+    border-bottom-width: 3px;
+    border-color : #006699;
+}
+
+h3, h4 {
+    padding-top : 1em;
+    padding-bottom : 0;
+}
+
+sup {
+    font-size : smaller;
+}
+
+li.spaced {
+    padding-bottom : 1em;
+}
+
+a:link {
+    color: #000099;
+    text-decoration: none;
+    background : inherit;
+}
+
+a:visited {
+    color: #990000;
+    text-decoration: none;
+    background : inherit;
+}
+
+a:hover {
+    color: black;
+    background-color: #ccccff;
+    text-decoration: underline;
+    border-color : white;
+}
+
+a:active { color: red;
+    text-decoration: underline;
+    border-color : white;
+    background : inherit;
+}
+
+table.nav {
+ width : 140px;
+ border-collapse : collapse;
+ border-style : solid;
+ border-width : 1px;
+ border-color : #9999ff;
+ margin : 0;
+ padding : 0;
+ float : left;
+ clear : left;
+}
+
+td.nav {
+ text-align: center;
+ font-size : smaller;
+ text-decoration : none;
+ border-collapse : collapse;
+ border-style : solid;
+ border-width : 1px;
+ background-color: #e5e5dc;
+ color : #000000;
+ border-color : #9999ff;
+ margin: 0;
+ padding : 0;
+}
+
+.nav a {
+    display: block;
+    width : 100%;
+    padding : 5px 0 5px 0;
+    border-color : #006699;
+    text-decoration : none;
+    background-color: #e5e5dc;
+    color : #000000;
+}
+
+.nav a:link {
+    text-decoration : none;
+    background-color: #e5e5dc;
+    color : #000000;
+}
+
+.nav a:visited {
+    text-decoration : none;
+    background-color: #e5e5dc;
+    color : #000000;
+}
+
+.nav a:active {
+    text-decoration : none;
+    background-color: #e5e5dc;
+    color : #000000;
+}
+
+.nav a:hover {
+    text-decoration : none;
+    background-color:  #c5c5dc;
+/*    background-color:  #3399cc; */
+    color : #000000;
+}
+
+.sources {
+    font-size : smaller;
+    margin-bottom : 1em;
+}
+
+.hidden { /* used with <span> for displaying hidden info */
+    background-color : #ffcccc;
+}
+
+.alert { /* used for highlighting unknown gender in main view */
+    font-weight: bold;
+    color : red;
+}
+
+.note { /* experimental, used for my own notes */
+    font-style : italic;
+/*    font-size : smaller; */
+}
+
+.inline_source {
+    /* font-style : italic; */
+    font-size : smaller;
+}
+
+.numeric {
+    text-align : right;
+}
+
+.name {
+    margin-left : 0px;
+    margin-right : 50px;
+    margin-bottom : 3px;
+    padding-top : 0.5em;
+    padding-bottom : 0;
+}
+
+.bmd {
+    margin-left : 50px;
+    margin-right : 50px;
+    margin-top : 3px;
+    padding-top : 0;
+    margin-bottom : 3px;
+    padding-bottom : 0;
+}
+
+.childsource {
+    font-size : smaller;
+    margin-left : 50px;
+    margin-right : 50px;
+    margin-top : 3px;
+    padding-top : 0;
+    margin-bottom : 3px;
+    padding-bottom : 0;
+}
+
+.blockquote {
+    margin-left : 50px;
+    margin-right : 50px;
+    font-size : smaller;
+}
+
+.bluebox { /* used in footer.php */
+    text-align : center;
+    font-size : smaller;
+    margin-top : 2em;
+    margin-left : 150px;
+    margin-right : 10px;
+    margin-bottom : 5px;
+    border-style : solid;
+    border-width : 1px;
+    border-color : #9999ff;
+    background-color: #ccccff;
+    padding : 5px;
+}
+
+ul.descendants { /* used in descendants.php */
+    list-style-type : none;
+    margin-right : 0;
+}
+
+/* the following definitions are used only in pedigree.php */
+
+.main { /* pedigree.php, main "table" cell */
+ width : 100%;
+ padding: 10px;
+ padding-top : 1em;
+}
+
+td.linkbox { /* used in pedigree.php */
+ text-align: center;
+ font-family: Verdana, Helvetica, Arial, sans-serif;
+ font-weight : bold;
+ font-size : 1.5ex;
+ text-decoration : none;
+ border-collapse : collapse;
+ border-style : solid;
+ border-width : 1px;
+ color : white;
+ background-color: #006699;
+ border-color : #006699;
+ padding : 5px 0 5px 0;
+}
+
+td.green { /* cell for proband */
+    text-align : center;
+    font-size : 1.8ex;
+    border-style : solid;
+    color : #000000;
+    background-color : #ecfccc;
+    border-color : #badaaa;
+    border-width : 2px;
+    padding : 2px;
+}
+
+td.blue { /* cell for male ancestors */
+    text-align : center;
+    font-size : 1.5ex;
+    border-style : solid;
+    color : #000000;
+    background-color : #e9eeff;
+    border-color : #aaaaff;
+    border-width : 2px;
+    padding : 2px;
+    margin: 0;
+}
+
+td.red { /* cell for female ancestors */
+    text-align : center;
+    font-size : 1.5ex;
+    border-style : solid;
+    color : #000000;
+    background-color : #ffeee9;
+    border-color : #ffaaaa;
+    border-width : 2px;
+    padding : 2px;
+    margin: 0;
+}
+
+td.tofath { /* using border properties to display lines to father cell */
+    font-size : 1px;
+    border-style: solid;
+    border-color: black white white black;
+    border-width: 1px 0 0 1px;
+    padding : 0;
+}
+
+td.tomoth { /* using border properties to display lines to mother cell */
+    font-size : 1px;
+    border-style: solid;
+    border-color: white white black black;
+    border-width: 0 0 1px 1px;
+    padding : 0;
+}
+
+td.tofathu { /* using border properties to display lines to father cell */
+    font-size : 1px;
+    border-style: solid;
+    border-color: black white white black;
+    border-width: 1px 0 0 1px;
+    border-style: dashed;
+    padding : 0;
+}
+
+td.tomothu { /* using border properties to display lines to mother cell */
+    font-size : 1px;
+    border-style: solid;
+    border-color: white white black black;
+    border-width: 0 0 1px 1px;
+    border-style: dashed;
+    padding : 0;
+}
+
+td.vline { /* vertical line */
+    font-size : 1px;
+    border-style: solid;
+    border-color: white white white black;
+    border-width: 0 0 0 1px;
+    padding : 0;
+}
+
+.faded {
+    color : #808080;
+}
+
+ul.plainlist {
+    list-style-type : none;
+}
+
+/* testing XML attribute selector */
+name[role|='child'] {
+    font-weight : bold;
+}
+
+span.child {
+    font-weight : bold;
+}
+
+
+/* sms2011-09-01: class "local_help" is used for slabs of local help */
+.localhelp {
+    margin-left : 150px;
+    margin-right : 10px;
+    background-color: #ccffff;
+}
+
+div.localhelp {
+    margin-top : 30px;
+    background-color: #ccccff;
+    font-size : smaller;
+}
+
+/* print style */
+
+@media print {
+    body {
+        font-family : serif;
+        font-size : smaller;
+    }
+
+    h1, h2 {
+        font-family : "Dejavu Sans", "Microsoft Sans Serif", Arial, sans-serif !important;
+        font-style: normal !important;
+        font-weight : normal !important;
+        padding-bottom : 3px;
+        border-style : solid;
+        border-width : 0;
+        border-bottom-width: 3px;
+        border-color : #006699;
+    }
+
+    h3, h4 {
+        margin-left : 0;
+        margin-right : 0;
+        padding-top : 1em;
+        padding-bottom : 0;
+    }
+
+    .normal {
+        margin-left : 0 !important;
+        margin-right : 0 !important;
+    }
+
+    .name {
+        margin-left : 0;
+        margin-right : 0;
+        margin-top : 3px;
+        margin-bottom : 3px;
+        padding-top : 0.5em;
+        padding-bottom : 0;
+    }
+
+    .bmd {
+        margin-left : 30px;
+        margin-right : 0;
+        margin-top : 0;
+        padding-top : 0;
+        margin-bottom : 0;
+        padding-bottom : 0;
+    }
+
+    .nav, table.nav, td.nav, .bluebox, .hotlink {
+            display : none;
+    }
+
+    ul.descendants {
+            list-style-type : none;
+            margin-left : 0;
+            margin-right : 0;
+    }
+}

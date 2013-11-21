@@ -1,0 +1,71 @@
+<h2>Local KHRD Help: Person</h2>
+
+<p>The yggdrasil "person" entity corresponds to a KHRD legacy userid i.e. AAAA999 (the associated Matricle event contains this legacy body/person identifier.</p>
+<p>Preloaded persons from legacy data have identifiers starting from 10000. Persons added locally have numbers starting from 1.</p>
+<p>Please note:</p>
+<ul>
+<li>only NAMES are provided;</li>
+<li>dates and locations of birth/death are derived from the events associated with this person;</li>
+</ul>
+
+<p>There is no provision as yet for structured/validated data capture about persons.</p>
+
+<h3>Person contents:</h3>
+<table>
+<tr><th>Label</th><th>Yggdrasil</th><th>Description</th><th>KHRD usage conventions and date entry guidelines</th></tr>
+
+<tr>                                                                                                                                              <th>Sex</th>
+  <td>gender</td>
+  <td></td>
+  <td>Select from provided choices.</td>
+</tr>
+
+<tr>
+  <th>Forename</th>
+  <td>given</td>
+  <td>First and middlenames</td>
+  <td></td>
+</tr>
+
+<tr>
+  <th>Maiden name</th>
+  <td>patronym</td>
+  <td>Father's surname.</td>
+  <td>Use for female maiden names if the maiden name (i.e. the patrilineal surname) differs from the loaded surname.</td>
+</tr>
+
+<tr>
+  <th>Toponym</th>
+  <td>toponym</td>
+  <td>unused</td>
+  <td>Possible usage in khrd clan/family group???</td>
+</tr>
+
+<tr>                                                                                                                                              <th>Surname</th>
+  <td>surname</td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>                                                                                                                                              <th>ALT surname(s)</th>
+  <td>occupation</td>
+  <td>Alternate forms(s) of a surname</td>
+  <td>Enter alias, alternate or "also known as" forms of surnames, comma delimited, in this field.</td>
+</tr>
+
+<tr>                                                                                                                                              <th>ALT forename(s)</th>
+  <td>epithet</td>
+  <td>Alternate forms(s) of forename</td>
+  <td>nter alias, alternate or "also known as" forms of forenames, comma delimited, in this field.</td>
+</tr>
+
+</table>
+
+<p>Requirements under consideration:</p>
+<ul>
+<li>determination of non-aboriginals?: local extended field in persons table</li>
+<li>search requirements: indexing, soundex/nysiis</li>
+<li>structured data capture/storage/validation e.g. causes of death: add xmlFragment</li>
+</ul>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

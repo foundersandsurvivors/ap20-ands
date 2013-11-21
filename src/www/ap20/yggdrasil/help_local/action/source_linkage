@@ -1,0 +1,61 @@
+<h2>Local KHRD Help: Source linkage</h2>
+
+<p>Source linkage in Yggdrasil means making assertions about the existance of people from sources.</p>
+
+<h3>Source linkage contents:</h3>
+
+<table border="1">
+<tr><th>Label</th><th>Yggdrasil</th><th>Description</th><th>KHRD usage conventions and date entry guidelines</th></tr>
+
+<tr>
+  <th>Source text</th>
+  <td>Source text</td>
+  <td>Description/label/transcript of this source</td>
+  <td></td>
+</tr>
+
+<tr>
+  <th>Role</th>
+  <td>label_en</td>
+  <td>Label used (english)</td>
+  <td>See table linkage_roles: undefined | child | father | mother | godparent | other</td>
+</tr>
+
+<tr>
+  <th>Person</th>
+  <td>person_fk</td>
+  <td>Id of person whose existence is asserted from this source.</td>
+  <td>Leave 0 if unknown.</td>
+</tr>
+
+<tr>
+  <th>How sure?</th>
+  <td>surety_fk</td>
+  <td>Level of certainty.</td>
+  <td>Wrong | unknown | possible | probable | certain.</td>
+</tr>
+
+<tr>
+  <th>Person name ...</th>
+  <td>s_name</td>
+  <td>Person name and contextual info as mentioned in the source.</td>
+  <td>Alt names of the subject, aliases, relations. Use for matricle? Searchable? These are shown in the list_mentioned function in source manager.</td>
+</tr>
+
+<tr>
+  <th>Note</th>
+  <td>sl_note</td>
+  <td>Notes and inferences.</td>
+  <td></td>
+</tr>
+
+</table>
+
+<h3>Requirements under consideration</h3>
+
+<ul>
+<li>...</li>
+</ul>
+
+<hr />
+<p>sms Mon Oct 29 13:57:08 EST 2012</p>

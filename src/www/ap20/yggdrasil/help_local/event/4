@@ -1,0 +1,33 @@
+<h2>Local KHRD Help: About event type 4 (Married)</h2>
+
+<p>In the KHRD, we created a "Married" event from the legacy OHRM/EAC data where relationships between persons was explicitly maintained.</p>
+
+<p>These <b>autoloaded marriages start from 400000</b>. User entered marriage events will be numbered much below that.<p>
+
+<p>In the OHRM, the "associative" relationship between marriage partners exists twice, but in Yggdrasil, the marriage event has 2 participants, and hence a marriage being entered once, provides a 2 way relationship.</p>
+
+<p>The automated loadup of the legacy OHRM marriage relationships was extremely complex. Because we sourced Person entries from Janet's more up to date FM Pro exported records which:</p>
+<ul>
+<li>has lost explicit pointers/relations between people (we only had the text of the spouse to go on);</li>
+<li>person data is duplicated across a multiple records, one for each different marriage a person had been in (a legacy of Generations file organisation);</li>
+<li>some people were present who did not exist in the OHRM/EAC files; See these listed in <a href="/khrd/yggdrasil/source_manager.php?node=8">this "source" in Yggdrasil...</a></li>
+<li>some which had been in the OHRM were no longer present in the FM Pro; See these listed in <a href="/khrd/yggdrasil/source_manager.php?node=6">this "source" in Yggdrasil...</a></li>
+</ul>
+
+<p>Because of the above, Len and Sandra applied the following checks in processing OHRM marriage relationships:</p> 
+
+<ul>
+<li>both people in the marriage had to exist in Janet's more up to date FM Pro export;</li>
+<li>we checked the partner's name(s) from Janet's file against the name involved in the relationship in the Ohrm;</li>
+<li>any differences in name were manually sighted by Len and Sandra -- non significant spelling differences in name were allowed to pass (many of these!);</li>
+<li>where names were substantively different we did NOT autoload the marriage - these will need to be reviewed and added manually;</li>
+<li>where it appeared multiple people may have been merged under the same userid in Janet's file, we omitted these -- these will need to be checked manually;</li>
+</ul>
+
+<p>The loaded marriage event note includes a cross reference back to the originating FM pro record -- based on a sequence number assigned in the processing by Sandra (as there is NO unique identifier in the supplied file. So those FM999 numbers need to be referred back to the FM record sequence number listed in the legacy loadup log reports.</p>
+
+<p>TODO -- placename loadup.</p>
+
+<p>TODO -- provide data entry instructions for creating a marriage in Yggdrasil.</p>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

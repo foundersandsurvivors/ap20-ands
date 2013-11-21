@@ -1,0 +1,66 @@
+<h2>Local KHRD Help: Events</h2>
+
+<p>A yggdrasil "event" describes a kind of dated, placed thing that has happened to a person.</p>
+<p>An event may be associated with a source text, which provides a "citation" or evidence for the event.</p>
+
+<p>There is no provision as yet for structured/validated data capture about events other than a date and place.</p>
+
+<h3>Event contents:</h3>
+<table border="1">
+<tr><th>Label</th><th>Yggdrasil</th><th>Description</th><th>KHRD usage conventions and date entry guidelines</th></tr>
+
+<tr>                                                                                                                                              <th>Type</th>
+  <td>tag_fk</td>
+  <td>The type of event.</td>
+  <td>Select from provided choices listed in alphabetical order.</td>
+</tr>
+
+<tr>
+  <th>Place</th>
+  <td>place_fk</td>
+  <td>Reference to an EXISTING placename</td>
+  <td>To do.</td>
+</tr>
+
+<tr>
+  <th>Event note</th>
+  <td>event_note</td>
+  <td><b>Optional</b> notes associated with the event</td>
+  <td>Used for workflow/task management if the text contains [task=XXXX] where XXXX is a user determined type of database cleansing task.</td>
+</tr>
+
+<tr>
+  <th>Source</th>
+  <td>event_citations</td>
+  <td><b>Optional</b>: associate an event with a Source (creating a "citation").</td>
+  <td>By default the LAST EDITED source is enetered here -- change this to ZERO if you do NOT want to associate the event with a source.</td>
+</tr>
+
+<tr>                                                                                                                                              <th>Surname</th>
+  <td>surname</td>
+  <td></td>
+  <td></td>
+</tr>
+
+<tr>                                                                                                                                              <th>Occupation</th>
+  <td>occupation</td>
+  <td>unused</td>
+  <td>unused</td>
+</tr>
+
+<tr>                                                                                                                                              <th>Epiteth</th>
+  <td>epiteth</td>
+  <td></td>
+  <td></td>
+</tr>
+
+</table>
+
+<p>Requirements under consideration:</p>
+<ul>
+<li>determination of non-aboriginals?: local extended field in persons table</li>
+<li>search requirements: indexing, soundex/nysiis</li>
+<li>structured data capture/storage/validation e.g. causes of death: add xmlFragment</li>
+</ul>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

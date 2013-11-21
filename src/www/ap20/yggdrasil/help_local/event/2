@@ -1,0 +1,12 @@
+<h2>Local KHRD Help: About event type 2 (Born)</h2>
+
+<p>In the KHRD, every person loaded from legacy data has had a Born event created for them:</p>
+<ul>
+<li>date has been entered where it was deemed a valid date (you can view these grouped/counted by year from the Event manager);</li>
+<li>the event is undated if there were multiple conflicting birth dates; these Born events have had a <b>resolveMultipleBirthDates</b> task noted on the event (you can access a list of these from the Event manager);</li>
+<li>the event is undated if there was no birthDate in the legacy sources; these Born events have had a <b>findBirthDate</b> task noted on the event (you can access a list of these from the Event manager);</li>
+</ul>
+
+<p>These <b>autoloaded births are identified by 200000 + the person_id number</b>. User entered birth events will be numbered much below that.<p>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

@@ -1,0 +1,49 @@
+body {
+    /* font-family : "Bitstream Vera Sans", "Lucida Sans MS", Helvetica, Arial, sans-serif; */
+    /* font-size : 88%; */
+    background-color: #f0f0dc;
+    color: #000000;
+}
+
+h1, h2 {
+    font-style : italic;
+    padding-top : 0;
+    padding-bottom : 3px;
+    margin-top : 0;
+    border-style : solid;
+    border-width : 0px;
+    border-bottom-width: 3px;
+    border-color : #006699;
+}
+
+.sources {
+    font-size : smaller;
+    margin-bottom : 1em;
+}
+
+.hidden { /* used with <span> for displaying hidden info */
+    background-color : #ffcccc;
+}
+
+.usererror {border: solid 1px gray; padding: 1ex; background-color: white; font-weight: bold; width: 50%; }
+
+.instruct {border: solid 1px gray; padding: 1ex; background-color: pink; text-align:center; width: 50%; }
+
+/* class "local_help" is used for slabs of local help */
+.localhelp {
+    margin-left : 80px;
+    margin-right : 80px;
+    margin-top : 30px;
+    background-color: #cccccc;
+    padding: 20px;
+    font-size : smaller;
+}
+
+/*
+div.localhelp {
+    margin-top : 30px;
+    background-color: #ccccff;
+    font-size : smaller;
+}
+*/
+

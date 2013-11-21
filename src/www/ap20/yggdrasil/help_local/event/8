@@ -1,0 +1,23 @@
+<h2>Local KHRD Help: About event type "LINK"</h2>
+
+<p>The "LINK" event is an experiment designed to facilitate interaction with and updating of John Bass's external link manager.</p>
+
+<p>At this stage I do not anticipate this being a requirement for the KHRD, but it will be a requirement for diggers-convict linkage.</p>
+
+<p>This would apply to diggers to convict linkage, where VDL BDM sources are loaded. Where these are NOT already interlinked (and that will be reflected in the load) there will be multiple people records for what might really be the same person. It is planned to use this event type, with 2 participants, to capture the fact that a human volunteer or staff member believes the 2 participants to be identical (e.g. person id of a digger LINK to a person which is the baby from a birth source).</p>
+
+<p>Custom data entry to support this kind of linkage is expected to be required, along with live interaction/validation with LKT/XML databases not yet implemented.</p>
+
+<p>It is anticipated that:</p>
+<ul>
+<li>the event_note will be used to record/log the users initials and any additional commentary;</li>
+<li>no data other than the LINKed person id (participant id) is required;</li>
+<li>persons will be merged/recreated overnight to reflect the link chain maintained externally by LKT;</li>
+<li>this in effect makes a LINK event a "transaction" which only exists to feed LKT.</li>
+</ul>
+
+<h3>Recommened usage in KHRD</h3>
+
+<p>I recommend it be used as a work task, to indicate two different different people are actually the same. Yggdrasil provides a "merge" process which when the KHRD data manager is confident that the 2 LINKed people are the same, would probably effect the required merging. ###Not yet certain of this###</p>
+
+<p>sms Sat Aug 27 13:35:52 EST 2011</p>

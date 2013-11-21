@@ -1,0 +1,322 @@
+<?php
+
+/***************************************************************************
+ *   settings.php                                                          *
+ *   Exodus: DB Connection and "global" settings                           *
+ *                                                                         *
+ *   Copyright (C) 2006-2011 by Leif B. Kristensen <leif@solumslekt.org>   *
+ *   All rights reserved. For terms of use, see LICENSE.txt                *
+ ***************************************************************************/
+
+/*
+  Changes (manually maintained as settings vary across deployments):
+  sms 14 Oct 2013: Extra checking for when db does not exist and auth.
+  sms 12 sep 2012: Added log4php.
+*/
+
+// NOTE: When adding configurable settings (e.g. userid/passwords) you should modify
+//       the ap20_deployer.pl script if you want to auto-deploy them to remote hosts
+//       See /srv/khrd/yggrasil-setup/99-remote-deploy
+
+ini_set('display_errors',1);
+error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
+
+// before you start working with your database, you *must* edit this file!
+
+// note to db style
+    $note_to_db_style = 'preserveLines';
+
+// sms: extended features
+
+    $administrator = array("yggdemo"=>1);
+    $icd10_googleIntegration = 0;
+    $enable_zebraforms = 0;
+    $bdm_source_search = 1; // for khrd & diggers but let it be turned off; branch filter on existing search cleaner/easier.
+    $webwork = "/var/webwork/ap20"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    // See get_restxq_xml2 function in functions.php fpr access to basex restxq service
+    $basex_server = ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $basex_restxq = $basex_server . ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $basex_restxq_iframe = $basex_server . ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+
+    $metasource_config_dir = "$webwork/metasource_config";
+    $javabin = "/opt/java/java/bin/java"; // host specific java binary for running saxon; use symlinks to get right version on your host
+
+// extended footer
+    $footer_line2 = "<a href=\"http://founders-and-survivors.org/y/index.shtml\">AP20 Home</a> | <a href=\"http://founders-and-survivors.org/y/prot/ydevwiki\">AP20 Wiki</a><br/><a href=\"http://www.ands.org.au/\"><img src=\"http://www.ands.org.au/partner/ands-logo-hi-res.jpg\" width=\"40px\" /></a> The <a href=\"https://github.com/foundersandsurvivors/ap20-ands\">software</a> used by this project was developed with the support of the <a href=\"http://www.ands.org.au/\">Australian National Data Service (ANDS)</a>. ANDS is supported by the Australian Government through the National Collaborative Research Infrastructure Strategy Program and the Education Investment Fund (EIF) Super Science Initiative.";
+// xml database access "fasprot" user/password
+    $xmluser = ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $xmlpassword = ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+
+// db parameters (default - may be changed below)
+    $host = "localhost"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $dbname = "demo"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $username = ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $password = ""; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+
+// application path ( If its not same as REQUEST_URI then auto configure using top 2 dirs )
+    $mydb = $dbname;
+    $mydomain = $dbname;
+    $app_path = "/ap20/yggdrasil"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+    $l = strlen($app_path);
+    if ( substr($_SERVER['PHP_SELF'],0,$l) != $app_path ) {
+         #$log->debug("conf specified: PHP_SELF[".$_SERVER['PHP_SELF']."] l[$l] app_path[$app_path]");
+         // sms: Convention we use is to examine first 2 dirs. First is dbname prefix, second dir AFTER "db" is appended
+         //      Typically we would define .htaccess in the first dir. The second distinguishes prod/dev/test and/or versioning
+         //      In this way we can have multiple databases sharing single code base.
+         //      Use aliases in apache config like so:
+         //      Alias /khrd2/dbdev/   /srv/fasweb/httpdocs/khrd/yggdrasil/    ==> $app_path = "/khrd2/dbdev"; $dbname="khrd2dev"
+         $parts = preg_split('~/~', $_SERVER['PHP_SELF'], -1);
+         $mydb = $mydomain = $parts[1];
+         if ( substr($parts[2],0,2) == 'db' ) { $mydb .= substr($parts[2],2); }
+         else $mydb .= $parts[2];
+         #$log->debug("do autoconf mydomain[$mydomain] mydb[$mydb] PHP_SELF[".$_SERVER['PHP_SELF']."] l[$l] app_path[$app_path]");
+         // reset app_path to first 2 dirs
+         $app_path = "/" . $parts[1] . "/" . $parts[2];
+         $dbname = $mydb;
+         #$log->debug("configured app_path[$app_path] dbname[$dbname]");
+    }
+
+// get the authorised user 
+    $is_protected = True;
+    $authfedfas = 0; # gets set if authorised from the FAS SSO vjs-login service
+    $authuser = "";
+    $authtokens = ""; // from auth_pubtkt
+    $can_access_this_db = 0;
+
+    if ( $is_protected ) {
+        // debugging: if ( $_SERVER['SERVER_ADDR'] != '192.168.11.56' ) echo $_COOKIE['auth_pubtkt'] . phpinfo();
+        // test for fas auth_pubtkt cookie before basic auth
+        if ( isset($_COOKIE['auth_pubtkt']) ) {
+            # sms added 20130913 as smstest2 mod_auth_pubtkt host failing to send basic auth header
+            ####$log->debug("settings.php auth_pubtkt[".$_COOKIE['auth_pubtkt']."]");
+            preg_match('/^uid=([^;]+);/', $_COOKIE['auth_pubtkt'], $m);
+            $authuser = $m[1];
+            # check that an authtoken is found at start of dbname
+            preg_match('/tokens=([^;]+);/', $_COOKIE['auth_pubtkt'], $m);
+            $authtokens = $m[1].",demo";
+            # check if the cookie domain is the fas sso
+            # debugging: file_put_contents("/tmp/sms",$_COOKIE['auth_pubtkt']."\n");
+file_put_contents("/tmp/yyyy1","tokens:".$authtokens."\n");
+        }
+
+        # we might have a cookie from fas sso, but want the demo db
+        elseif ( !$authuser && isset($_SERVER['PHP_AUTH_USER']) ) {
+
+            # basic auth. Note we use mod_auth_pubtkt: https://neon1.net/mod_auth_pubtkt/install.html
+            #             and have it simulate basic auth headers; it also contains in tokens a list of ldap groups.
+            #             Alternately: preg_match('/^uid=([^;]+);/', $_COOKIE['auth_pubtkt'], $m); $authuser = $m[1];
+            $authuser = $_SERVER['PHP_AUTH_USER'];
+            if ( isset($_SERVER['REMOTE_USER_TOKENS']) ) { $authtokens = $_SERVER['REMOTE_USER_TOKENS']; }
+            else { $authtokens = "demo"; }
+file_put_contents("/tmp/yyyy2","tokens:".$authtokens."\n");
+        }
+        # see if the tokens match this dbname
+        $tokens = explode(",", $authtokens);
+        foreach ($tokens as &$value) {
+            if ( $dbname == "demo" ) { $can_access_this_db++; }
+            if ( preg_match( '/^'.$value.'/', $dbname) ) { $can_access_this_db++; }
+            if ($value == "authfedfas" && isset($_COOKIE['auth_pubtkt'])) { $authfedfas = 1; }
+        }
+ 
+        if (!$authuser || !$can_access_this_db) {
+            // allow saxon and other localhost automated http clients during development
+            if ( $_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR'] ) {
+                $authuser = "khrdbot";
+            }
+            else {           
+                // if here, apache authentication has been removed or is broken!
+                header('HTTP/1.0 401 Unauthorized');
+                echo "<h4>Sorry, you($authuser) are not authorised at this time to access this database($dbname). You may go to the <a href=\"http://founders-and-survivors.org/y/\">AP20 Project page</a>.</h4>";
+                exit;
+            }
+        }
+    }
+  
+
+// application root
+    $app_root = 'http://' . $_SERVER['SERVER_NAME'] . $app_path;
+
+// Try to connect
+    $db = pg_connect("host=$host dbname=$dbname user=$username password=$password");
+    if ( !$db && $administrator[$authuser] ) {
+        echo "<html><head>Create db</head><body>\n";
+        echo "<h1>Administrator[$authuser] database initialisation support</h1>\n";
+        echo "<h2>Could not connect to Postgresql dbname[$dbname] mydb[$mydb] -- please check it is running (may vary depending on your system)</h2>\n";
+        echo "<pre>";
+        echo "ls -la /var/run/postgresql :\n".shell_exec("ls -la /var/run/postgresql")."\n";
+        echo "sudo /etc/init.d/postgresql status";
+        echo "</pre>";
+        echo "<h2>If it IS running, you can INITIALISE DATABASE FOR SUPERUSER as follows:</h2>\n";
+        echo "<pre>";
+        echo "dbname: [$dbname]\n";
+        echo "username: [$username]\n";
+        echo "host: [$host]\n";
+        echo "<hr/>";
+        $c = "$webwork/bin/create_and_init_ap20_database.sh $dbname $username";
+        echo "RUN: $c\n";
+        $results = shell_exec($c);
+        echo "<hr/>";
+        echo "RESULT:\n".$results;
+        echo "<hr/>";
+        echo "</pre>";
+        exit;
+    }
+    elseif (!$db) {
+        die('Could not connect: ' . pg_last_error()."<h4>You[$authuser] need to ask the system administrator to create database [$dbname] or fix connection config. \$_SERVER['PHP_AUTH_USER']=[".$_SERVER['PHP_AUTH_USER']."]</h4>");
+    }
+
+
+// log4php : to /var/log/yggdrasil/$dbname/$dbname_date.log
+$logdir = "/var/log/ap20/$dbname"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
+if ( ! is_dir($logdir) ) mkdir($logdir); 
+include('log4php/Logger.php');
+Logger::configure(array(
+    'rootLogger' => array(
+        'appenders' => array('default'),
+    ),
+    'appenders' => array(
+        'default' => array(
+            'class' => 'LoggerAppenderRollingFile',
+            'layout' => array(
+                    'class' => 'LoggerLayoutPattern',
+                    'params' => array(
+                        'conversionPattern' => '%d{Y-m-d H:i:s.u} [%t] %-5p - %m%n'
+                    )
+            ),
+            'params' => array(
+                    'file' => "$logdir/${dbname}_" . date('Y-m-d') . '.log',
+                    'maxFileSize' => '10MB',
+                    'maxBackupIndex' => 10,
+            )
+        )
+    )
+));
+$log = Logger::getLogger('ap20_logger');
+
+// logging (old)
+    $logupdates = "$webwork/${dbname}_updates.log";
+    $logdebug = "$webwork/${dbname}_debug.log";
+
+// frequently used event types
+    define("BIRT", 2);
+    define("DEAT", 3);
+    define("MARR", 4);
+// added sms for KHRD cause of death
+    define("CAUS", 7);
+
+    if ( $is_protected && $authuser ) {
+        // lookup user in database
+        $handle = pg_query("
+        SELECT
+            initials,
+            user_lang,
+            show_delete
+        FROM
+            user_settings
+        WHERE
+            username='$authuser'
+        ");
+        $num_rows = pg_num_rows($handle);
+        $row = pg_fetch_assoc($handle);
+
+        // If nothing returned for this user, add them to the user_settings table,
+        // and direct them to the user settings form
+        if (! $num_rows ) {
+            # last column timezone missing from user_settings table. $handle = pg_query( "INSERT INTO user_settings VALUES ( '$authuser','','',0,'level_4','%','f','','en','Australia/Melbourne')" );
+            $handle = pg_query( "INSERT INTO user_settings VALUES ( '$authuser','','',0,'level_4','%','f','','en')" );
+            $log->warn("settings.php PHP_AUTH_USER[".$_SERVER['PHP_AUTH_USER']."] was initialised in db. Transferring to user_settings.php...");
+            header("Location: $app_root/forms/user_settings.php");
+        }
+
+        // user initials
+        $_initials = $row['initials'];
+        $_show_delete = $row['show_delete'];
+
+        // user language
+        $language = $row['user_lang'];
+
+        /*
+        ####################################################### start ENHANCEMENT(authorizing google api usage to database)
+        Desc: The following authorisation logic is hardcoded into a file. The user_settings table need to be extended
+              so that line 1 of the file (a list of usernames) is stored in an additional field. Web interface to maintain
+              the data needs to be built to enable the database user (the system owner) 
+              to set the access value to null(default), 'read','edit','owner'
+              It would also be necessary to have a configuration table so the shared credentials can be stored/modified in the database.
+        Priority: low (assumes the database owner has shell access/expertise to edit a file in the file system).
+        */
+        
+        // get a shared google auth token where users are listed in line 1, and get shared google credentials
+        $google_api_trusted_users_info = "$webwork/google_users/$mydomain";
+        if ( file_exists ( $google_api_trusted_users_info ) ) {
+             $h = fopen($google_api_trusted_users_info, "r");
+             $trusted = fgets($h);
+             if ( preg_match("/\b$authuser\b/", $trusted ) ) {
+                  $google_shared_username = fgets($h); 
+                  $google_shared_password = fgets($h);
+                  while ( !feof($h) ) {
+                      // lines of form xxxx:yyyy where XXXX is a variable name and yyyy is the value; check for safe characters
+                      if ( preg_match("/^([\w_]+):(\w+)\n$/",fgets($h),$matches) ) {
+                           eval("\$$matches[1] = '$matches[2]';");
+                      }
+                  }
+                  // refresh the auth token every 24 hours (cron a job to delete it daily)
+                  $authtoken = "";
+                  $authtoken_file = "$webwork/${mydomain}_googleauth";
+                  // test that the file is less than 24 hours old
+                  if ( file_exists ( $authtoken_file ) ) {
+                       if ( time()-filemtime($authtoken_file) > 24 * 3600 ) {     
+                         $log->debug("== settings.php authtoken_file[$authtoken_file] is stale, deleting it." );
+                         unlink($authtoken_file);
+                       }
+                  }
+                  if ( file_exists ( $authtoken_file ) ) {
+                     $google_authtoken = file_get_contents($authtoken_file);
+                  }
+                  else {
+                     // create a google api oauth token for this database, lasts for 24 hours
+                     $clientlogin_post = array(
+                         "accountType" => "HOSTED_OR_GOOGLE",
+                         "Email"   => $google_shared_username,
+                         "Passwd"  => $google_shared_password,
+                         "service" => "wise",
+                         "source"  => "Dashboards-XQUERY-Example"
+                     );
+                     $curl = curl_init();
+                     curl_setopt($curl, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
+                     curl_setopt($curl, CURLOPT_POST, true);
+                     curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+                     curl_setopt($curl, CURLOPT_POSTFIELDS, $clientlogin_post);
+                     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+                     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                     $response = curl_exec($curl);
+                     // Get the Auth string and save it to the file $authtoken_file
+                     preg_match("/Auth=([a-z0-9_\-]+)/i", $response, $matches);
+                     $google_authtoken = $matches[1];
+                     file_put_contents($authtoken_file,$google_authtoken,LOCK_EX);
+                     curl_close($curl);
+                  }
+             }
+             fclose($h);
+        }
+        // ####################################################### end ENHANCEMENT(authorizing google api usage to database)
+    }
+    else {
+        $_initials = "";
+        $_show_delete = False;
+        $language = "en"; # Leif will want to change this
+    }
+    $log->debug("== settings.php prot[$is_protected] authuser[$authuser] authtokens[$authtokens] language[$language] _initials[$_initials] _show_delete[$_show_delete] SERVER_ADDR[".$_SERVER['SERVER_ADDR']."] from REMOTE_ADDR[".$_SERVER['REMOTE_ADDR']."]" );
+
+// set internal PHP encoding to UTF-8
+    mb_internal_encoding("UTF-8");
+
+// set up vars for header.php menu buttons
+    $person = false;
+    $family = false;
+    $pedigree = false;
+    $descendants = false;
+    $source_manager = false;
+
+?>

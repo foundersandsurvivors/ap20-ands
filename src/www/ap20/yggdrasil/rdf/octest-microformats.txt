@@ -1,0 +1,124 @@
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 22 February 1862 p 2
+MAINTENANCE. - Amelia Woodhall summoned John Woodhall, her husband, for leaving her without means of support.
+Defendant said he had a house and five acres of land, and was willing to receive his wife and children.
+Mr. Lees, for the complainant, said defendant went away eleven months ago with a young woman and had since brought her to live in the immediate neighborhood ; he lived a life of idleness, and lived on the labor of his wife.
+Defendant referred to the profits of his trade, and the stock of trees he had on his ground.
+The Bench under the circumstances said they could not make any order.
+Complainant then claimed the protection of the court against defendant's violence, and The Police Magistrate said that was a matter for another proceeding ; she had her remedy if she had any ground to fear his violence.
+Complainant protested that she would not live with her husband again.
+The Bench told her she might obtain protection for her earnings by resorting to the proper tribunal.
+Mr. Lees intimated that this course would be adopted.
+................. callAPIsms
+..line: [<!--Use of the Calais Web Service is governed by the Terms of Service located at http://www.opencalais.com. By using this service or the results of the service you agree to these terms of service.--><!--]
+..line: [rel-tags: John Woodhall,Amelia Woodhall,UN Court,Legal terms,Plaintiff,Law_Crime,]
+..line: [--><OpenCalaisMicroformats><Description><allowDistribution>false</allowDistribution><allowSearch>false</allowSearch><calaisRequestID>b97a65ec-04ec-20cd-141c-03a58b92c0b3</calaisRequestID><id>http://id.opencalais.com/3JzByO2zGaMODfTrbSKrBw</id><about>http://d.opencalais.com/dochash-1/c54d01a6-1f0f-347b-b09c-76b959278843</about><stagsVer>8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25</stagsVer><docTitle/><docDate>2013-10-16 02:45:51.663</docDate><externalMetadata/></Description><Microformats><cards/><calendars/><rel-tags><rel-tag><a href="/John%20Woodhall" rel="tag">John Woodhall</a></rel-tag><rel-tag><a href="/Amelia%20Woodhall" rel="tag">Amelia Woodhall</a></rel-tag><rel-tag><a href="/UN%20Court" rel="tag">UN Court</a></rel-tag><rel-tag><a href="/Legal%20terms" rel="tag">Legal terms</a></rel-tag><rel-tag><a href="/Plaintiff" rel="tag">Plaintiff</a></rel-tag><rel-tag><a href="/Law_Crime" rel="tag">Law_Crime</a></rel-tag></rel-tags></Microformats></OpenCalaisMicroformats>]
+
+<entity-type>rel-tags</entity-type>
+<ul>
+  <li>John Woodhall</li>
+  <li>Amelia Woodhall</li>
+  <li>UN Court</li>
+  <li>Legal terms</li>
+  <li>Plaintiff</li>
+  <li>Law_Crime</li>
+</ul>
+
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Friday 9 January 1863 p 2
+Assault.-Catherine Whittaker charged John Woodhall with assaulting her on 29th December last.
+The complainant deposed that the defendant assaulted her near the door of her father's house.
+Defendant at first commenced kicking up a row with witness's father. He then called witness names and struck her with his fist under the ear and knocked her down. Witness then threw a stone at him which hit him.
+Cross-examined: Did not strike defendant first.
+Richard Whittaker corroborated the complainant's evidence.
+A little boy named Michael Whittaker was called but the Bench did not think it fit to receive his evidence.
+The defendant called Thomas Coates who said that Whittaker and defendant had some words about a fence and then
+the complainant hit defendant who then hit her and then she threw stones. The dispute began about a fence which Woodhall said was on his ground and he went to pull it down.
+John Crowther was next called but knew nothing of the alleged assault.
+The Bench dismissed the information, but cautioned defendant not to go on Whittakers premises again.
+................. callAPIsms
+..line: [<!--Use of the Calais Web Service is governed by the Terms of Service located at http://www.opencalais.com. By using this service or the results of the service you agree to these terms of service.--><!--]
+..line: [rel-tags: Richard Whittaker,Michael Whittaker,Thomas Coates,John Woodhall,John Crowther,Judicial Event,Legal terms,Whittaker,Plaintiff,Law_Crime,]
+..line: [--><OpenCalaisMicroformats><Description><allowDistribution>false</allowDistribution><allowSearch>false</allowSearch><calaisRequestID>8a5bec69-9a08-498f-141c-03a370f4359a</calaisRequestID><id>http://id.opencalais.com/fGlOF*xfgoamCLJzG7lb7w</id><about>http://d.opencalais.com/dochash-1/d34e8714-9e57-3911-87e3-91f9f5d5e2ac</about><stagsVer>8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25</stagsVer><docTitle/><docDate>2013-10-16 02:45:43.014</docDate><externalMetadata/></Description><Microformats><cards/><calendars/><rel-tags><rel-tag><a href="/Richard%20Whittaker" rel="tag">Richard Whittaker</a></rel-tag><rel-tag><a href="/Michael%20Whittaker" rel="tag">Michael Whittaker</a></rel-tag><rel-tag><a href="/Thomas%20Coates" rel="tag">Thomas Coates</a></rel-tag><rel-tag><a href="/John%20Woodhall" rel="tag">John Woodhall</a></rel-tag><rel-tag><a href="/John%20Crowther" rel="tag">John Crowther</a></rel-tag><rel-tag><a href="/Judicial%20Event" rel="tag">Judicial Event</a></rel-tag><rel-tag><a href="/Legal%20terms" rel="tag">Legal terms</a></rel-tag><rel-tag><a href="/Whittaker" rel="tag">Whittaker</a></rel-tag><rel-tag><a href="/Plaintiff" rel="tag">Plaintiff</a></rel-tag><rel-tag><a href="/Law_Crime" rel="tag">Law_Crime</a></rel-tag></rel-tags></Microformats></OpenCalaisMicroformats>]
+
+<entity-type>rel-tags</entity-type>
+<ul>
+  <li>Richard Whittaker</li>
+  <li>Michael Whittaker</li>
+  <li>Thomas Coates</li>
+  <li>John Woodhall</li>
+  <li>John Crowther</li>
+  <li>Judicial Event</li>
+  <li>Legal terms</li>
+  <li>Whittaker</li>
+  <li>Plaintiff</li>
+  <li>Law_Crime</li>
+</ul>
+
+
+================= CONTENT[0]:
+The Mercury (Hobart, Tas. : 1860 - 1954) Saturday 30 July 1864 p 2
+WOODHALL v. WOODHALL..-An information by Amelia Woodhall against her husband for maintenance.
+The complainant deposed that on the 28th of April an order was made upon the defendant by two justices of the peace for payment to her of 10s. per week for maintenance. The money was regularly paid up to seven weeks ago, when the
+payments were discontinued. Witness was not aware of any sufficient reason for the non-payment. Hubert Day Church,Clerk of the Peace, produced the order of maintenance in question.
+The Bench dismissed the complainant, on the ground that the order had lapsed.
+................. callAPIsms
+..line: [<!--Use of the Calais Web Service is governed by the Terms of Service located at http://www.opencalais.com. By using this service or the results of the service you agree to these terms of service.--><!--]
+..line: [hCards: Church,]
+..line: [rel-tags: Hubert Day,Amelia Woodhall,Hubert Day Church,Church,Law,Legal terms,Woodhall,Justice of the Peace,Clerk of the Peace,Plaintiff,Law_Crime,]
+..line: [--><OpenCalaisMicroformats><Description><allowDistribution>false</allowDistribution><allowSearch>false</allowSearch><calaisRequestID>f3980681-7023-3341-41c0-3a3bd04359ae</calaisRequestID><id>http://id.opencalais.com/xFtZ5bco6i78RStjN3RP3g</id><about>http://d.opencalais.com/dochash-1/9ee47a4b-25d1-3466-8a95-8a70cbb4bb35</about><stagsVer>8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25</stagsVer><docTitle/><docDate>2013-10-16 02:45:44.122</docDate><externalMetadata/></Description><Microformats><cards><hcard><span class="vcard"><abbr class="fn" title="Church">Church</abbr><abbr class="title" title="Clerk"/></span></hcard></cards><calendars/><rel-tags><rel-tag><a href="/Hubert%20Day" rel="tag">Hubert Day</a></rel-tag><rel-tag><a href="/Amelia%20Woodhall" rel="tag">Amelia Woodhall</a></rel-tag><rel-tag><a href="/Hubert%20Day%20Church" rel="tag">Hubert Day Church</a></rel-tag><rel-tag><a href="/Church" rel="tag">Church</a></rel-tag><rel-tag><a href="/Law" rel="tag">Law</a></rel-tag><rel-tag><a href="/Legal%20terms" rel="tag">Legal terms</a></rel-tag><rel-tag><a href="/Woodhall" rel="tag">Woodhall</a></rel-tag><rel-tag><a href="/Justice%20of%20the%20Peace" rel="tag">Justice of the Peace</a></rel-tag><rel-tag><a href="/Clerk%20of%20the%20Peace" rel="tag">Clerk of the Peace</a></rel-tag><rel-tag><a href="/Plaintiff" rel="tag">Plaintiff</a></rel-tag><rel-tag><a href="/Law_Crime" rel="tag">Law_Crime</a></rel-tag></rel-tags></Microformats></OpenCalaisMicroformats>]
+
+<entity-type>hCards</entity-type>
+<ul>
+  <li>Church</li>
+</ul>
+
+
+<entity-type>rel-tags</entity-type>
+<ul>
+  <li>Hubert Day</li>
+  <li>Amelia Woodhall</li>
+  <li>Hubert Day Church</li>
+  <li>Church</li>
+  <li>Law</li>
+  <li>Legal terms</li>
+  <li>Woodhall</li>
+  <li>Justice of the Peace</li>
+  <li>Clerk of the Peace</li>
+  <li>Plaintiff</li>
+  <li>Law_Crime</li>
+</ul>
+
+
+================= CONTENT[0]:
+<aifDescendant id_ns="ccc113961.01" naa_key="3037287">
+  <surnameEnlistee>Askey</surnameEnlistee>
+  <forenameEnlistee>Clarence Bernard Samuel</forenameEnlistee>
+  <genealogy>
+    <p>
+      <l>Son of Samuel Askey (1863-1942) &amp; Sarah Louisa Gard (1862-1942),</l>
+      <l>grandson of Robert Gard (1832-1916) &amp; Ann Phillips (1835-1891),</l>
+      <l>great grandson of Henry Phillips (1795-1888) &amp; Mary Clark (1800-1863)</l>
+    </p>
+  </genealogy>
+  <anyOtherDetails>Enlisted 9 Oct 1915. Discharged 15 Oct 1919.</anyOtherDetails>
+  <otherSources>NAA Series B2455, Barcode 3037287.</otherSources>
+</aifDescendant>
+................. callAPIsms
+..line: [<!--Use of the Calais Web Service is governed by the Terms of Service located at http://www.opencalais.com. By using this service or the results of the service you agree to these terms of service.--><!--]
+..line: [rel-tags: Sarah Louisa Gard,Ann Phillips,Samuel Askey,Robert Gard,Henry Phillips,Mary Clark,Phillips,]
+..line: [--><OpenCalaisMicroformats><Description><allowDistribution>false</allowDistribution><allowSearch>false</allowSearch><calaisRequestID>7ea181e4-3ccf-bf58-141c-03a66a9575e7</calaisRequestID><id>http://id.opencalais.com/5yAO38qO-5mXHw4B5ts6bA</id><about>http://d.opencalais.com/dochash-1/b4c737f1-3e8b-3d7c-b88c-a7670a871dc2</about><stagsVer>8.0.OpenCalais-SNAPSHOT-b13-2012-06-14_23:22:25</stagsVer><docTitle/><docDate>2013-10-16 02:45:55.044</docDate><externalMetadata/></Description><Microformats><cards/><calendars/><rel-tags><rel-tag><a href="/Sarah%20Louisa%20Gard" rel="tag">Sarah Louisa Gard</a></rel-tag><rel-tag><a href="/Ann%20Phillips" rel="tag">Ann Phillips</a></rel-tag><rel-tag><a href="/Samuel%20Askey" rel="tag">Samuel Askey</a></rel-tag><rel-tag><a href="/Robert%20Gard" rel="tag">Robert Gard</a></rel-tag><rel-tag><a href="/Henry%20Phillips" rel="tag">Henry Phillips</a></rel-tag><rel-tag><a href="/Mary%20Clark" rel="tag">Mary Clark</a></rel-tag><rel-tag><a href="/Phillips" rel="tag">Phillips</a></rel-tag></rel-tags></Microformats></OpenCalaisMicroformats>]
+
+<entity-type>rel-tags</entity-type>
+<ul>
+  <li>Sarah Louisa Gard</li>
+  <li>Ann Phillips</li>
+  <li>Samuel Askey</li>
+  <li>Robert Gard</li>
+  <li>Henry Phillips</li>
+  <li>Mary Clark</li>
+  <li>Phillips</li>
+</ul>
+
