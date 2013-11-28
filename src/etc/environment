@@ -1,5 +1,5 @@
 # required environment variables for ap20 yggdrasil
-AP20_DISTRO="/srv/ap20-home/ap20-ands"
+AP20_DISTRO="/srv/ap20/ap20-ands"
 AP20_WEBROOT="/var/www"
 AP20_HOME="/var/ydev"
 FASHOST=""
