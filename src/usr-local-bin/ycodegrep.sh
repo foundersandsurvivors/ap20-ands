@@ -5,6 +5,7 @@
 # get the yggdrasil repo location and source the local .env from there
 . /etc/environment
 . $AP20_DISTRO/bin/bash.functions
+. $AP20_DISTRO/bin/.env
 
 cd $YGGDEP_PHPAPP
 echo "#........................................................................................................."
