@@ -50,13 +50,14 @@ fi
 makedir $YGGDEP_WEBLOGS                   ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 
 makedir $YGGDEP_WEBWORK                   root:root                         755
+makedir $YGGDEP_EXPORT                    ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
+makedir $YGGDEP_EXPORT/xml                ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBWORK/ap20              ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBWORK/ap20/bin          $YGGDEP_DEFAULT_PERMS             775
 makedir $YGGDEP_WEBWORK/ap20/db_init      $YGGDEP_DEFAULT_PERMS             775
 makedir $YGGDEP_WEBWORK/ap20/db_init/demo $YGGDEP_DEFAULT_PERMS             775
 makedir $YGGDEP_WEBWORK/ap20/db_init/logs $YGGDEP_DEFAULT_PERMS             775
-makedir $YGGDEP_WEBWORK/ap20/export       $YGGDEP_DEFAULT_PERMS             775
-makedir $YGGDEP_WEBWORK/ap20/export/xml   $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/xml_export   $YGGDEP_DEFAULT_PERMS             775
  
 makedir $YGGDEP_WEBROOT/documentation     ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
 makedir $YGGDEP_WEBROOT/test              $YGGDEP_DEFAULT_PERMS             775
