@@ -80,6 +80,8 @@ for F in ../src/webwork/bin/*
 do
    copy $F $YGGDEP_WEBWORK/ap20/bin $YGGDEP_DEFAULT_PERMS 775 "$1"
 done
+copy ../src/webwork/xml_export/run.sh          $YGGDEP_WEBWORK/ap20/xml_export/run.sh $YGGDEP_DEFAULT_PERMS 775 "$1"
+copy ../src/webwork/xml_export/list_tables.sql $YGGDEP_WEBWORK/ap20/xml_export/list_tables.sql $YGGDEP_DEFAULT_PERMS 664 "$1"
 
 # src/www
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
