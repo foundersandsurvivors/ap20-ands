@@ -1,0 +1,44 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: source_part_types; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+INSERT INTO source_part_types VALUES (0, 'Undefined', false, 'Undef', 'Udef');
+INSERT INTO source_part_types VALUES (1, 'Birth record', true, 'Birth', 'Fødsel');
+INSERT INTO source_part_types VALUES (2, 'Marriage record', true, 'Marriage', 'Ekteskap');
+INSERT INTO source_part_types VALUES (3, 'Death record', true, 'Death', 'Død');
+INSERT INTO source_part_types VALUES (5, 'Enumeration', true, 'Enum.', 'Enum.');
+INSERT INTO source_part_types VALUES (6, 'Transcript', true, 'Transcript', 'Transcript');
+INSERT INTO source_part_types VALUES (11, 'Page', false, 'Page', 'Side');
+INSERT INTO source_part_types VALUES (12, 'Chapter', false, 'Chapter', 'Kapittel');
+INSERT INTO source_part_types VALUES (13, 'Section', false, 'Section', 'Seksjon');
+INSERT INTO source_part_types VALUES (14, 'Volume', false, 'Volume', 'Bind');
+INSERT INTO source_part_types VALUES (15, 'Book', false, 'Book', 'Bok');
+INSERT INTO source_part_types VALUES (16, 'Jurisdiction', false, 'Area', 'Område');
+INSERT INTO source_part_types VALUES (17, 'Main Category', false, 'Main cat.', 'Hovedgruppe');
+INSERT INTO source_part_types VALUES (18, 'Series', false, 'Series', 'Series');
+INSERT INTO source_part_types VALUES (19, 'Year', false, 'Year', 'Year');
+INSERT INTO source_part_types VALUES (20, 'File', false, 'File', 'File');
+INSERT INTO source_part_types VALUES (21, 'Family', false, 'Family', 'Family');
+INSERT INTO source_part_types VALUES (1001, 'SYSTEM', false, 'REFERENCE', 'REFERENCE');
+INSERT INTO source_part_types VALUES (1002, 'SYSTEM', false, 'COHORT', 'COHORT');
+INSERT INTO source_part_types VALUES (1000, 'SYSTEM', false, 'CONTROLLER', 'WORKFLOW');
+INSERT INTO source_part_types VALUES (1003, 'SYSTEM', false, 'WORKFLOW', 'WORKFLOW');
+INSERT INTO source_part_types VALUES (1005, 'SYSTEM', false, 'FACSIMILIE', 'FACSIMILIE');
+
+
+--
+-- PostgreSQL database dump complete
+--
+

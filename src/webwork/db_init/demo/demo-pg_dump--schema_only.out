@@ -1,0 +1,4402 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plperl; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: ubuntu
+--
+
+CREATE OR REPLACE PROCEDURAL LANGUAGE plperl;
+
+
+ALTER PROCEDURAL LANGUAGE plperl OWNER TO ubuntu;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
+-- Name: ltree; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION ltree IS 'data type for hierarchical tree-like structures';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: age_estimates; Type: TYPE; Schema: public; Owner: ubuntu
+--
+
+CREATE TYPE age_estimates AS (
+	life_days integer,
+	age_years integer,
+	age_pg text
+);
+
+
+ALTER TYPE public.age_estimates OWNER TO ubuntu;
+
+--
+-- Name: estimated_event_data; Type: TYPE; Schema: public; Owner: ubuntu
+--
+
+CREATE TYPE estimated_event_data AS (
+	date_cert integer,
+	est_date date,
+	est_jday integer,
+	est_decade integer
+);
+
+
+ALTER TYPE public.estimated_event_data OWNER TO ubuntu;
+
+--
+-- Name: fuzzydate; Type: TYPE; Schema: public; Owner: ubuntu
+--
+
+CREATE TYPE fuzzydate AS (
+	midpoint date,
+	fuzziness interval
+);
+
+
+ALTER TYPE public.fuzzydate OWNER TO ubuntu;
+
+--
+-- Name: int_text; Type: TYPE; Schema: public; Owner: ubuntu
+--
+
+CREATE TYPE int_text AS (
+	number integer,
+	string text
+);
+
+
+ALTER TYPE public.int_text OWNER TO ubuntu;
+
+--
+-- Name: _append(text, text, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION _append(text, text, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+-- private string concatenation function
+-- used with get_place_name() and get_person_name() below
+SELECT
+    CASE WHEN $2 <> '' AND $2 NOT LIKE '-%'
+    THEN
+        $1 || $3 || $2
+    ELSE
+        $1
+    END
+$_$;
+
+
+ALTER FUNCTION public._append(text, text, text) OWNER TO ubuntu;
+
+--
+-- Name: _my_expand(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION _my_expand(text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- private func, expand external compact links
+DECLARE
+    str TEXT := $1;
+    links RECORD;
+
+BEGIN
+    FOR links IN SELECT short_link, long_link FROM my_links LOOP
+        str := REGEXP_REPLACE(str, links.short_link, links.long_link, 'g');
+    END LOOP;
+    RETURN str;
+END
+$_$;
+
+
+ALTER FUNCTION public._my_expand(text) OWNER TO ubuntu;
+
+--
+-- Name: add_birth(integer, text, integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_birth(integer, text, integer, integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- synthesize birth event based on age info
+DECLARE
+    person      INTEGER := $1;   -- person id
+    mydate      TEXT    := $2;   -- fuzzy date of event
+    age         INTEGER := $3;   -- age of person at event
+    src_id      INTEGER := $4;   -- source id
+    birth_year  INTEGER;         -- inferred year of birth
+    event       INTEGER;         -- id of inserted birth event
+BEGIN
+    birth_year := SUBSTR(mydate, 1, 4)::INTEGER - age;
+    INSERT INTO events (tag_fk, place_fk, event_date, sort_date)
+        VALUES (2, 1, birth_year::TEXT || '00002000000001',
+            (birth_year::TEXT || '-01-01')::DATE) RETURNING event_id INTO event;
+    INSERT INTO participants (person_fk, event_fk) VALUES (person, event);
+    IF src_id <> 0 THEN
+        INSERT INTO event_citations VALUES (event, src_id);
+    END IF;
+    RETURN event;
+END
+$_$;
+
+
+ALTER FUNCTION public.add_birth(integer, text, integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: add_participant(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_participant(integer, integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- add participants to event, set sort order automatically
+DECLARE
+    srt INTEGER;
+    per INTEGER := $1;
+    evt INTEGER := $2;
+BEGIN
+    IF (SELECT tag_fk FROM events WHERE event_id = evt) IN (4,5,23) THEN
+        srt := get_gender(per);
+    ELSE
+        SELECT COUNT(*) + 1 FROM participants WHERE event_fk = evt INTO srt;
+    END IF;
+    INSERT INTO participants (person_fk, event_fk, sort_order) VALUES (per, evt, srt);
+    RETURN srt;
+END
+$_$;
+
+
+ALTER FUNCTION public.add_participant(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: add_participants(text, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_participants(text, integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- add space-separated list of participant IDs to event,
+-- intended for type 3 events such as census for an entire household
+DECLARE
+    arr TEXT ARRAY;
+    ret INTEGER;
+BEGIN
+    arr := regexp_split_to_array($1, E'\\s+');
+    FOR i IN 1..array_length(arr, 1) LOOP
+        SELECT add_participant(arr[i]::INTEGER, $2) INTO ret;
+        RAISE NOTICE 'Added %', get_person_name(arr[i]::INTEGER);
+    END LOOP;
+    RETURN ret;
+END
+$_$;
+
+
+ALTER FUNCTION public.add_participants(text, integer) OWNER TO ubuntu;
+
+--
+-- Name: add_participants_from_links(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_participants_from_links(integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- auto-add participants to multi-person events from [p=\d+ type links
+-- NOTE: this routine will remove previously associated participants
+-- $1: id of source event
+DECLARE
+    link_id     INTEGER;        -- id of linked person
+    srt         INTEGER;
+    link_count  INTEGER := 0;   -- return value: number of linked persons
+    mynote      TEXT;
+BEGIN
+    -- copy event note
+    SELECT event_note FROM events WHERE event_id = $1 INTO mynote;
+    -- auto-cleanup
+    DELETE FROM participants WHERE event_fk = $1;
+    WHILE mynote SIMILAR TO E'%\\[p=\\d+%' LOOP
+        -- sort order = count of participants + 1
+        SELECT COUNT(*) + 1 FROM participants WHERE event_fk = $1 INTO srt;
+        -- extract linked person id from first non-processed link
+        link_id := (REGEXP_MATCHES(mynote, E'\\[p=(\\d+)'))[1]::INTEGER;
+        RAISE NOTICE 'Added %', get_person_name(link_id);
+        INSERT INTO participants (person_fk, event_fk, sort_order, is_principal)
+            VALUES (link_id, $1, srt, TRUE);
+        -- mark this link as processed
+        mynote := REGEXP_REPLACE(mynote, E'\\[p=', E'\\[#p=');
+        link_count = link_count + 1;
+    END LOOP;
+    RETURN link_count;
+END
+$_$;
+
+
+ALTER FUNCTION public.add_participants_from_links(integer) OWNER TO ubuntu;
+
+--
+-- Name: add_source(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_source(integer, text) RETURNS integer
+    LANGUAGE sql
+    AS $_$
+-- overload of above function with only two input params
+-- parent node and text, everything else default
+    SELECT add_source(0, 0, 0, $1, $2, 1);
+$_$;
+
+
+ALTER FUNCTION public.add_source(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: add_source(integer, integer, integer, integer, text, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION add_source(integer, integer, integer, integer, text, integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- Inserts sources and citations, returns current source_id
+-- 2009-03-26: this func has finally been moved from PHP to the db.
+-- 2011-06-13: Modified after changing source_id to type SERIAL
+-- Should be called via the functions.php add_source() which is left as a gatekeeper.
+DECLARE
+    person  INTEGER := $1;
+    tag     INTEGER := $2;
+    event   INTEGER := $3;
+    src_id  INTEGER := $4;
+    txt     TEXT    := $5;
+    srt     INTEGER := $6;
+    par_id  INTEGER;
+    rel_id  INTEGER;
+    x       INTEGER;
+    pt      INTEGER;
+BEGIN
+    IF LENGTH(txt) <> 0 THEN -- source text has been entered, add new node
+        par_id := src_id;
+        -- parse text to infer sort order
+        SELECT number, string FROM get_sort(par_id, srt, txt) INTO srt, txt;
+        -- get source type from parent source
+        SELECT ch_part_type FROM sources WHERE source_id = par_id INTO pt;
+        -- there's a unique constraint on (parent_id, source_text) in the sources table, don't violate it.
+        -- get part type from text if part type is undefined
+        IF pt = 0 THEN
+            SELECT number, string FROM get_source_type(txt) INTO pt, txt;
+        END IF;
+        SELECT source_id FROM sources WHERE parent_id = par_id AND source_text = txt INTO x;
+        IF NOT FOUND THEN
+            INSERT INTO sources (parent_id, source_text, sort_order, source_date, part_type)
+                VALUES (par_id, txt, srt, true_date_extract(txt), pt) RETURNING source_id INTO src_id;
+        ELSE
+            RAISE NOTICE 'Source % has the same parent id and text as you tried to enter.', x;
+            RETURN -x; -- abort the transaction and return the offended source id as a negative number.
+        END IF;
+        -- the rest of the code will only be executed if the source is already associated with a person-event,
+        -- ie. the source has been entered from the add/edit event forms.
+        IF event <> 0 THEN
+            -- if new cit. is expansion of an old one, we may remove the "parent node" citation
+            DELETE FROM event_citations WHERE event_fk = event AND source_fk = par_id;
+            -- Details about a birth event will (almost) always include parental evidence. Therefore, we'll
+            -- update relation_citations if birth event (and new source is an expansion of existing source)
+            IF tag = 2 THEN
+                FOR rel_id IN SELECT relation_id FROM relations WHERE child_fk = person LOOP
+                    INSERT INTO relation_citations (relation_fk, source_fk) VALUES (rel_id, src_id);
+                    -- again, remove references to "parent node"
+                    DELETE FROM relation_citations WHERE relation_fk = rel_id AND source_fk = par_id;
+                END LOOP;
+            END IF;
+        END IF;
+    END IF;
+    -- associate source node with event
+    IF event <> 0 THEN
+        -- don't violate unique constraint on (source_fk, event_fk) in the event_citations table.
+        -- if this source-event association already exists, it's rather pointless to repeat it.
+        PERFORM * FROM event_citations WHERE event_fk = event AND source_fk = src_id;
+        IF NOT FOUND THEN
+                INSERT INTO event_citations (event_fk, source_fk) VALUES (event, src_id);
+            ELSE
+                RAISE NOTICE 'citation exists';
+            END IF;
+    END IF;
+    RETURN src_id;
+END
+$_$;
+
+
+ALTER FUNCTION public.add_source(integer, integer, integer, integer, text, integer) OWNER TO ubuntu;
+
+--
+-- Name: age_at_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION age_at_death(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT ABS(f_year(get_pddate($1)) - f_year(get_pbdate($1)))::INTEGER
+$_$;
+
+
+ALTER FUNCTION public.age_at_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: age_estimates(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION age_estimates(integer, integer) RETURNS age_estimates
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    r age_estimates;
+    d INTEGER;
+    y INTEGER;
+    date1 date;
+    date2 date;
+    pg_age TEXT;
+BEGIN
+    date1 := to_date($1::text,'J');
+    date2 := to_date($2::text,'J');
+    IF $1 > -1 THEN
+       -- we have a birth jday
+       IF $2 > -1 THEN
+          -- we have a death jday: calc days
+          d = $2 - $1;
+          pg_age := age(date2, date1);
+          -- need to sanity check for negative
+       ELSE
+          -- today as jday less birth jday
+          d = to_char(current_date,'J')::integer - $1;
+          pg_age := age(current_date, date1);
+       END IF;
+       y = floor(d / 365.25);
+    ELSE
+       -- no birth, cannot calc
+       d = -1;
+       y = -1;
+       pg_age = '';
+    END IF;
+    r.life_days = d;
+    r.age_years = y;
+    r.age_pg = pg_age;
+    RETURN r;
+END;
+$_$;
+
+
+ALTER FUNCTION public.age_estimates(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: age_if_alive(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION age_if_alive(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return NULL;
+    ELSE
+       return person_age_at_date($1, to_char(current_date,'YYYY0101') ,3);
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.age_if_alive(integer) OWNER TO ubuntu;
+
+--
+-- Name: age_if_dead(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION age_if_dead(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return person_age_at_date($1, to_char( (estimated_death_data($1)).est_date,'YYYYMMDD') ,3);
+    ELSE
+       return NULL;
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.age_if_dead(integer) OWNER TO ubuntu;
+
+--
+-- Name: agelong_if_alive(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION agelong_if_alive(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return NULL;
+    ELSE
+       return person_agelong_at_date($1, to_char(current_date,'YYYY0101') ,3);
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.agelong_if_alive(integer) OWNER TO ubuntu;
+
+--
+-- Name: agelong_if_dead(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION agelong_if_dead(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return person_agelong_at_date($1, to_char( (estimated_death_data($1)).est_date,'YYYYMMDD') ,3);
+    ELSE
+       return NULL;
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.agelong_if_dead(integer) OWNER TO ubuntu;
+
+--
+-- Name: birth_sortdate_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION birth_sortdate_jday(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+    select to_char(sort_date::date,'J')::integer from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.birth_sortdate_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: calc_age_at_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION calc_age_at_death(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    age INTEGER;
+    isdead INTEGER;
+    dd TEXT;
+    bd TEXT;
+BEGIN
+    isdead := have_death($1);
+    IF isdead = 0 THEN
+        age := 0;
+    ELSE
+        -- we have a death for them, check we have birth and death dates
+        dd := have_deathdate($1);
+        IF dd = '00000000' THEN
+            age := -1;
+        ELSE
+            bd := have_birthdate($1);
+            if bd = '00000000' OR bd is NULL THEN
+                age := -1;
+            else
+                age := age_at_death($1);
+            END IF;
+        END IF;
+    END IF;
+    RETURN age;
+END;
+$_$;
+
+
+ALTER FUNCTION public.calc_age_at_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: cite_inline(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION cite_inline(text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- extract/expand all inline citations
+DECLARE
+    str TEXT := $1;
+    tmp TEXT;
+    seq TEXT;
+BEGIN
+    WHILE str SIMILAR TO E'%\\[s=\\d+\\]%' LOOP
+        str := REGEXP_REPLACE(str, E'\\[s=(\\d+?)\\]', E'#\\1#');
+        tmp := SUBSTRING(str, E'#\\d+?#');
+        seq := cite_seq(BTRIM(tmp, '#')::INTEGER);
+        str := REPLACE(str, tmp, '<sup>' || seq::TEXT || '</sup>');
+    END LOOP;
+    RETURN str;
+END
+$_$;
+
+
+ALTER FUNCTION public.cite_inline(text) OWNER TO ubuntu;
+
+--
+-- Name: cite_seq(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION cite_seq(integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- stores unique citations in the temporary table tmp_sources.
+-- see family.php, function cite()
+DECLARE
+    seq INTEGER; -- sequence number
+BEGIN
+    -- check if the source is already cited
+    SELECT citation_id FROM tmp_sources WHERE source_id = $1 INTO seq;
+    -- if not, store new citation
+    IF NOT FOUND THEN
+        INSERT INTO tmp_sources (source_id) VALUES ($1)
+            RETURNING citation_id INTO seq;
+    END IF;
+    RETURN seq;
+END
+$_$;
+
+
+ALTER FUNCTION public.cite_seq(integer) OWNER TO ubuntu;
+
+--
+-- Name: conn_count(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION conn_count(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    (SELECT COUNT(*)::INTEGER FROM participants
+        WHERE person_fk = $1) +
+    (SELECT COUNT(*)::INTEGER FROM relations
+        WHERE child_fk = $1 OR parent_fk = $1)
+$_$;
+
+
+ALTER FUNCTION public.conn_count(integer) OWNER TO ubuntu;
+
+--
+-- Name: date2text(date); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION date2text(date) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+-- removes hyphens from a regular date
+SELECT
+    SUBSTR(TEXT($1),1,4) ||
+    SUBSTR(TEXT($1),6,2) ||
+    SUBSTR(TEXT($1),9,2)
+$_$;
+
+
+ALTER FUNCTION public.date2text(date) OWNER TO ubuntu;
+
+--
+-- Name: date_extract(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION date_extract(text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- used by Source Manager for sorting subsources in chron. order
+-- extracts "German style" dates embedded in text
+DECLARE
+    s TEXT;
+BEGIN
+    SELECT SUBSTRING($1, E'\\d{2}\\.\\d{2}\\.\\d{4}') INTO s;
+    RETURN
+        SUBSTR(s,7,4) || '-' ||
+        SUBSTR(s,4,2) || '-' ||
+        SUBSTR(s,1,2);
+END;
+$_$;
+
+
+ALTER FUNCTION public.date_extract(text) OWNER TO ubuntu;
+
+--
+-- Name: date_of_birth(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION date_of_birth(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    bd TEXT;
+    bdte INTEGER;
+BEGIN
+    bd := have_birthdate($1);
+    IF bd = '00000000' OR bd is NULL THEN
+        bdte := -1;
+    ELSE
+        bdte := bd::INTEGER;
+    END IF;
+    RETURN bdte;
+END;
+$_$;
+
+
+ALTER FUNCTION public.date_of_birth(integer) OWNER TO ubuntu;
+
+--
+-- Name: date_of_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION date_of_death(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    isdead INTEGER;
+    dd TEXT;
+    ddte INTEGER;
+BEGIN
+    isdead := have_death($1);
+    IF isdead = 0 THEN
+        ddte := NULL;
+    ELSE
+        dd := have_deathdate($1);
+        IF dd = '00000000' or dd is NULL THEN
+            ddte := -1;
+        ELSE
+            ddte := dd::INTEGER;
+        END IF;
+    END IF;
+    RETURN ddte;
+END;
+$_$;
+
+
+ALTER FUNCTION public.date_of_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: days_alive_at_date(integer, text, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION days_alive_at_date(integer, text, integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+  person_id INTEGER;
+  ev_date_text TEXT;
+  tag_id INTEGER;
+  event_cert INTEGER;
+  event_jday INTEGER;
+  b estimated_event_data;
+  days INTEGER;
+BEGIN
+  person_id = $1;
+  ev_date_text = $2;
+  tag_id = $3;
+  if ( event_type_has_date(tag_id) ) THEN
+     IF ( event_type_birth(tag_id) ) THEN
+        -- this is a birth, they must be 0 years old
+        days = 0;
+     ELSE
+        days = -1; -- set the standard missing val if we can't calculate it
+        event_cert = event_date_certainty(ev_date_text);
+        IF event_cert > 0 THEN
+           event_jday = estimated_jday_from_yyyymmdd(ev_date_text);
+           select (estimated_birth_data(person_id)).* into b.date_cert, b.est_date, b.est_jday, b.est_decade;
+           IF b.date_cert > 0 THEN
+              days = event_jday - (b).est_jday;
+           END IF;
+        END IF;
+     END IF;
+  ELSE
+     days = NULL;
+  END IF;
+  return days;
+END;
+$_$;
+
+
+ALTER FUNCTION public.days_alive_at_date(integer, text, integer) OWNER TO ubuntu;
+
+--
+-- Name: days_alive_if_alive(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION days_alive_if_alive(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return NULL;
+    ELSE
+       return days_alive_at_date($1, to_char(current_date,'YYYY0101') ,3);
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.days_alive_if_alive(integer) OWNER TO ubuntu;
+
+--
+-- Name: days_alive_if_dead(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION days_alive_if_dead(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+    IF have_death($1) THEN
+       return days_alive_at_date($1, to_char( (estimated_death_data($1)).est_date,'YYYYMMDD') ,3);
+    ELSE
+       return NULL;
+    END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.days_alive_if_dead(integer) OWNER TO ubuntu;
+
+--
+-- Name: dead_child(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION dead_child(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN $1 IN (SELECT person_fk FROM dead_children)
+THEN TRUE ELSE FALSE END
+$_$;
+
+
+ALTER FUNCTION public.dead_child(integer) OWNER TO ubuntu;
+
+--
+-- Name: death_sortdate_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION death_sortdate_jday(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+    select to_char(sort_date::date,'J')::integer from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (3,62);
+$_$;
+
+
+ALTER FUNCTION public.death_sortdate_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: ecc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION ecc(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- count event citations for source node
+SELECT COUNT(*)::INTEGER FROM event_citations WHERE source_fk = $1
+$_$;
+
+
+ALTER FUNCTION public.ecc(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_birth_data(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_birth_data(integer) RETURNS estimated_event_data
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT date_cert, est_date, est_jday, est_decade FROM estimated_event_data($1,'birth');
+$_$;
+
+
+ALTER FUNCTION public.estimated_birth_data(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_birth_date(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_birth_date(integer) RETURNS date
+    LANGUAGE sql STABLE
+    AS $_$
+    select estimated_date_from_yyyymmdd(event_date) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.estimated_birth_date(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_birth_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_birth_jday(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+    select estimated_jday_from_yyyymmdd(event_date) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.estimated_birth_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_birth_sortdate_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_birth_sortdate_jday(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+    select to_char(estimated_date_from_yyyymmdd(event_date)::date,'J')::integer from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.estimated_birth_sortdate_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_date_from_yyyymmdd(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_date_from_yyyymmdd(text) RETURNS date
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- sms: adapted from true_date_extract but provide mid points where month/day unknown.
+-- get real date from string
+-- extracts "German style" dates embedded in text
+-- note the "relaxed" date checking; eg. 29.02.2009 is treated
+-- as a valid date, but will be returned as '2009-03-01'
+DECLARE
+    s TEXT;                                                                                                                                         dd TEXT;
+    mm TEXT;
+    yyyy TEXT;
+    d INTEGER;                                                                                                                                      m INTEGER;
+    y INTEGER;
+    mydate DATE;
+BEGIN
+    SELECT SUBSTR($1,1,8) into s;
+    d := SUBSTR(s,7,2)::INTEGER;
+    m := SUBSTR(s,5,2)::INTEGER;
+    y := SUBSTR(s,1,4)::INTEGER;
+    IF d >= 1 AND d <= 31 THEN
+        dd = SUBSTR(s,7,2);
+        IF m >= 1 AND m <= 12 THEN
+            mm = SUBSTR(s,5,2);
+            IF y >= 1500 AND y <= 2100 THEN
+                yyyy = SUBSTR(s,1,4);
+                -- mydate := to_date(s, 'DD.MM.YYYY');
+            END IF;
+        END IF;
+        s = dd || '.' || mm || '.' || yyyy;
+        RETURN to_date(s, 'DD.MM.YYYY');
+    ELSIF y >= 1500 AND y <= 2100 THEN
+        yyyy = SUBSTR(s,1,4);
+        IF m >= 1 AND m <= 12 THEN
+             dd = '15';
+             mm = SUBSTR(s,5,2);
+        ELSE
+             dd = '01';
+             mm = '07';
+        END IF;
+        s = dd || '.' || mm || '.' || yyyy;
+        RETURN to_date(s, 'DD.MM.YYYY');
+    ELSE
+        RETURN NULL;
+    END IF;
+END
+$_$;
+
+
+ALTER FUNCTION public.estimated_date_from_yyyymmdd(text) OWNER TO ubuntu;
+
+--
+-- Name: estimated_death_data(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_death_data(integer) RETURNS estimated_event_data
+    LANGUAGE sql STABLE
+    AS $_$
+   select * from estimated_event_data($1,'death');
+$_$;
+
+
+ALTER FUNCTION public.estimated_death_data(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_death_date(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_death_date(integer) RETURNS date
+    LANGUAGE sql STABLE
+    AS $_$
+    select estimated_date_from_yyyymmdd(event_date) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (3,62);
+$_$;
+
+
+ALTER FUNCTION public.estimated_death_date(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_death_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_death_jday(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+    select estimated_jday_from_yyyymmdd(event_date) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (3,62);
+$_$;
+
+
+ALTER FUNCTION public.estimated_death_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_event_data(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_event_data(integer, text) RETURNS estimated_event_data
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+  result_record estimated_event_data;
+  wanted boolean;
+BEGIN
+    select date_cert, est_date, est_jday into result_record.date_cert, result_record.est_date, result_record.est_jday
+    from participants,events_with_est_dates,tags
+    where person_fk = $1 and event_fk = event_id and events_with_est_dates.tag_fk = tags.tag_id and event_wanted(tags.tag_id,$2)
+    order by est_jday;
+    IF NOT FOUND THEN
+       result_record.date_cert = -1;
+       result_record.est_date = NULL;
+       result_record.est_jday = -1;
+       result_record.est_decade = -1;
+    ELSE
+       result_record.est_decade = substr(result_record.est_date::text,1,3)::integer * 10;
+    END IF;
+    return result_record;
+END;
+$_$;
+
+
+ALTER FUNCTION public.estimated_event_data(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: estimated_jday_from_yyyymmdd(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_jday_from_yyyymmdd(text) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    mydate TEXT;
+    jday INTEGER;
+BEGIN
+    mydate := estimated_date_from_yyyymmdd($1);
+    jday := to_char(mydate::date,'J')::integer;
+    return valid_jday(jday);
+END
+$_$;
+
+
+ALTER FUNCTION public.estimated_jday_from_yyyymmdd(text) OWNER TO ubuntu;
+
+--
+-- Name: estimated_jday_of_birth(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_jday_of_birth(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    bd INTEGER;
+BEGIN
+    bd := estimated_birth_jday($1);
+    RETURN valid_jday(bd);
+END;
+$_$;
+
+
+ALTER FUNCTION public.estimated_jday_of_birth(integer) OWNER TO ubuntu;
+
+--
+-- Name: estimated_jday_of_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION estimated_jday_of_death(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    bd INTEGER;
+BEGIN
+    bd := estimated_death_jday($1);
+    RETURN valid_jday(bd);
+END;
+$_$;
+
+
+ALTER FUNCTION public.estimated_jday_of_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_date_certainty(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_date_certainty(text) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    s TEXT;                                                                                                                                         d INTEGER;
+    m INTEGER;
+    y INTEGER;
+    flag INTEGER := -1;
+BEGIN
+    SELECT SUBSTR($1,1,8) into s;
+    d := SUBSTR(s,7,2)::INTEGER;
+    m := SUBSTR(s,5,2)::INTEGER;
+    y := SUBSTR(s,1,4)::INTEGER;
+    IF y >= 1500 AND y <= 2100 THEN
+         flag = 2;
+         IF m >= 1 AND m <= 12 THEN
+              flag = 3;
+              IF d >= 1 AND d <= 31 THEN
+                   flag = 4;
+              END IF;
+         END IF;
+    ELSIF s = '00000000' THEN
+         flag = 0;
+    ELSE
+         flag = -1;
+    END IF;
+    return flag;
+END;
+$_$;
+
+
+ALTER FUNCTION public.event_date_certainty(text) OWNER TO ubuntu;
+
+--
+-- Name: event_note_has_task(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_note_has_task(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT event_note like ('%task=%') from events where event_id = $1
+$_$;
+
+
+ALTER FUNCTION public.event_note_has_task(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_note_has_task2(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_note_has_task2(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN ( event_note_has_task($1) )
+THEN 1 ELSE 0 END
+$_$;
+
+
+ALTER FUNCTION public.event_note_has_task2(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_type_birth(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_type_birth(integer) RETURNS boolean
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+  -- <INSTALLER:MODIFY_LIST_FOR_YOUR_BIRTH_EVENT_TAGIDS>
+  if $1 IN (2,62,1035) THEN
+     return true;
+  ELSE
+     return false;
+  END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.event_type_birth(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_type_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_type_death(integer) RETURNS boolean
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+  -- <INSTALLER:MODIFY_LIST_FOR_YOUR_DEATH_EVENT_TAGIDS>
+  if $1 IN (3,62) THEN
+     return true;
+  ELSE
+     return false;
+  END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.event_type_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_type_has_date(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_type_has_date(integer) RETURNS boolean
+    LANGUAGE plpgsql STABLE
+    AS $_$
+BEGIN
+  -- <INSTALLER:MODIFY_LIST_FOR_YOUR_UNDATED_EVENT_TAGIDS>
+  if $1 IN (1041,101,8,1040,9,1039,1006) THEN
+     return false;
+  ELSE
+     return true;
+  END IF;
+END;
+$_$;
+
+
+ALTER FUNCTION public.event_type_has_date(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_wanted(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION event_wanted(integer, text) RETURNS boolean
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- Modify this if tags changes for the core event types (recommend you dont)
+BEGIN
+   IF $2 = 'birth' THEN
+      return event_type_birth($1);
+   ELSIF $2 = 'death' THEN
+      return event_type_death($1);
+   ELSIF $2 = 'any' THEN
+      return event_type_has_date($1);
+   END IF;
+   return false;
+END;
+$_$;
+
+
+ALTER FUNCTION public.event_wanted(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: f_year(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION f_year(text) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT SUBSTR($1,1,4)::INTEGER
+$_$;
+
+
+ALTER FUNCTION public.f_year(text) OWNER TO ubuntu;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: places; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE places (
+    place_id integer NOT NULL,
+    level_1 text DEFAULT ''::text NOT NULL,
+    level_2 text DEFAULT ''::text NOT NULL,
+    level_3 text DEFAULT ''::text NOT NULL,
+    level_4 text DEFAULT ''::text NOT NULL,
+    level_5 text DEFAULT ''::text NOT NULL
+);
+
+
+ALTER TABLE public.places OWNER TO ubuntu;
+
+--
+-- Name: filtered_places(); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION filtered_places() RETURNS SETOF places
+    LANGUAGE plpgsql STABLE
+    AS $$
+DECLARE
+    fl RECORD;
+    pl places%ROWTYPE;
+    -- place_filter_level   | level_3
+    -- place_filter_content | %
+
+BEGIN
+    SELECT
+        place_filter_level AS _mkey,
+        place_filter_content AS _mval
+    FROM
+        user_settings
+    WHERE
+        username = current_user
+    INTO fl;
+    FOR pl IN EXECUTE 'SELECT * FROM places WHERE ' || fl._mkey ||
+            ' LIKE ' || QUOTE_LITERAL(fl._mval) || ' OR place_id = 1' LOOP
+        RETURN NEXT pl;
+    END LOOP;
+    RETURN;
+END
+$$;
+
+
+ALTER FUNCTION public.filtered_places() OWNER TO ubuntu;
+
+--
+-- Name: fuzzydate(character, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION fuzzydate(character, text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    q INTEGER;
+    str TEXT;
+    date1 TEXT;
+    date2 TEXT;
+BEGIN
+    str := SUBSTR($1,1,4) || '-' || SUBSTR($1,5,2) || '-' || SUBSTR($1,7,2);
+    date1 := mydate(str, $2);
+    str := SUBSTR($1,10,4) || '-' || SUBSTR($1,14,2) || '-' || SUBSTR($1,16,2);
+    date2 := mydate(str, $2);
+    q := SUBSTR($1,9,1)::INTEGER;
+    IF $2 = 'en' THEN
+        IF q = 0 THEN
+            str = 'before ' || date1;
+        ELSIF q = 1 THEN
+            str = 'around ' || date1;
+        ELSIF q = 2 THEN
+            str = 'ca. ' || date1;
+        ELSIF q = 3 THEN
+            str = date1;
+        ELSIF q = 4 THEN
+            str = 'after ' || date1;
+        ELSIF q = 5 THEN
+            str = 'between ' || date1 || ' and ' || date2;
+        ELSIF q = 6 THEN
+            str = date1 || ' or ' || date2;
+        ELSIF q = 7 THEN
+            str = 'from ' || date1 || ' to ' || date2;
+        ELSE
+            RAISE NOTICE 'Invalid qualifier %', q;
+            str = '';
+        END IF;
+    END IF;
+    IF $2 = 'nb' THEN
+        IF q = 0 THEN
+            str = 'før ' || date1;
+        ELSIF q = 1 THEN
+            str = 'rundt ' || date1;
+        ELSIF q = 2 THEN
+            str = 'ca. ' || date1;
+        ELSIF q = 3 THEN
+            str = date1;
+        ELSIF q = 4 THEN
+            str = 'etter ' || date1;
+        ELSIF q = 5 THEN
+            str = 'mellom ' || date1 || ' og ' || date2;
+        ELSIF q = 6 THEN
+            str = date1 || ' eller ' || date2;
+        ELSIF q = 7 THEN
+            str = 'fra ' || date1 || ' til ' || date2;
+        ELSE
+            RAISE NOTICE 'Invalid qualifier %', q;
+            str = '';
+        END IF;
+    END IF;
+    RETURN str;
+END;
+$_$;
+
+
+ALTER FUNCTION public.fuzzydate(character, text) OWNER TO ubuntu;
+
+--
+-- Name: generate_probate_witnesses(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION generate_probate_witnesses(integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $_$
+-- auto-add "inheritors" to probate events from [p=\d+ type links
+-- $1: id of source event
+DECLARE
+    link_id     INTEGER;        -- id of linked person
+    srt         INTEGER;
+    link_count  INTEGER := 0;   -- return value: number of linked persons
+    mynote      TEXT;
+BEGIN
+    -- copy event note
+    SELECT event_note FROM events WHERE event_id = $1 INTO mynote;
+    -- as this routine performs automated and trivial changes in person info,
+    -- i don't feel it warranted to update last_edit for the participants
+    ALTER TABLE participants DISABLE TRIGGER update_last_edit;
+    -- auto-cleanup in case procedure has been run before
+    DELETE FROM participants WHERE event_fk = $1 AND is_principal IS FALSE;
+    WHILE mynote SIMILAR TO E'%\\[p=\\d+%' LOOP
+        -- sort order = count of participants + 1
+        SELECT COUNT(*) + 1 FROM participants WHERE event_fk = $1 INTO srt;
+        -- extract linked person id from first non-processed link
+        link_id := (REGEXP_MATCHES(mynote, E'\\[p=(\\d+)'))[1]::INTEGER;
+        RAISE NOTICE 'Added %', get_person_name(link_id);
+        INSERT INTO participants (person_fk, event_fk, sort_order, is_principal)
+            VALUES (link_id, $1, srt, FALSE);
+        -- mark this link as processed
+        mynote := REGEXP_REPLACE(mynote, E'\\[p=', E'\\[#p=');
+        link_count = link_count + 1;
+    END LOOP;
+    ALTER TABLE participants ENABLE TRIGGER update_last_edit;
+    RETURN link_count;
+END
+$_$;
+
+
+ALTER FUNCTION public.generate_probate_witnesses(integer) OWNER TO ubuntu;
+
+--
+-- Name: geometricdate(fuzzydate); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION geometricdate(fd fuzzydate) RETURNS box
+    LANGUAGE plpgsql IMMUTABLE
+    AS $$
+  DECLARE
+    start_day INTEGER;
+    end_day INTEGER;
+  BEGIN
+    start_day := EXTRACT(epoch FROM fd.midpoint - fd.fuzziness)::INTEGER / 86400;
+    end_day := EXTRACT(epoch FROM fd.midpoint + fd.fuzziness)::INTEGER / 86400;
+    RETURN box(point(start_day, 0), point(end_day, 0));
+  END;
+$$;
+
+
+ALTER FUNCTION public.geometricdate(fd fuzzydate) OWNER TO ubuntu;
+
+--
+-- Name: get_coparent(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_coparent(integer, integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT parent_fk FROM relations WHERE child_fk = $2
+        AND parent_fk <> $1), 0)
+$_$;
+
+
+ALTER FUNCTION public.get_coparent(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: get_event_type(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_event_type(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    t.tag_type_fk
+FROM
+    events e,
+    tags t
+WHERE
+    e.tag_fk = t.tag_id
+AND
+    e.event_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_event_type(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_gender(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_gender(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    gender::INTEGER
+FROM
+    persons
+WHERE
+    person_id = $1;
+$_$;
+
+
+ALTER FUNCTION public.get_gender(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_khrd_matricle(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_khrd_matricle(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+    SELECT event_note from events where event_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_khrd_matricle(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_lang(); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_lang() RETURNS text
+    LANGUAGE sql STABLE
+    AS $$
+SELECT user_lang FROM user_settings WHERE username = current_user
+$$;
+
+
+ALTER FUNCTION public.get_lang() OWNER TO ubuntu;
+
+--
+-- Name: get_lrole(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_lrole(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT role_no FROM linkage_roles WHERE role_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_lrole(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_lrole(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_lrole(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN $2 = 'nb' THEN role_no ELSE role_en END
+FROM linkage_roles WHERE role_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_lrole(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_lsurety(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_lsurety(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT surety_no FROM sureties WHERE surety_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_lsurety(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_lsurety(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_lsurety(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN $2 = 'nb' THEN surety_no ELSE surety_en END
+FROM sureties WHERE surety_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_lsurety(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_mother_lifedata(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_mother_lifedata(integer, OUT integer, OUT text, OUT integer, OUT integer) RETURNS record
+    LANGUAGE sql STABLE
+    AS $_$
+select person as mother_id,name as mother_name,born as mother_born,died as mother_died from khrd_name_and_dates where person=get_parent($1,2)
+$_$;
+
+
+ALTER FUNCTION public.get_mother_lifedata(integer, OUT integer, OUT text, OUT integer, OUT integer) OWNER TO ubuntu;
+
+--
+-- Name: get_next_page(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_next_page(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- return source_id with next higher sort_order from current
+-- of set sharing same parent_id,
+-- or min(sort_order) from same set
+SELECT COALESCE(
+    (SELECT source_id
+        FROM sources
+        WHERE parent_id = get_parent_id($1)
+        AND sort_order > (
+            SELECT sort_order
+            FROM sources
+            WHERE source_id = $1
+        )
+        ORDER BY sort_order ASC LIMIT 1
+    ),
+    (SELECT source_id
+        FROM sources
+        WHERE parent_id = get_parent_id($1)
+        AND sort_order = (
+            SELECT MIN(sort_order)
+            FROM sources
+            WHERE parent_id = get_parent_id($1)
+        )
+    ORDER BY source_id LIMIT 1
+    )
+)
+$_$;
+
+
+ALTER FUNCTION public.get_next_page(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_nonaboriginal_flag(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_nonaboriginal_flag(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $$
+DECLARE
+    na INTEGER := 0;
+BEGIN
+    RETURN na;
+END;
+$$;
+
+
+ALTER FUNCTION public.get_nonaboriginal_flag(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_parent(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_parent(integer, integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT parent_fk FROM relations r, persons p
+        WHERE r.child_fk = $1
+            AND r.parent_fk = p.person_id
+            AND p.gender = $2), 0)
+$_$;
+
+
+ALTER FUNCTION public.get_parent(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: get_parent_id(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_parent_id(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- get 'parent' of source id
+SELECT parent_id FROM sources WHERE source_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_parent_id(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_part_type(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_part_type(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT part_type FROM sources WHERE source_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_part_type(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_pbdate(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_pbdate(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT event_date::TEXT FROM events e, participants p
+        WHERE e.event_id = p.event_fk
+        AND p.person_fk = $1
+        AND e.tag_fk IN (2,62,1035) LIMIT 1),
+    '000000003000000001'::TEXT)
+$_$;
+
+
+ALTER FUNCTION public.get_pbdate(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_pddate(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_pddate(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT event_date::TEXT FROM events e, participants p
+        WHERE e.event_id = p.event_fk
+        AND p.person_fk = $1
+        AND e.tag_fk IN (3,62) LIMIT 1),
+    '000000003000000001'::TEXT)
+$_$;
+
+
+ALTER FUNCTION public.get_pddate(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_person_name(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_person_name(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return full person name as text
+DECLARE
+    pe persons%ROWTYPE;
+    str TEXT;
+BEGIN
+    str := '';
+    SELECT * INTO pe FROM persons WHERE person_id = $1;
+    str := _append(str, pe.surname, ' ');
+    str := _append(str, pe.given, ', ');
+    IF pe.patronym <> '' AND pe.patronym <> pe.surname THEN
+       str := _append(str, pe.patronym, ' Maiden name: ');
+    END IF;
+
+    -- str := _append(str, pe.patronym, ' pat: ');
+    -- str := _append(str, pe.toponym, ' ');
+    -- str := _append(str, pe.surname, ' s:');
+    -- str := _append(str, pe.occupation, ' ');
+    -- str := _append(str, pe.epithet, ' ep:');
+    str := BTRIM(str, ' ');
+    IF NOT is_public($1) THEN
+        str := str || ' *';
+    ELSEIF dead_child($1) THEN
+        str := str || ' &#x2020;';
+    END IF;
+    RETURN str;
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_person_name(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_person_title(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_person_title(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT get_person_name($1) ||
+    ' (' || fuzzydate(get_pbdate($1)::CHAR(18),'nb') ||
+    ' - ' || fuzzydate(get_pddate($1)::CHAR(18),'nb') || ')';
+$_$;
+
+
+ALTER FUNCTION public.get_person_title(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_place_name(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_place_name(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return full place name as text
+DECLARE
+    pl places%ROWTYPE;
+    str TEXT;
+BEGIN
+    str := '';
+    SELECT * INTO pl FROM places WHERE place_id = $1;
+    str := _append(str, pl.level_1, ', ');
+    str := _append(str, pl.level_2, ', ');
+    str := _append(str, pl.level_3, ', ');
+    str := _append(str, pl.level_4, ', ');
+    str := _append(str, pl.level_5, ', ');
+    RETURN BTRIM(str, ', ');
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_place_name(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_prev_page(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_prev_page(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- return source_id with next lower sort_order from current
+-- of set sharing same parent_id,
+-- or max(sort_order) from same set
+SELECT COALESCE(
+    (SELECT source_id
+        FROM sources
+        WHERE parent_id = get_parent_id($1)
+        AND sort_order < (
+            SELECT sort_order
+            FROM sources
+            WHERE source_id = $1
+        )
+        ORDER BY sort_order DESC LIMIT 1
+    ),
+    (SELECT source_id
+        FROM sources
+        WHERE parent_id = get_parent_id($1)
+        AND sort_order = (
+            SELECT MAX(sort_order)
+            FROM sources
+            WHERE parent_id = get_parent_id($1)
+        )
+    ORDER BY source_id LIMIT 1
+    )
+)
+$_$;
+
+
+ALTER FUNCTION public.get_prev_page(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_principal(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_principal(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT person_fk FROM participants WHERE event_fk = $1
+        ORDER BY get_gender(person_fk) LIMIT 1), 0)
+$_$;
+
+
+ALTER FUNCTION public.get_principal(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_principal(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_principal(integer, integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- get coprincipal
+SELECT COALESCE(
+    (SELECT person_fk FROM participants
+        WHERE event_fk = $1 AND person_fk <> $2 LIMIT 1), 0)
+$_$;
+
+
+ALTER FUNCTION public.get_principal(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: get_role(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_role(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT initcap( role_en ) FROM linkage_roles WHERE role_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_role(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_role(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_role(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT initcap( CASE WHEN $2 = 'nb' THEN role_no ELSE role_en END )
+FROM linkage_roles WHERE role_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_role(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_sort(integer, integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_sort(integer, integer, text) RETURNS int_text
+    LANGUAGE plpgsql
+    AS $_$
+-- parse source text to infer sort order. Note that this function utilizes a
+-- micro-language of "commands" which may be embedded in the input text.
+-- CREATE TYPE int_text AS (number INTEGER, string TEXT)
+DECLARE
+    par_id INTEGER := $1;
+    srt INTEGER := $2;
+    txt TEXT := $3;
+    lang TEXT; -- language code
+    sort_text int_text;
+BEGIN
+    -- default condition: if nothing is modified, return input values
+    sort_text.number := srt;
+    sort_text.string := txt;
+    -- 1) use page number for sort order (low priority, may be overridden)
+    SELECT get_lang() INTO lang;
+    IF srt = 1 THEN -- don't apply this rule unless sort = default
+        IF lang = 'en' THEN
+            IF txt SIMILAR TO E'%page \\d+%' THEN
+                sort_text.number := (REGEXP_MATCHES(txt, E'page (\\d+)'))[1]::INTEGER;
+            END IF;
+        END IF;
+        IF lang = 'nb' THEN
+            IF txt SIMILAR TO E'%side \\d+%' THEN
+                sort_text.number := (REGEXP_MATCHES(txt, E'side (\\d+)'))[1]::INTEGER;
+            END IF;
+        END IF;
+    END IF;
+    -- 2) use ^#(\d+) for sort order
+    IF txt SIMILAR TO E'#\\d+%' THEN
+        sort_text.number := (REGEXP_MATCHES(txt, E'^#(\\d+)'))[1]::INTEGER;
+        sort_text.string := REGEXP_REPLACE(txt, E'^#\\d+ ', ''); -- strip #n from text
+    END IF;
+    -- 3) use ^!(\d+) for sort order, increment sort order for those above
+    -- in the same group, effectively making an insert
+    IF txt SIMILAR TO E'!\\d+%' THEN
+        sort_text.number := (REGEXP_MATCHES(txt, E'^!(\\d+)'))[1]::INTEGER;
+        UPDATE sources SET sort_order = sort_order + 1
+            WHERE get_source_gp(source_id) =
+                (SELECT parent_id FROM sources WHERE source_id = par_id)
+            AND sort_order >= sort_text.number;
+        sort_text.string := REGEXP_REPLACE(txt, E'^!\\d+ ', ''); -- strip !n from text
+    END IF;
+    -- 4) use ^=(\d+) for sort order, increment sort order for those above
+    -- with the same parent node, effectively making an insert
+    IF txt SIMILAR TO E'=\\d+%' THEN
+        sort_text.number := (REGEXP_MATCHES(txt, E'^=(\\d+)'))[1]::INTEGER;
+        UPDATE sources SET sort_order = sort_order + 1
+            WHERE parent_id = par_id
+            AND sort_order >= sort_text.number;
+        sort_text.string := REGEXP_REPLACE(txt, E'^=\\d+ ', ''); -- strip !n from text
+    END IF;
+    -- 5) increment from max(sort_order) of source group
+    IF txt LIKE '++ %' THEN
+        SELECT MAX(sort_order) + 1
+            FROM sources
+            WHERE get_source_gp(source_id) =
+                (SELECT parent_id FROM sources WHERE source_id = par_id)
+        INTO sort_text.number;
+        sort_text.string := REPLACE(txt, '++ ', ''); -- strip symbol from text
+    END IF;
+    RETURN sort_text;
+END
+$_$;
+
+
+ALTER FUNCTION public.get_sort(integer, integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_source_gp(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_gp(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- get 'grandparent' of source id
+SELECT parent_id FROM sources WHERE source_id = (
+    SELECT parent_id FROM sources WHERE source_id = $1
+)
+$_$;
+
+
+ALTER FUNCTION public.get_source_gp(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_source_text(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_text(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return full source string by recursive concatenation
+DECLARE
+    src sources%ROWTYPE;
+    str TEXT;
+BEGIN
+    SELECT * INTO src FROM sources WHERE source_id = $1;
+    str := src.source_text;
+    IF src.parent_id <> 0 THEN
+        str := get_source_text(src.parent_id) || ' ' || str;
+    END IF;
+    -- if str ~= ^{.*}$, return as is, else suppress hidden text
+    IF str NOT LIKE '{%}' THEN
+        str := REGEXP_REPLACE(str, '{.*?}', '', 'g');
+        str := REPLACE(str, '  ', ' ');
+    END IF;
+    str := link_expand(str);
+    RETURN COALESCE(BTRIM(str, ' '), '[undefined]');
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_source_text(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_source_text_p1(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_text_p1(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return part source string by recursive concatenation
+DECLARE
+    src sources%ROWTYPE;
+    str TEXT;
+BEGIN
+    SELECT * INTO src FROM sources WHERE source_id = $1;
+    SELECT ((regexp_split_to_array(src.source_text, E'\\n|\<br'))[1]) into str;
+    -- SELECT length(regexp_replace(src.source_text, E'[^\\n]', '', 'g')) into str;
+    IF src.parent_id <> 0 THEN
+        str := get_source_text_p1(src.parent_id) || '/' || str;
+    END IF;
+    -- if str ~= ^{.*}$, return as is, else suppress hidden text
+    IF str NOT LIKE '{%}' THEN
+        str := REGEXP_REPLACE(str, '{.*?}', '', 'g');
+        str := REPLACE(str, '  ', ' ');
+    END IF;
+    str := link_expand(str);
+    RETURN COALESCE(BTRIM(str, ' '), '[undefined]');
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_source_text_p1(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_source_text_p1(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_text_p1(integer, integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return first line of source string by recursive concatenation
+-- if 2nd parameter is 0, do not include the starting source
+DECLARE
+    src sources%ROWTYPE;
+    str TEXT;
+BEGIN
+    SELECT * INTO src FROM sources WHERE source_id = $1;
+    str := '';
+    if $2 > 0 THEN
+         SELECT ((regexp_split_to_array(src.source_text, E'\\n|\<br'))[1]) into str;
+         IF src.parent_id <> 0 THEN
+            str := ';['|| src.source_id ||']' || str;
+         ELSE
+            str := '['|| src.source_id ||']' || str;
+         END IF;
+    END IF;
+    IF src.parent_id <> 0 THEN
+        str := get_source_text_p1(src.parent_id,1) || str;
+    END IF;
+    -- if str ~= ^{.*}$, return as is, else suppress hidden text
+    --IF str NOT LIKE '{%}' THEN
+    --    str := REGEXP_REPLACE(str, '{.*?}', '', 'g');
+    --    str := REPLACE(str, '  ', ' ');
+    --END IF;
+    -- str := link_expand(str);
+    RETURN COALESCE(BTRIM(str, ' '), '[undefined]');
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_source_text_p1(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: get_source_text_p1(integer, integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_text_p1(integer, integer, text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return first line of source string by recursive concatenation
+-- if 2nd parameter is 0, do not include the starting source
+-- if 3rd parameter, hotlink the source_id using the string as url
+DECLARE
+    src sources%ROWTYPE;
+    str TEXT;
+    delim TEXT;
+BEGIN
+    delim := '';
+    SELECT * INTO src FROM sources WHERE source_id = $1;
+    str := '';
+    if $2 > 0 THEN
+         SELECT ((regexp_split_to_array(src.source_text, E'\\n|\<br'))[1]) into str;
+         -- if str ~= ^{.*}$, return as is, else suppress hidden text
+         IF str NOT LIKE '{%}' THEN
+            str := REGEXP_REPLACE(str, '{.*?}', '', 'g');
+            str := REPLACE(str, '  ', ' ');
+         END IF;
+         IF src.parent_id <> 0 THEN
+            delim := ' -&gt; ';
+         END IF;
+         IF $3 <> '' THEN
+            str := delim || '[<a href="' || $3 || '?node='|| src.source_id || '">'|| src.source_id ||'</a>] ' || str;
+         ELSE
+            str := delim || '['|| src.source_id ||'] ' || str;
+         END IF;
+    END IF;
+    IF src.parent_id <> 0 THEN
+        str := get_source_text_p1(src.parent_id,1,$3) || str;
+    END IF;
+    RETURN COALESCE(BTRIM(str, ' '), '[undefined]');
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_source_text_p1(integer, integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_source_type(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_source_type(text) RETURNS int_text
+    LANGUAGE plpgsql
+    AS $_$
+-- parse source text to get source type, modifies text.
+-- source type input as §n first or immediately after sort directive
+DECLARE
+    txt TEXT := $1;
+    src_text int_text;
+
+BEGIN
+    -- default condition: if nothing is modified, return input values
+    src_text.number := 0;
+    src_text.string := txt;
+    IF txt SIMILAR TO E'§\\d+%' THEN
+        src_text.number := (REGEXP_MATCHES(txt, E'^§(\\d+)'))[1]::INTEGER;
+        src_text.string := REGEXP_REPLACE(txt, E'^§\\d+ ', ''); -- strip §n from text
+    END IF;
+    RETURN src_text;
+END
+$_$;
+
+
+ALTER FUNCTION public.get_source_type(text) OWNER TO ubuntu;
+
+--
+-- Name: get_spt_label(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_spt_label(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- get localized source part type label
+DECLARE
+    lbl TEXT;
+
+BEGIN
+    EXECUTE
+        'SELECT label_' || get_lang() ||
+        ' FROM source_part_types WHERE part_type_id = ' || $1
+    INTO lbl;
+    RETURN lbl;
+END
+$_$;
+
+
+ALTER FUNCTION public.get_spt_label(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_surety(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_surety(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT initcap(surety_no) FROM sureties WHERE surety_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_surety(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_surety(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_surety(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT initcap( CASE WHEN $2 = 'nb' THEN surety_no ELSE surety_en END )
+FROM sureties WHERE surety_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_surety(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_surety_int(integer, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_surety_int(integer, integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT surety_fk FROM relations WHERE child_fk = $1 AND parent_fk = $2), 0)
+$_$;
+
+
+ALTER FUNCTION public.get_surety_int(integer, integer) OWNER TO ubuntu;
+
+--
+-- Name: get_tag_group(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_tag_group(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    t.tag_group_fk
+FROM
+    events e,
+    tags t
+WHERE
+    e.tag_fk = t.tag_id
+AND
+    e.event_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_tag_group(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_tag_name(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_tag_name(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    (SELECT tag_name FROM tags WHERE tag_id = $1),
+    '[undefined]')
+$_$;
+
+
+ALTER FUNCTION public.get_tag_name(integer) OWNER TO ubuntu;
+
+--
+-- Name: get_tag_name(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_tag_name(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COALESCE(
+    CASE WHEN $2 = 'nb'
+    THEN
+        (SELECT tag_label FROM tags WHERE tag_id = $1)
+    ELSE
+        (SELECT tag_name FROM tags WHERE tag_id = $1)
+    END,
+    '[undefined]')
+$_$;
+
+
+ALTER FUNCTION public.get_tag_name(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: get_tag_type(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION get_tag_type(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    t.tag_type_fk
+FROM
+    events e,
+    tags t
+WHERE
+    e.tag_fk = t.tag_id
+AND
+    e.event_id = $1
+$_$;
+
+
+ALTER FUNCTION public.get_tag_type(integer) OWNER TO ubuntu;
+
+--
+-- Name: has_coprincipal(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION has_coprincipal(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT
+    CASE WHEN (SELECT tag_type_fk FROM tags WHERE tag_id = $1) = 2
+    THEN TRUE ELSE FALSE END
+$_$;
+
+
+ALTER FUNCTION public.has_coprincipal(integer) OWNER TO ubuntu;
+
+--
+-- Name: have_birth(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION have_birth(integer) RETURNS bigint
+    LANGUAGE sql STABLE
+    AS $_$
+    select count(event_fk) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.have_birth(integer) OWNER TO ubuntu;
+
+--
+-- Name: have_birthdate(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION have_birthdate(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+    select substring(event_date,1,8) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (2,62,1035);
+$_$;
+
+
+ALTER FUNCTION public.have_birthdate(integer) OWNER TO ubuntu;
+
+--
+-- Name: have_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION have_death(integer) RETURNS bigint
+    LANGUAGE sql STABLE
+    AS $_$
+    select count(event_fk) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (3,62);
+$_$;
+
+
+ALTER FUNCTION public.have_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: have_deathdate(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION have_deathdate(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+    select substring(event_date,1,8) from participants,events where person_fk = $1 and event_fk = event_id and tag_fk IN (3,62);
+$_$;
+
+
+ALTER FUNCTION public.have_deathdate(integer) OWNER TO ubuntu;
+
+--
+-- Name: is_leaf(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION is_leaf(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT is_leaf FROM source_part_types WHERE part_type_id = (
+    SELECT part_type FROM sources WHERE source_id = $1
+)
+$_$;
+
+
+ALTER FUNCTION public.is_leaf(integer) OWNER TO ubuntu;
+
+--
+-- Name: is_merged(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION is_merged(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN $1 IN (SELECT old_person_fk FROM merged)
+    THEN TRUE ELSE FALSE END
+$_$;
+
+
+ALTER FUNCTION public.is_merged(integer) OWNER TO ubuntu;
+
+--
+-- Name: is_public(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION is_public(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN $1 IN (SELECT person_fk FROM private_persons)
+THEN FALSE ELSE TRUE END
+$_$;
+
+
+ALTER FUNCTION public.is_public(integer) OWNER TO ubuntu;
+
+--
+-- Name: is_unused(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION is_unused(integer) RETURNS boolean
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN (ecc($1) = 0 AND rcc($1) = 0 AND ssc($1) = 0)
+THEN TRUE ELSE FALSE END
+$_$;
+
+
+ALTER FUNCTION public.is_unused(integer) OWNER TO ubuntu;
+
+--
+-- Name: is_used(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION is_used(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN (ecc($1) = 0 AND rcc($1) = 0 AND ssc($1) = 0)
+THEN 0 ELSE 1 END
+$_$;
+
+
+ALTER FUNCTION public.is_used(integer) OWNER TO ubuntu;
+
+--
+-- Name: jday_of_birth(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION jday_of_birth(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    bd INTEGER;
+BEGIN
+    bd := birth_sortdate_jday($1);
+    RETURN valid_jday(bd);
+END;
+$_$;
+
+
+ALTER FUNCTION public.jday_of_birth(integer) OWNER TO ubuntu;
+
+--
+-- Name: jday_of_death(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION jday_of_death(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    bd INTEGER;
+BEGIN
+    bd := death_sortdate_jday($1);
+    RETURN valid_jday(bd);
+END;
+$_$;
+
+
+ALTER FUNCTION public.jday_of_death(integer) OWNER TO ubuntu;
+
+--
+-- Name: link_expand(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION link_expand(text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- expand all compacted links
+DECLARE
+    str TEXT := $1;
+    tmp TEXT;
+BEGIN
+    -- expand internal shortlinks to persons
+    -- replace [p=xxx|yyy] with full link
+    str := REGEXP_REPLACE(str, E'\\[p=(\\d+?)\\|(.+?)\\]',
+            E'<a href="./family.php?person=\\1" title="@\\1@">\\2</a>', 'g');
+    -- replace [p=xxx] with full link
+    WHILE str SIMILAR TO E'%\\[p=\\d+\\]%' LOOP
+        str := REGEXP_REPLACE(str, E'\\[p=(\\d+?)\\]',
+                E'<a href="./family.php?person=\\1" title="@\\1@">#\\1#</a>');
+        tmp := SUBSTRING(str, E'#\\d+?#');
+        str := REPLACE(str, tmp, get_person_name(BTRIM(tmp, '#')::INTEGER));
+    END LOOP;
+    -- show person name with lifespan as tooltip
+    WHILE str SIMILAR TO E'%@\\d+@%' LOOP
+        tmp := SUBSTRING(str, E'@\\d+?@');
+        str := REPLACE(str, tmp, get_person_title(BTRIM(tmp, '@')::INTEGER));
+    END LOOP;
+    -- expand custom external shortlinks
+    str := _my_expand(str);
+    str := REGEXP_REPLACE(str,
+                E'<name role="child" n="(.*?)">(.+?)</name>',
+                E'<span class="child" title="\\1">\\2</span>', 'g');
+    RETURN str;
+END
+$_$;
+
+
+ALTER FUNCTION public.link_expand(text) OWNER TO ubuntu;
+
+--
+-- Name: msc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION msc(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- count subsources for source node which are meta types
+SELECT COUNT(*)::INTEGER FROM sources WHERE parent_id = $1 and (part_type>=1000 or ch_part_type>=1000);
+$_$;
+
+
+ALTER FUNCTION public.msc(integer) OWNER TO ubuntu;
+
+--
+-- Name: my_get_place_name(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION my_get_place_name(integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- return full place name as text
+DECLARE
+    pl places%ROWTYPE;
+    str TEXT;
+    age INTEGER;
+BEGIN
+    age := 1;
+    str := '';
+    SELECT * INTO pl FROM places WHERE place_id = $1;
+    str := _append(str, pl.level_1, ', ');
+    str := _append(str, pl.level_2, ', ');
+    str := _append(str, pl.level_3, ', ');
+    str := _append(str, pl.level_4, ', ');
+    str := _append(str, pl.level_5, ', ');
+    RETURN BTRIM(str, ', ');
+END;
+$_$;
+
+
+ALTER FUNCTION public.my_get_place_name(integer) OWNER TO ubuntu;
+
+--
+-- Name: mydate(character, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION mydate(character, text) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- takes iso-8601 date string, returns localized date string
+-- accepts partial dates eg. 2008-00-00 or 2008-05-00
+DECLARE
+    d INTEGER;
+    m INTEGER;
+    y INTEGER;
+    mon TEXT;
+    str TEXT;
+BEGIN
+    -- decompose datestring
+    y := SUBSTR($1,1,4)::INTEGER;
+    m := SUBSTR($1,6,2)::INTEGER;
+    d := SUBSTR($1,9,2)::INTEGER;
+    EXECUTE 'SELECT ' || $2 || ' FROM months WHERE id = ' || m INTO mon;
+    IF $2 = 'en' THEN -- [d] [m] Y
+        str := y::TEXT;
+        IF m <> 0 THEN
+            str := substr(mon,1,3) || ' ' || str;
+        END IF;
+        IF d <> 0 THEN
+            str := d::TEXT || ' ' || str;
+        END IF;
+    END IF;
+    IF $2 = 'nb' THEN -- [d.] [m] Y
+        str := y::TEXT;
+        IF m <> 0 THEN
+            str := mon || ' ' || str;
+        END IF;
+        IF d <> 0 THEN
+            str := d::TEXT || '. ' || str;
+        END IF;
+    END IF;
+    -- catch "empty" dates
+    IF y = 0 THEN
+        str := '';
+    END IF;
+    RETURN str;
+END;
+$_$;
+
+
+ALTER FUNCTION public.mydate(character, text) OWNER TO ubuntu;
+
+--
+-- Name: num_children(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION num_children(integer) RETURNS bigint
+    LANGUAGE sql STABLE
+    AS $_$
+    select count(*) from relations where parent_fk = $1;
+$_$;
+
+
+ALTER FUNCTION public.num_children(integer) OWNER TO ubuntu;
+
+--
+-- Name: num_marriages(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION num_marriages(integer) RETURNS bigint
+    LANGUAGE sql STABLE
+    AS $_$
+    select count(*) from marriages where person = $1;
+$_$;
+
+
+ALTER FUNCTION public.num_marriages(integer) OWNER TO ubuntu;
+
+--
+-- Name: part_ldesc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION part_ldesc(integer) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT description FROM source_part_types WHERE part_type_id = $1
+$_$;
+
+
+ALTER FUNCTION public.part_ldesc(integer) OWNER TO ubuntu;
+
+--
+-- Name: part_type_count(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION part_type_count(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COUNT(*)::INTEGER FROM sources WHERE part_type = $1
+$_$;
+
+
+ALTER FUNCTION public.part_type_count(integer) OWNER TO ubuntu;
+
+--
+-- Name: person_age_at_date(integer, date); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION person_age_at_date(integer, date) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $$
+DECLARE
+  person_id INTEGER;
+  ev_date INTEGER;
+BEGIN
+  return -1;
+END;
+$$;
+
+
+ALTER FUNCTION public.person_age_at_date(integer, date) OWNER TO ubuntu;
+
+--
+-- Name: person_age_at_date(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION person_age_at_date(integer, text) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+  person_id INTEGER;
+  ev_date_text TEXT;
+  event_cert INTEGER;
+  event_date DATE;
+  b estimated_event_data;
+  age_pg TEXT;
+  age_last_birthday INTEGER;
+BEGIN
+  age_last_birthday = -1; -- standard missing val if we can't calculate it
+  person_id = $1;
+  ev_date_text = $2;
+  event_cert = event_date_certainty(ev_date_text);
+  IF event_cert > 0 THEN
+     event_date = estimated_date_from_yyyymmdd(ev_date_text);
+     select (estimated_birth_data(person_id)).* into b.date_cert, b.est_date, b.est_jday, b.est_decade;
+     IF b.date_cert > 0 THEN
+        age_pg = age ( event_date, (b).est_date );
+        age_last_birthday = date_part('year', age_pg::interval);
+     END IF;
+  END IF;
+  return age_last_birthday;
+END;
+$_$;
+
+
+ALTER FUNCTION public.person_age_at_date(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: person_age_at_date(integer, text, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION person_age_at_date(integer, text, integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+   agelong TEXT;
+BEGIN
+   agelong = person_agelong_at_date($1,$2,$3);
+   if ( agelong = '' ) THEN
+      return NULL;
+   else
+      return date_part('year', agelong::interval );
+   end if;
+END
+$_$;
+
+
+ALTER FUNCTION public.person_age_at_date(integer, text, integer) OWNER TO ubuntu;
+
+--
+-- Name: person_agelong_at_date(integer, text, integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION person_agelong_at_date(integer, text, integer) RETURNS text
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+  person_id INTEGER;
+  ev_date_text TEXT;
+  tag_id INTEGER;
+  event_cert INTEGER;
+  event_date DATE;
+  b estimated_event_data;
+  age_pg TEXT;
+BEGIN
+  person_id = $1;
+  ev_date_text = $2;
+  tag_id = $3;
+  if ( event_type_has_date(tag_id) ) THEN
+     IF ( event_type_birth(tag_id) ) THEN
+        -- this is a birth, they must be 0 years old
+        age_pg = '0 days';
+     ELSE
+        age_pg = ''; -- set the standard missing val if we can't calculate it
+        event_cert = event_date_certainty(ev_date_text);
+        IF event_cert > 0 THEN
+           event_date = estimated_date_from_yyyymmdd(ev_date_text);
+           select (estimated_birth_data(person_id)).* into b.date_cert, b.est_date, b.est_jday, b.est_decade;
+           IF b.date_cert > 0 THEN
+              age_pg = age ( event_date, (b).est_date );
+           END IF;
+        END IF;
+     END IF;
+  ELSE
+     age_pg = NULL;
+  END IF;
+  return age_pg;
+END;
+$_$;
+
+
+ALTER FUNCTION public.person_agelong_at_date(integer, text, integer) OWNER TO ubuntu;
+
+--
+-- Name: place_count(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION place_count(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COUNT(*)::INTEGER FROM events WHERE place_fk = $1;
+$_$;
+
+
+ALTER FUNCTION public.place_count(integer) OWNER TO ubuntu;
+
+--
+-- Name: prepose(integer, text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION prepose(integer, text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+-- get connective preposition for type 2 event
+SELECT COALESCE(
+    (SELECT preposition
+        FROM tag_prepositions
+        WHERE tag_fk = $1
+            AND lang_code = $2),
+    (SELECT preposition
+        FROM default_prepositions
+        WHERE lang_code = $2)
+)
+$_$;
+
+
+ALTER FUNCTION public.prepose(integer, text) OWNER TO ubuntu;
+
+--
+-- Name: public_id(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION public_id(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT CASE WHEN is_public($1) THEN $1 ELSE 0 END
+$_$;
+
+
+ALTER FUNCTION public.public_id(integer) OWNER TO ubuntu;
+
+--
+-- Name: rcc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION rcc(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- count relation citations for source node
+SELECT COUNT(*)::INTEGER FROM relation_citations WHERE source_fk = $1
+$_$;
+
+
+ALTER FUNCTION public.rcc(integer) OWNER TO ubuntu;
+
+--
+-- Name: set_last_selected_place(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION set_last_selected_place(integer) RETURNS void
+    LANGUAGE sql
+    AS $_$
+-- updates recent_places
+    DELETE FROM recent_places WHERE place_fk = $1;
+    INSERT INTO recent_places (place_fk) VALUES ($1);
+$_$;
+
+
+ALTER FUNCTION public.set_last_selected_place(integer) OWNER TO ubuntu;
+
+--
+-- Name: sms(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION sms(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+    age INTEGER;
+    isdead INTEGER;
+BEGIN
+    isdead := have_death($1);
+    IF isdead = 0 THEN
+        age := -1;
+    ELSE
+        age := age_at_death(INTEGER);
+    END IF;
+    RETURN age;
+END;
+$_$;
+
+
+ALTER FUNCTION public.sms(integer) OWNER TO ubuntu;
+
+--
+-- Name: ssc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION ssc(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- count subsources for source node
+SELECT COUNT(*)::INTEGER FROM sources WHERE parent_id = $1
+$_$;
+
+
+ALTER FUNCTION public.ssc(integer) OWNER TO ubuntu;
+
+--
+-- Name: tag_count(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION tag_count(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COUNT(*)::INTEGER FROM events WHERE tag_fk = $1
+$_$;
+
+
+ALTER FUNCTION public.tag_count(integer) OWNER TO ubuntu;
+
+--
+-- Name: tag_count_task(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION tag_count_task(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT COUNT(*)::INTEGER FROM events WHERE tag_fk = $1 and event_note like '%task=%'
+$_$;
+
+
+ALTER FUNCTION public.tag_count_task(integer) OWNER TO ubuntu;
+
+--
+-- Name: tasktype(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION tasktype(text) RETURNS text
+    LANGUAGE sql STABLE
+    AS $_$
+SELECT (regexp_matches( $1, '\[task=([^\]:]+)' ))[1]::TEXT
+$_$;
+
+
+ALTER FUNCTION public.tasktype(text) OWNER TO ubuntu;
+
+--
+-- Name: test; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE test (
+    i integer,
+    v character varying,
+    x xml
+);
+
+
+ALTER TABLE public.test OWNER TO ubuntu;
+
+--
+-- Name: test_munge(); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION test_munge() RETURNS SETOF test
+    LANGUAGE plperl
+    AS $_$
+    my $rv = spi_exec_query('select i, v from test;');
+    my $status = $rv->{status};
+    my $nrows = $rv->{processed};
+    foreach my $rn (0 .. $nrows - 1) {
+        my $row = $rv->{rows}[$rn];
+        $row->{i} += 200 if defined($row->{i});
+        $row->{v} =~ tr/A-Za-z/a-zA-Z/ if (defined($row->{v}));
+        return_next($row);
+    }
+    return undef;
+$_$;
+
+
+ALTER FUNCTION public.test_munge() OWNER TO ubuntu;
+
+--
+-- Name: true_date_extract(text); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION true_date_extract(text) RETURNS date
+    LANGUAGE plpgsql STABLE
+    AS $_$
+-- get real date from string
+-- extracts "German style" dates embedded in text
+-- note the "relaxed" date checking; eg. 29.02.2009 is treated
+-- as a valid date, but will be returned as '2009-03-01'
+DECLARE
+    s TEXT;
+    d INTEGER;
+    m INTEGER;
+    y INTEGER;
+    mydate DATE;
+BEGIN
+    SELECT SUBSTRING($1, E'\\d{2}\\.\\d{2}\\.\\d{4}') INTO s;
+    d := SUBSTR(s,1,2)::INTEGER;
+    m := SUBSTR(s,4,2)::INTEGER;
+    y := SUBSTR(s,7,4)::INTEGER;
+    IF d >= 1 AND d <= 31 THEN
+        IF m >= 1 AND m <= 12 THEN
+            IF y >= 1500 AND y <= 2100 THEN
+                mydate := to_date(s, 'DD.MM.YYYY');
+            END IF;
+        END IF;
+    END IF;
+    RETURN mydate;
+END
+$_$;
+
+
+ALTER FUNCTION public.true_date_extract(text) OWNER TO ubuntu;
+
+--
+-- Name: usc(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION usc(integer) RETURNS integer
+    LANGUAGE sql STABLE
+    AS $_$
+-- count unused subsources for source node
+SELECT COUNT(*)::INTEGER FROM sources WHERE parent_id = $1
+    AND is_unused(source_id)
+$_$;
+
+
+ALTER FUNCTION public.usc(integer) OWNER TO ubuntu;
+
+--
+-- Name: valid_jday(integer); Type: FUNCTION; Schema: public; Owner: ubuntu
+--
+
+CREATE FUNCTION valid_jday(integer) RETURNS integer
+    LANGUAGE plpgsql STABLE
+    AS $_$
+DECLARE
+   -- 1700-01-01 #### CUSTOMISE config_lowest_jday FOR YOUR APPLICATION e.g. select to_char('1700-01-01'::date,'J') ####
+   config_lowest_jday INTEGER := 2341973;
+   missing_jday INTEGER := -1;
+   jd           INTEGER;
+BEGIN
+   IF $1 >= config_lowest_jday THEN
+      jd := $1;
+   ELSE
+      jd := missing_jday;
+   END IF;
+   RETURN jd;
+END;
+$_$;
+
+
+ALTER FUNCTION public.valid_jday(integer) OWNER TO ubuntu;
+
+--
+-- Name: event_citations; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE event_citations (
+    event_fk integer NOT NULL,
+    source_fk integer NOT NULL
+);
+
+
+ALTER TABLE public.event_citations OWNER TO ubuntu;
+
+--
+-- Name: events; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE events (
+    event_id integer NOT NULL,
+    tag_fk integer,
+    place_fk integer,
+    event_date character(18) DEFAULT '000000003000000001'::bpchar NOT NULL,
+    sort_date date DEFAULT now() NOT NULL,
+    event_note text DEFAULT ''::text NOT NULL
+);
+
+
+ALTER TABLE public.events OWNER TO ubuntu;
+
+--
+-- Name: participants; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE participants (
+    person_fk integer NOT NULL,
+    event_fk integer NOT NULL,
+    sort_order integer DEFAULT 1 NOT NULL,
+    is_principal boolean DEFAULT true NOT NULL
+);
+
+
+ALTER TABLE public.participants OWNER TO ubuntu;
+
+--
+-- Name: principals; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW principals AS
+    SELECT participants.person_fk AS person, events.event_id AS event, events.place_fk AS place, events.event_date, events.sort_date, events.tag_fk AS tag_type FROM events, participants WHERE ((events.event_id = participants.event_fk) AND (get_tag_type(events.event_id) < 3)) ORDER BY get_gender(participants.person_fk);
+
+
+ALTER TABLE public.principals OWNER TO ubuntu;
+
+--
+-- Name: birth_sources; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW birth_sources AS
+    SELECT principals.person, principals.event, principals.tag_type, event_citations.source_fk, event_citations.event_fk FROM principals, event_citations WHERE ((principals.event = event_citations.event_fk) AND (principals.tag_type = 2));
+
+
+ALTER TABLE public.birth_sources OWNER TO ubuntu;
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tags (
+    tag_id integer NOT NULL,
+    tag_group_fk integer,
+    tag_type_fk integer,
+    tag_name character varying(20) DEFAULT ''::character varying NOT NULL,
+    gedcom_tag character(5) DEFAULT ''::bpchar NOT NULL,
+    tag_label character varying(20) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE public.tags OWNER TO ubuntu;
+
+--
+-- Name: marriages; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW marriages AS
+    SELECT p.person_fk AS person, e.event_id AS event, e.event_date, e.sort_date, get_place_name(e.place_fk) AS place_name, get_principal(e.event_id, p.person_fk) AS spouse, get_person_name(get_principal(e.event_id, p.person_fk)) AS spouse_name FROM events e, participants p, tags t WHERE (((p.event_fk = e.event_id) AND (e.tag_fk = t.tag_id)) AND (t.tag_group_fk = 2)) ORDER BY e.sort_date;
+
+
+ALTER TABLE public.marriages OWNER TO ubuntu;
+
+--
+-- Name: couples; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW couples AS
+    SELECT marriages.sort_date, marriages.person AS p1, get_person_name(marriages.person) AS p1n, marriages.spouse AS p2, marriages.spouse_name AS p2n FROM marriages;
+
+
+ALTER TABLE public.couples OWNER TO ubuntu;
+
+--
+-- Name: dead_children; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE dead_children (
+    person_fk integer NOT NULL
+);
+
+
+ALTER TABLE public.dead_children OWNER TO ubuntu;
+
+--
+-- Name: default_prepositions; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE default_prepositions (
+    lang_code text NOT NULL,
+    preposition text
+);
+
+
+ALTER TABLE public.default_prepositions OWNER TO ubuntu;
+
+--
+-- Name: sources; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE sources (
+    source_id integer NOT NULL,
+    parent_id integer,
+    source_text text DEFAULT ''::text NOT NULL,
+    sort_order integer DEFAULT 1 NOT NULL,
+    source_date date,
+    part_type integer DEFAULT 0,
+    ch_part_type integer DEFAULT 0,
+    xids hstore,
+    sdata hstore,
+    stree ltree DEFAULT ''::ltree NOT NULL
+);
+
+
+ALTER TABLE public.sources OWNER TO ubuntu;
+
+--
+-- Name: event_notes; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW event_notes AS
+    SELECT event_citations.event_fk AS note_id, sources.source_id, get_source_text(sources.source_id) AS source_text FROM sources, event_citations WHERE (sources.source_id = event_citations.source_fk) ORDER BY sources.source_date;
+
+
+ALTER TABLE public.event_notes OWNER TO ubuntu;
+
+--
+-- Name: event_types_by_count; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW event_types_by_count AS
+    SELECT tags.tag_label AS hendelse, tag_count(tags.tag_id) AS antall FROM tags ORDER BY tag_count(tags.tag_id) DESC;
+
+
+ALTER TABLE public.event_types_by_count OWNER TO ubuntu;
+
+--
+-- Name: events_event_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE events_event_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.events_event_id_seq OWNER TO ubuntu;
+
+--
+-- Name: events_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE events_event_id_seq OWNED BY events.event_id;
+
+
+--
+-- Name: events_with_est_dates; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW events_with_est_dates AS
+    SELECT events.event_id, events.tag_fk, events.place_fk, events.event_date, events.sort_date, event_date_certainty((events.event_date)::text) AS date_cert, estimated_date_from_yyyymmdd((events.event_date)::text) AS est_date, estimated_jday_from_yyyymmdd((events.event_date)::text) AS est_jday, events.event_note FROM participants, events WHERE (participants.event_fk = events.event_id);
+
+
+ALTER TABLE public.events_with_est_dates OWNER TO ubuntu;
+
+--
+-- Name: persons; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE persons (
+    person_id integer NOT NULL,
+    last_edit date DEFAULT now() NOT NULL,
+    gender smallint DEFAULT 0 NOT NULL,
+    given text DEFAULT ''::text NOT NULL,
+    patronym text DEFAULT ''::text NOT NULL,
+    toponym text DEFAULT ''::text NOT NULL,
+    surname text DEFAULT ''::text NOT NULL,
+    occupation text DEFAULT ''::text NOT NULL,
+    epithet text DEFAULT ''::text NOT NULL,
+    keys text[],
+    CONSTRAINT illegal_gender_value CHECK ((gender = ANY (ARRAY[0, 1, 2, 9])))
+);
+
+
+ALTER TABLE public.persons OWNER TO ubuntu;
+
+--
+-- Name: khrd_name_and_dates; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW khrd_name_and_dates AS
+    SELECT persons.person_id AS person, get_person_name(persons.person_id) AS name, date_of_birth(persons.person_id) AS born, date_of_death(persons.person_id) AS died FROM persons;
+
+
+ALTER TABLE public.khrd_name_and_dates OWNER TO ubuntu;
+
+--
+-- Name: khrd_person_lifedata; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW khrd_person_lifedata AS
+    SELECT p.person_id AS person, get_khrd_matricle(p.person_id) AS legacy_id, p.gender, p.given AS forename, p.surname, get_nonaboriginal_flag(p.person_id) AS not_a, get_person_name(p.person_id) AS name, date_of_birth(p.person_id) AS born, jday_of_birth(p.person_id) AS born_jday, have_death(p.person_id) AS isdead, date_of_death(p.person_id) AS died, jday_of_death(p.person_id) AS died_jday, calc_age_at_death(p.person_id) AS ageatdeath, mother.person_id AS mother_id, get_person_name(mother.person_id) AS mother_name, date_of_birth(mother.person_id) AS mother_birth, jday_of_birth(mother.person_id) AS mother_birth_jday, date_of_death(mother.person_id) AS mother_death, jday_of_death(mother.person_id) AS mother_death_jday, father.person_id AS father_id, get_person_name(father.person_id) AS father_name, date_of_birth(father.person_id) AS father_birth, jday_of_birth(father.person_id) AS father_birth_jday, date_of_death(father.person_id) AS father_death, jday_of_death(father.person_id) AS father_death_jday FROM ((persons p LEFT JOIN persons mother ON ((mother.person_id = get_parent(p.person_id, 2)))) LEFT JOIN persons father ON ((father.person_id = get_parent(p.person_id, 1)))) WHERE (p.person_id > 4) ORDER BY p.person_id;
+
+
+ALTER TABLE public.khrd_person_lifedata OWNER TO ubuntu;
+
+--
+-- Name: khrd_person_lifedata_v2; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW khrd_person_lifedata_v2 AS
+    SELECT p.person_id AS person, get_khrd_matricle(p.person_id) AS legacy_id, p.gender, p.given AS forename, p.surname, get_nonaboriginal_flag(p.person_id) AS not_a, get_person_name(p.person_id) AS name, num_children(p.person_id) AS n_children, num_marriages(p.person_id) AS n_marriages, have_death(p.person_id) AS isdead, days_alive_if_dead(p.person_id) AS days_alive_atdeath, age_if_dead(p.person_id) AS age_lb_atdeath, agelong_if_dead(p.person_id) AS age_long_atdeath, days_alive_if_alive(p.person_id) AS days_alive, age_if_alive(p.person_id) AS age_lb, agelong_if_alive(p.person_id) AS age_long, 'MERGE_AGE_AT_DEATH' AS merge_age_at_death, date_of_birth(p.person_id) AS born_text, (estimated_birth_data(p.person_id)).date_cert AS birth_date_cert, (estimated_birth_data(p.person_id)).est_date AS birth_est_date, (estimated_birth_data(p.person_id)).est_jday AS birth_est_jday, (estimated_birth_data(p.person_id)).est_decade AS birth_decade, date_of_death(p.person_id) AS death_text, (estimated_death_data(p.person_id)).date_cert AS death_date_cert, (estimated_death_data(p.person_id)).est_date AS death_est_date, (estimated_death_data(p.person_id)).est_jday AS death_est_jday, (estimated_death_data(p.person_id)).est_decade AS death_decade, mother.person_id AS mother_id, get_person_name(mother.person_id) AS mother_name, date_of_birth(mother.person_id) AS mother_birth, date_of_death(mother.person_id) AS mother_death, father.person_id AS father_id, get_person_name(father.person_id) AS father_name, date_of_birth(father.person_id) AS father_birth, date_of_death(father.person_id) AS father_death FROM ((persons p LEFT JOIN persons mother ON ((mother.person_id = get_parent(p.person_id, 2)))) LEFT JOIN persons father ON ((father.person_id = get_parent(p.person_id, 1)))) WHERE (p.person_id > 6) ORDER BY p.person_id;
+
+
+ALTER TABLE public.khrd_person_lifedata_v2 OWNER TO ubuntu;
+
+--
+-- Name: langs; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE langs (
+    lang_code text NOT NULL
+);
+
+
+ALTER TABLE public.langs OWNER TO ubuntu;
+
+--
+-- Name: linkage_roles; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE linkage_roles (
+    role_id integer NOT NULL,
+    role_en text,
+    role_no text
+);
+
+
+ALTER TABLE public.linkage_roles OWNER TO ubuntu;
+
+--
+-- Name: merged; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE merged (
+    old_person_fk integer NOT NULL,
+    new_person_fk integer NOT NULL,
+    merged_at date DEFAULT now()
+);
+
+
+ALTER TABLE public.merged OWNER TO ubuntu;
+
+--
+-- Name: missing_birth; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW missing_birth AS
+    SELECT persons.person_id FROM persons WHERE ((f_year(get_pbdate(persons.person_id)) = 0) AND (is_merged(persons.person_id) IS FALSE));
+
+
+ALTER TABLE public.missing_birth OWNER TO ubuntu;
+
+--
+-- Name: months; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE months (
+    id integer NOT NULL,
+    gedcode character(3),
+    en text,
+    nb text,
+    alternate text
+);
+
+
+ALTER TABLE public.months OWNER TO ubuntu;
+
+--
+-- Name: multiple_births; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW multiple_births AS
+    SELECT participants.person_fk AS person, count(participants.person_fk) AS birth_count FROM events, participants WHERE ((events.event_id = participants.event_fk) AND (events.tag_fk = ANY (ARRAY[2, 1035]))) GROUP BY participants.person_fk HAVING (count(participants.person_fk) > 1) ORDER BY participants.person_fk;
+
+
+ALTER TABLE public.multiple_births OWNER TO ubuntu;
+
+--
+-- Name: multiple_deaths; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW multiple_deaths AS
+    SELECT participants.person_fk AS person, count(participants.person_fk) AS death_count FROM events, participants WHERE ((events.event_id = participants.event_fk) AND (events.tag_fk = 3)) GROUP BY participants.person_fk HAVING (count(participants.person_fk) > 1) ORDER BY participants.person_fk;
+
+
+ALTER TABLE public.multiple_deaths OWNER TO ubuntu;
+
+--
+-- Name: my_links; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE my_links (
+    link_type character(2) NOT NULL,
+    short_link text,
+    long_link text,
+    description text
+);
+
+
+ALTER TABLE public.my_links OWNER TO ubuntu;
+
+--
+-- Name: name_and_dates; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW name_and_dates AS
+    SELECT persons.person_id AS person, get_person_name(persons.person_id) AS name, get_pbdate(persons.person_id) AS born, get_pddate(persons.person_id) AS died, is_public(persons.person_id) AS is_public FROM persons;
+
+
+ALTER TABLE public.name_and_dates OWNER TO ubuntu;
+
+--
+-- Name: participant_notes; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE participant_notes (
+    person_fk integer NOT NULL,
+    event_fk integer NOT NULL,
+    part_note text
+);
+
+
+ALTER TABLE public.participant_notes OWNER TO ubuntu;
+
+--
+-- Name: person_event_groups; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW person_event_groups AS
+    SELECT p.person_fk AS person, e.sort_date, e.event_date, e.event_id AS event_key, e.place_fk AS place_key, e.tag_fk AS tag_key, t.tag_group_fk AS group_key FROM participants p, tags t, events e WHERE ((t.tag_id = e.tag_fk) AND (e.event_id = p.event_fk)) ORDER BY e.sort_date;
+
+
+ALTER TABLE public.person_event_groups OWNER TO ubuntu;
+
+--
+-- Name: person_events; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW person_events AS
+    SELECT participants.person_fk AS person, tags.tag_name AS event_name, events.event_date, get_place_name(events.place_fk) AS event_place, link_expand(cite_inline(events.event_note)) AS event_note, events.event_id AS event_number, events.tag_fk AS event_type_number, events.sort_date FROM participants, tags, events WHERE ((tags.tag_id = events.tag_fk) AND (events.event_id = participants.event_fk)) ORDER BY events.sort_date;
+
+
+ALTER TABLE public.person_events OWNER TO ubuntu;
+
+--
+-- Name: person_events_with_age; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW person_events_with_age AS
+    SELECT participants.person_fk AS person, estimated_date_from_yyyymmdd(get_pbdate(participants.person_fk)) AS est_birth, events.tag_fk AS tag_id, t.tag_name AS ev, events.event_id, person_age_at_date(participants.person_fk, (events.event_date)::text, events.tag_fk) AS age, events.place_fk, event_date_certainty((events.event_date)::text) AS date_cert, estimated_date_from_yyyymmdd((events.event_date)::text) AS est_date, estimated_jday_from_yyyymmdd((events.event_date)::text) AS est_jday, events.event_note FROM participants, events, tags t WHERE ((participants.event_fk = events.event_id) AND (events.tag_fk = t.tag_id));
+
+
+ALTER TABLE public.person_events_with_age OWNER TO ubuntu;
+
+--
+-- Name: person_lifedata; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW person_lifedata AS
+    SELECT p.person_id AS person, get_khrd_matricle(p.person_id) AS legacy_id, p.gender, p.given AS forename, p.surname, get_nonaboriginal_flag(p.person_id) AS not_a, get_person_name(p.person_id) AS name, date_of_birth(p.person_id) AS born, have_death(p.person_id) AS isdead, date_of_death(p.person_id) AS died, calc_age_at_death(p.person_id) AS ageatdeath, mother.person_id AS mother_id, get_person_name(mother.person_id) AS mother_name, date_of_birth(mother.person_id) AS mother_birth, date_of_death(mother.person_id) AS mother_death, father.person_id AS father_id, get_person_name(father.person_id) AS father_name, date_of_birth(father.person_id) AS father_birth, date_of_death(father.person_id) AS father_death FROM ((persons p LEFT JOIN persons mother ON ((mother.person_id = get_parent(p.person_id, 2)))) LEFT JOIN persons father ON ((father.person_id = get_parent(p.person_id, 1)))) WHERE (length(get_khrd_matricle(p.person_id)) > 0) ORDER BY p.person_id;
+
+
+ALTER TABLE public.person_lifedata OWNER TO ubuntu;
+
+--
+-- Name: persons_person_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE persons_person_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.persons_person_id_seq OWNER TO ubuntu;
+
+--
+-- Name: persons_person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE persons_person_id_seq OWNED BY persons.person_id;
+
+
+--
+-- Name: place_events; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW place_events AS
+    SELECT events.event_id, get_tag_name(events.tag_fk) AS event_name, events.event_date, events.place_fk, get_principal(events.event_id) AS p1, get_principal(events.event_id, get_principal(events.event_id)) AS p2 FROM events ORDER BY events.sort_date;
+
+
+ALTER TABLE public.place_events OWNER TO ubuntu;
+
+--
+-- Name: place_level_desc; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE place_level_desc (
+    place_level_id integer NOT NULL,
+    place_level_name text DEFAULT ''::text NOT NULL,
+    desc_en text DEFAULT ''::text NOT NULL,
+    desc_nb text DEFAULT ''::text NOT NULL
+);
+
+
+ALTER TABLE public.place_level_desc OWNER TO ubuntu;
+
+--
+-- Name: places_place_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE places_place_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.places_place_id_seq OWNER TO ubuntu;
+
+--
+-- Name: places_place_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE places_place_id_seq OWNED BY places.place_id;
+
+
+--
+-- Name: pm_view; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW pm_view AS
+    SELECT places.place_id, get_place_name(places.place_id) AS place_name, place_count(places.place_id) AS place_count FROM places WHERE (places.place_id <> 1) ORDER BY get_place_name(places.place_id);
+
+
+ALTER TABLE public.pm_view OWNER TO ubuntu;
+
+--
+-- Name: private_persons; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE private_persons (
+    person_fk integer NOT NULL
+);
+
+
+ALTER TABLE public.private_persons OWNER TO ubuntu;
+
+--
+-- Name: tmg_persons; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW tmg_persons AS
+    SELECT persons.person_id, get_parent(persons.person_id, 1) AS father_id, get_parent(persons.person_id, 2) AS mother_id, persons.last_edit, get_pbdate(persons.person_id) AS pb_date, get_pddate(persons.person_id) AS pd_date, persons.gender AS s, is_public(persons.person_id) AS p FROM persons;
+
+
+ALTER TABLE public.tmg_persons OWNER TO ubuntu;
+
+--
+-- Name: public_tmg_persons; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW public_tmg_persons AS
+    SELECT tmg_persons.person_id, CASE WHEN (is_public(tmg_persons.father_id) AND (SELECT (get_surety_int(tmg_persons.person_id, tmg_persons.father_id) = 3))) THEN tmg_persons.father_id ELSE 0 END AS father_id, CASE WHEN (is_public(tmg_persons.mother_id) AND (SELECT (get_surety_int(tmg_persons.person_id, tmg_persons.mother_id) = 3))) THEN tmg_persons.mother_id ELSE 0 END AS mother_id, tmg_persons.last_edit, tmg_persons.pb_date, tmg_persons.pd_date, tmg_persons.s FROM tmg_persons WHERE is_public(tmg_persons.person_id);
+
+
+ALTER TABLE public.public_tmg_persons OWNER TO ubuntu;
+
+--
+-- Name: recent_places; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE recent_places (
+    id integer NOT NULL,
+    place_fk integer
+);
+
+
+ALTER TABLE public.recent_places OWNER TO ubuntu;
+
+--
+-- Name: recent_places_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE recent_places_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.recent_places_id_seq OWNER TO ubuntu;
+
+--
+-- Name: recent_places_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE recent_places_id_seq OWNED BY recent_places.id;
+
+
+--
+-- Name: relation_citations; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE relation_citations (
+    relation_fk integer NOT NULL,
+    source_fk integer NOT NULL
+);
+
+
+ALTER TABLE public.relation_citations OWNER TO ubuntu;
+
+--
+-- Name: relation_notes; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW relation_notes AS
+    SELECT relation_citations.relation_fk AS note_id, sources.source_id, get_source_text(sources.source_id) AS source_text FROM sources, relation_citations WHERE (sources.source_id = relation_citations.source_fk) ORDER BY sources.source_date;
+
+
+ALTER TABLE public.relation_notes OWNER TO ubuntu;
+
+--
+-- Name: relations; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE relations (
+    relation_id integer NOT NULL,
+    child_fk integer NOT NULL,
+    parent_fk integer NOT NULL,
+    surety_fk integer DEFAULT 3 NOT NULL
+);
+
+
+ALTER TABLE public.relations OWNER TO ubuntu;
+
+--
+-- Name: relations_relation_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE relations_relation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.relations_relation_id_seq OWNER TO ubuntu;
+
+--
+-- Name: relations_relation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE relations_relation_id_seq OWNED BY relations.relation_id;
+
+
+--
+-- Name: source_events; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW source_events AS
+    SELECT events.event_id, get_tag_type(events.event_id) AS tag_type, event_citations.source_fk AS source_id, get_tag_name(events.tag_fk) AS event_name, events.event_date, events.sort_date, events.event_note AS note, get_place_name(events.place_fk) AS event_place, get_principal(events.event_id) AS p1, get_principal(events.event_id, get_principal(events.event_id)) AS p2 FROM events, event_citations WHERE (event_citations.event_fk = events.event_id) ORDER BY get_principal(events.event_id);
+
+
+ALTER TABLE public.source_events OWNER TO ubuntu;
+
+--
+-- Name: source_linkage; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE source_linkage (
+    source_fk integer NOT NULL,
+    per_id integer NOT NULL,
+    role_fk integer,
+    person_fk integer,
+    surety_fk integer,
+    s_name text,
+    sl_note text
+);
+
+
+ALTER TABLE public.source_linkage OWNER TO ubuntu;
+
+--
+-- Name: source_part_types; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE source_part_types (
+    part_type_id integer NOT NULL,
+    description text,
+    is_leaf boolean DEFAULT false NOT NULL,
+    label_en text DEFAULT ''::text NOT NULL,
+    label_nb text DEFAULT ''::text NOT NULL
+);
+
+
+ALTER TABLE public.source_part_types OWNER TO ubuntu;
+
+--
+-- Name: source_persons; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW source_persons AS
+    SELECT event_citations.source_fk AS src, principals.event, principals.person, get_person_name(principals.person) AS name FROM principals, event_citations WHERE (principals.event = event_citations.event_fk);
+
+
+ALTER TABLE public.source_persons OWNER TO ubuntu;
+
+--
+-- Name: source_types_by_count; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW source_types_by_count AS
+    SELECT source_part_types.description AS kildetype, part_type_count(source_part_types.part_type_id) AS antall FROM source_part_types ORDER BY part_type_count(source_part_types.part_type_id) DESC;
+
+
+ALTER TABLE public.source_types_by_count OWNER TO ubuntu;
+
+--
+-- Name: sources_source_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE sources_source_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sources_source_id_seq OWNER TO ubuntu;
+
+--
+-- Name: sources_source_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE sources_source_id_seq OWNED BY sources.source_id;
+
+
+--
+-- Name: sureties; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE sureties (
+    surety_id integer NOT NULL,
+    surety_en text,
+    surety_no text
+);
+
+
+ALTER TABLE public.sureties OWNER TO ubuntu;
+
+--
+-- Name: tag_events; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW tag_events AS
+    SELECT events.event_id, events.tag_fk, get_tag_name(events.tag_fk) AS event_name, events.event_date, events.event_note, events.place_fk, get_place_name(events.place_fk) AS place_name, get_principal(events.event_id) AS p1, get_principal(events.event_id, get_principal(events.event_id)) AS p2 FROM events ORDER BY events.sort_date;
+
+
+ALTER TABLE public.tag_events OWNER TO ubuntu;
+
+--
+-- Name: tag_groups; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tag_groups (
+    tag_group_id integer NOT NULL,
+    tag_group_name_en character varying(20) DEFAULT ''::character varying NOT NULL,
+    tag_group_name_nb character varying(20) DEFAULT ''::character varying NOT NULL
+);
+
+
+ALTER TABLE public.tag_groups OWNER TO ubuntu;
+
+--
+-- Name: tag_prepositions; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tag_prepositions (
+    tag_fk integer NOT NULL,
+    lang_code text NOT NULL,
+    preposition text
+);
+
+
+ALTER TABLE public.tag_prepositions OWNER TO ubuntu;
+
+--
+-- Name: tag_tasktypes; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW tag_tasktypes AS
+    SELECT events.tag_fk, get_tag_name(events.tag_fk) AS tagname, count(events.event_id) AS tc, f_year((events.event_date)::text) AS y, tasktype(events.event_note) AS task FROM events WHERE event_note_has_task(events.event_id) GROUP BY events.tag_fk, get_tag_name(events.tag_fk), f_year((events.event_date)::text), tasktype(events.event_note) ORDER BY get_tag_name(events.tag_fk), f_year((events.event_date)::text), tasktype(events.event_note);
+
+
+ALTER TABLE public.tag_tasktypes OWNER TO ubuntu;
+
+--
+-- Name: tag_types; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tag_types (
+    tag_type_id integer NOT NULL,
+    description character varying(20)
+);
+
+
+ALTER TABLE public.tag_types OWNER TO ubuntu;
+
+--
+-- Name: templates; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE templates (
+    source_fk integer NOT NULL,
+    template text
+);
+
+
+ALTER TABLE public.templates OWNER TO ubuntu;
+
+--
+-- Name: tmg_events; Type: VIEW; Schema: public; Owner: ubuntu
+--
+
+CREATE VIEW tmg_events AS
+    SELECT events.event_id, events.tag_fk, get_principal(events.event_id) AS person1_fk, COALESCE(get_principal(events.event_id, get_principal(events.event_id)), 0) AS person2_fk, events.place_fk, events.event_date, events.sort_date, events.event_note, get_tag_type(events.event_id) AS tag_type FROM events;
+
+
+ALTER TABLE public.tmg_events OWNER TO ubuntu;
+
+--
+-- Name: user_settings; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE user_settings (
+    username text DEFAULT "current_user"() NOT NULL,
+    user_full_name text DEFAULT ''::text NOT NULL,
+    user_email text DEFAULT ''::text NOT NULL,
+    last_selected_source integer DEFAULT 0 NOT NULL,
+    place_filter_level text DEFAULT 'level_4'::text NOT NULL,
+    place_filter_content text DEFAULT '%'::text NOT NULL,
+    show_delete boolean DEFAULT false NOT NULL,
+    initials text DEFAULT ''::text NOT NULL,
+    user_lang text DEFAULT 'en'::text NOT NULL
+);
+
+
+ALTER TABLE public.user_settings OWNER TO ubuntu;
+
+--
+-- Name: event_id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE events ALTER COLUMN event_id SET DEFAULT nextval('events_event_id_seq'::regclass);
+
+
+--
+-- Name: person_id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE persons ALTER COLUMN person_id SET DEFAULT nextval('persons_person_id_seq'::regclass);
+
+
+--
+-- Name: place_id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE places ALTER COLUMN place_id SET DEFAULT nextval('places_place_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE recent_places ALTER COLUMN id SET DEFAULT nextval('recent_places_id_seq'::regclass);
+
+
+--
+-- Name: relation_id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE relations ALTER COLUMN relation_id SET DEFAULT nextval('relations_relation_id_seq'::regclass);
+
+
+--
+-- Name: source_id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE sources ALTER COLUMN source_id SET DEFAULT nextval('sources_source_id_seq'::regclass);
+
+
+--
+-- Name: child_parent; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY relations
+    ADD CONSTRAINT child_parent UNIQUE (child_fk, parent_fk);
+
+
+--
+-- Name: dead_children_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY dead_children
+    ADD CONSTRAINT dead_children_pkey PRIMARY KEY (person_fk);
+
+
+--
+-- Name: default_prepositions_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY default_prepositions
+    ADD CONSTRAINT default_prepositions_pkey PRIMARY KEY (lang_code);
+
+
+--
+-- Name: event_citations_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY event_citations
+    ADD CONSTRAINT event_citations_pkey PRIMARY KEY (event_fk, source_fk);
+
+
+--
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (event_id);
+
+
+--
+-- Name: langs_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY langs
+    ADD CONSTRAINT langs_pkey PRIMARY KEY (lang_code);
+
+
+--
+-- Name: linkage_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY linkage_roles
+    ADD CONSTRAINT linkage_roles_pkey PRIMARY KEY (role_id);
+
+
+--
+-- Name: merged_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY merged
+    ADD CONSTRAINT merged_pkey PRIMARY KEY (old_person_fk, new_person_fk);
+
+
+--
+-- Name: months_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY months
+    ADD CONSTRAINT months_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: my_links_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY my_links
+    ADD CONSTRAINT my_links_pkey PRIMARY KEY (link_type);
+
+
+--
+-- Name: participant_notes_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY participant_notes
+    ADD CONSTRAINT participant_notes_pkey PRIMARY KEY (person_fk, event_fk);
+
+
+--
+-- Name: participants_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY participants
+    ADD CONSTRAINT participants_pkey PRIMARY KEY (person_fk, event_fk);
+
+
+--
+-- Name: persons_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY persons
+    ADD CONSTRAINT persons_pkey PRIMARY KEY (person_id);
+
+
+--
+-- Name: place_level_desc_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY place_level_desc
+    ADD CONSTRAINT place_level_desc_pkey PRIMARY KEY (place_level_id);
+
+
+--
+-- Name: places_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY places
+    ADD CONSTRAINT places_pkey PRIMARY KEY (place_id);
+
+
+--
+-- Name: private_persons_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY private_persons
+    ADD CONSTRAINT private_persons_pkey PRIMARY KEY (person_fk);
+
+
+--
+-- Name: recent_places_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY recent_places
+    ADD CONSTRAINT recent_places_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: relation_citations_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY relation_citations
+    ADD CONSTRAINT relation_citations_pkey PRIMARY KEY (relation_fk, source_fk);
+
+
+--
+-- Name: relations_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY relations
+    ADD CONSTRAINT relations_pkey PRIMARY KEY (relation_id);
+
+
+--
+-- Name: source_linkage_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY source_linkage
+    ADD CONSTRAINT source_linkage_pkey PRIMARY KEY (source_fk, per_id);
+
+
+--
+-- Name: source_part_types_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY source_part_types
+    ADD CONSTRAINT source_part_types_pkey PRIMARY KEY (part_type_id);
+
+
+--
+-- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY sources
+    ADD CONSTRAINT sources_pkey PRIMARY KEY (source_id);
+
+
+--
+-- Name: sureties_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY sureties
+    ADD CONSTRAINT sureties_pkey PRIMARY KEY (surety_id);
+
+
+--
+-- Name: tag_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_groups
+    ADD CONSTRAINT tag_groups_pkey PRIMARY KEY (tag_group_id);
+
+
+--
+-- Name: tag_prepositions_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_prepositions
+    ADD CONSTRAINT tag_prepositions_pkey PRIMARY KEY (tag_fk, lang_code);
+
+
+--
+-- Name: tag_types_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_types
+    ADD CONSTRAINT tag_types_pkey PRIMARY KEY (tag_type_id);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (tag_id);
+
+
+--
+-- Name: templates_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY templates
+    ADD CONSTRAINT templates_pkey PRIMARY KEY (source_fk);
+
+
+--
+-- Name: unique_place; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY places
+    ADD CONSTRAINT unique_place UNIQUE (level_1, level_2, level_3, level_4, level_5);
+
+
+--
+-- Name: user_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY user_settings
+    ADD CONSTRAINT user_settings_pkey PRIMARY KEY (username);
+
+
+--
+-- Name: child_key; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX child_key ON relations USING btree (child_fk);
+
+
+--
+-- Name: event_key; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX event_key ON participants USING btree (event_fk);
+
+
+--
+-- Name: parent_key; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX parent_key ON relations USING btree (parent_fk);
+
+
+--
+-- Name: person_key; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX person_key ON participants USING btree (person_fk);
+
+
+--
+-- Name: persons_keys_gin; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX persons_keys_gin ON persons USING gin (keys);
+
+
+--
+-- Name: sources_sdata_gist; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX sources_sdata_gist ON sources USING gist (sdata);
+
+
+--
+-- Name: sources_stree_gist; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX sources_stree_gist ON sources USING gist (stree);
+
+
+--
+-- Name: sources_xids_gist; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX sources_xids_gist ON sources USING gist (xids);
+
+
+--
+-- Name: placelimit; Type: RULE; Schema: public; Owner: ubuntu
+--
+
+CREATE RULE placelimit AS ON INSERT TO recent_places DO DELETE FROM recent_places WHERE (NOT (recent_places.id IN (SELECT recent_places.id FROM recent_places ORDER BY recent_places.id DESC LIMIT 10)));
+
+
+--
+-- Name: dead_children_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY dead_children
+    ADD CONSTRAINT dead_children_person_fk_fkey FOREIGN KEY (person_fk) REFERENCES persons(person_id) ON DELETE CASCADE;
+
+
+--
+-- Name: default_prepositions_lang_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY default_prepositions
+    ADD CONSTRAINT default_prepositions_lang_code_fkey FOREIGN KEY (lang_code) REFERENCES langs(lang_code) ON DELETE CASCADE;
+
+
+--
+-- Name: event_citations_event_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY event_citations
+    ADD CONSTRAINT event_citations_event_fk_fkey FOREIGN KEY (event_fk) REFERENCES events(event_id) ON DELETE CASCADE;
+
+
+--
+-- Name: event_citations_source_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY event_citations
+    ADD CONSTRAINT event_citations_source_fk_fkey FOREIGN KEY (source_fk) REFERENCES sources(source_id);
+
+
+--
+-- Name: events_place_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_place_fk_fkey FOREIGN KEY (place_fk) REFERENCES places(place_id);
+
+
+--
+-- Name: events_tag_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_tag_fk_fkey FOREIGN KEY (tag_fk) REFERENCES tags(tag_id);
+
+
+--
+-- Name: merged_new_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY merged
+    ADD CONSTRAINT merged_new_person_fk_fkey FOREIGN KEY (new_person_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: merged_old_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY merged
+    ADD CONSTRAINT merged_old_person_fk_fkey FOREIGN KEY (old_person_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: participants_event_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY participants
+    ADD CONSTRAINT participants_event_fk_fkey FOREIGN KEY (event_fk) REFERENCES events(event_id) ON DELETE CASCADE;
+
+
+--
+-- Name: participants_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY participants
+    ADD CONSTRAINT participants_person_fk_fkey FOREIGN KEY (person_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: private_persons_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY private_persons
+    ADD CONSTRAINT private_persons_person_fk_fkey FOREIGN KEY (person_fk) REFERENCES persons(person_id) ON DELETE CASCADE;
+
+
+--
+-- Name: recent_places_place_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY recent_places
+    ADD CONSTRAINT recent_places_place_fk_fkey FOREIGN KEY (place_fk) REFERENCES places(place_id) ON DELETE CASCADE;
+
+
+--
+-- Name: relation_citations_relation_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY relation_citations
+    ADD CONSTRAINT relation_citations_relation_fk_fkey FOREIGN KEY (relation_fk) REFERENCES relations(relation_id) ON DELETE CASCADE;
+
+
+--
+-- Name: relation_citations_source_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY relation_citations
+    ADD CONSTRAINT relation_citations_source_fk_fkey FOREIGN KEY (source_fk) REFERENCES sources(source_id);
+
+
+--
+-- Name: relations_child_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY relations
+    ADD CONSTRAINT relations_child_fk_fkey FOREIGN KEY (child_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: relations_parent_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY relations
+    ADD CONSTRAINT relations_parent_fk_fkey FOREIGN KEY (parent_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: relations_surety_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY relations
+    ADD CONSTRAINT relations_surety_fk_fkey FOREIGN KEY (surety_fk) REFERENCES sureties(surety_id);
+
+
+--
+-- Name: source_linkage_person_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY source_linkage
+    ADD CONSTRAINT source_linkage_person_fk_fkey FOREIGN KEY (person_fk) REFERENCES persons(person_id);
+
+
+--
+-- Name: source_linkage_role_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY source_linkage
+    ADD CONSTRAINT source_linkage_role_fk_fkey FOREIGN KEY (role_fk) REFERENCES linkage_roles(role_id);
+
+
+--
+-- Name: source_linkage_source_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY source_linkage
+    ADD CONSTRAINT source_linkage_source_fk_fkey FOREIGN KEY (source_fk) REFERENCES sources(source_id);
+
+
+--
+-- Name: source_linkage_surety_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY source_linkage
+    ADD CONSTRAINT source_linkage_surety_fk_fkey FOREIGN KEY (surety_fk) REFERENCES sureties(surety_id);
+
+
+--
+-- Name: sources_ch_part_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY sources
+    ADD CONSTRAINT sources_ch_part_type_fkey FOREIGN KEY (ch_part_type) REFERENCES source_part_types(part_type_id);
+
+
+--
+-- Name: sources_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY sources
+    ADD CONSTRAINT sources_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES sources(source_id);
+
+
+--
+-- Name: sources_part_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY sources
+    ADD CONSTRAINT sources_part_type_fkey FOREIGN KEY (part_type) REFERENCES source_part_types(part_type_id);
+
+
+--
+-- Name: tag_prepositions_lang_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tag_prepositions
+    ADD CONSTRAINT tag_prepositions_lang_code_fkey FOREIGN KEY (lang_code) REFERENCES langs(lang_code) ON DELETE CASCADE;
+
+
+--
+-- Name: tag_prepositions_tag_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tag_prepositions
+    ADD CONSTRAINT tag_prepositions_tag_fk_fkey FOREIGN KEY (tag_fk) REFERENCES tags(tag_id) ON DELETE CASCADE;
+
+
+--
+-- Name: tags_tag_group_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_tag_group_fk_fkey FOREIGN KEY (tag_group_fk) REFERENCES tag_groups(tag_group_id);
+
+
+--
+-- Name: tags_tag_type_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_tag_type_fk_fkey FOREIGN KEY (tag_type_fk) REFERENCES tag_types(tag_type_id);
+
+
+--
+-- Name: templates_source_fk_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY templates
+    ADD CONSTRAINT templates_source_fk_fkey FOREIGN KEY (source_fk) REFERENCES sources(source_id) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

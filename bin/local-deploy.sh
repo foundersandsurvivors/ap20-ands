@@ -47,16 +47,26 @@ if ! [ -f /srv/.first ];then
 fi
 # ensure dirs exist
 
-makedir $YGGDEP_WEBWORK               root:root                         755
-makedir $YGGDEP_WEBLOGS               ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
-makedir $YGGDEP_WEBWORK/ap20          ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
-makedir $YGGDEP_WEBROOT/documentation ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
-makedir $YGGDEP_WEBROOT/test          $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBLOGS                   ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
+
+makedir $YGGDEP_WEBWORK                   root:root                         755
+makedir $YGGDEP_WEBWORK/ap20              ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
+makedir $YGGDEP_WEBWORK/ap20/bin          $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/db_init      $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/db_init/demo $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/db_init/logs $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/export       $YGGDEP_DEFAULT_PERMS             775
+makedir $YGGDEP_WEBWORK/ap20/export/xml   $YGGDEP_DEFAULT_PERMS             775
+ 
+makedir $YGGDEP_WEBROOT/documentation     ${YGGDEP_WEBUSER}:${YGGDEP_GROUP} 775
+makedir $YGGDEP_WEBROOT/test              $YGGDEP_DEFAULT_PERMS             775
 
 # copy files
 
 cd $DIR
 copy ../src/cgi-bin/first              $YGGDEP_CGIBIN_DIR/first         $YGGDEP_DEFAULT_PERMS 775 "$1"
+
+# src/usr-local-bin
 copy ../src/usr-local-bin/ap20init.sh  /usr/local/bin/ap20init.sh       root:root             700 "$1"
 for F in ../src/usr-local-bin/*
 do
@@ -64,7 +74,13 @@ do
    if ! [ "$B" == "ap20init.sh" ]; then copy $F /usr/local/bin/$B $YGGDEP_DEFAULT_PERMS 775 "$1"; fi
 done
 
-####copy ../src/usr-local-bin/ycodegrep.sh /usr/local/bin/ycodegrep.sh      $YGGDEP_DEFAULT_PERMS 775 "$1"
+# src/webwork
+for F in ../src/webwork/bin/*
+do
+   copy $F $YGGDEP_WEBWORK/ap20/bin $YGGDEP_DEFAULT_PERMS 775 "$1"
+done
+
+# src/www
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
@@ -76,9 +92,16 @@ do
 done
 
 # manual copies/ancilliary web stuff
+DRYRUN="-n"
+if ! [ "$1" == "" ]; then
+   DRYRUN=""
+fi
 echo ""
-echo "-- (web support files) rsync -ax ../src/www/css $YGGDEP_WEBROOT"
-sudo rsync -ax ../src/www/css $YGGDEP_WEBROOT                  
+echo "-- (web support files) rsync $DRYRUN -vax ../src/www/css $YGGDEP_WEBROOT"
+sudo rsync $DRYRUN -vax ../src/www/css $YGGDEP_WEBROOT                  
+echo ""
+echo "-- (demo database files) rsync $DRYRUN -vax ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init"
+sudo rsync $DRYRUN -vax ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init
 
 # make a bunch of symlinks for the xquery modules
 cd $YGGDEP_XQUERYLIB

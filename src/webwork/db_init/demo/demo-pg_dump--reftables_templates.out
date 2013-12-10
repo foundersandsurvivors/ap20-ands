@@ -1,0 +1,27 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: templates; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+INSERT INTO templates VALUES (34, 'xxx: _____ yyyy:______');
+INSERT INTO templates VALUES (14, 'V%2d [url=http://founders-and-survivors.org/prot/teidocs/populations/faspop1/CON31_0%02d.xml]');
+INSERT INTO templates VALUES (33, 'jobid => "demo1", modeltype => "googleform", formkey => "dERucXNEQjVBb1FtNFZWWG5oTEhGZEE6MQ", sheetkey => "OAoiyjWOrNNcCdERucXNEQjVBb1FtNFZWWiG5oTEhGZEE", owner => "zensorac@gmail.com" ');
+INSERT INTO templates VALUES (13, 'rectype=>"XXX"');
+INSERT INTO templates VALUES (84, '~raw_ert/?query=//ert[@n=%s]~Barcode %s~ Image:[er=%s]');
+
+
+--
+-- PostgreSQL database dump complete
+--
+

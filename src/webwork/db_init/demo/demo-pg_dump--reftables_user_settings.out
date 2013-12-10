@@ -1,0 +1,31 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: user_settings; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+INSERT INTO user_settings VALUES ('ssilcot', 'Sandra Silcot', 'ssilcot@unimelb.edu.au', 86, 'level_4', '%', false, 'ss', 'en');
+INSERT INTO user_settings VALUES ('len', 'Len Smith', 'leonard.smith@anu.edu.au', 0, 'level_4', '%', false, 'ls', 'en');
+INSERT INTO user_settings VALUES ('tcdr_web', '', '', 0, 'level_4', '%', false, '', 'en');
+INSERT INTO user_settings VALUES ('khrdbot', 'KHRD automated processes', 'ssilcot@unimelb.edu.au', 0, 'level_4', '%', false, 'KB', 'en');
+INSERT INTO user_settings VALUES ('nknight', 'Nick Knight', 'naknight297@gmail.com', 0, 'level_4', '%', false, 'NAK', 'en');
+INSERT INTO user_settings VALUES ('fas', '', '', 0, 'level_4', '%', false, 'fas', 'en');
+INSERT INTO user_settings VALUES ('janetsm', 'Janet McCalman', 'janetsm@unimelb.edu.au', 0, 'level_4', '%', false, 'jmc', 'en');
+INSERT INTO user_settings VALUES ('rjk300', 'Rebecca Kippen', 'rkippen@unimelb.edu.au', 0, 'level_4', '%', false, 'rjk', 'en');
+INSERT INTO user_settings VALUES ('leifk', 'Leif Kristensen', 'leif@solumslekt.org', 0, 'level_4', '%', false, 'lk', 'nb');
+
+
+--
+-- PostgreSQL database dump complete
+--
+

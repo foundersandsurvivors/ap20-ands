@@ -49,4 +49,5 @@ fi
 LOG="sources_$DB_load_${MODELNAME}.log"
 echo "##======== $0 Load sources in $DB using model $MODELNAME `date`"
 echo "-- psql $DB < $SQL_STATEMENTS > $LOG 2>&1"
+psql $DB < $SQL_STATEMENTS > $LOG 2>&1
 ls -la $LOG
