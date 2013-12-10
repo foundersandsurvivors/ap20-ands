@@ -26,10 +26,23 @@ Manual Installation
 
 [SKIP this if running a Nectar VM]
 
+You need a webserver with postgresql and php installed. See the Installation-guide.md for complete details of core and optional components. 
+
+This repository includes the php web application code and supporting shell/perl/saxon utilities which assist in automating the creation of empty Yggdrasil databases. 
+
+Clone the repo into a convenient location e.g. /srv/ap20/ap20-ands, for example :
+<pre>
+    cd /srv
+    sudo mkdir /srv/ap20; sudo chown ubuntu:ubuntu /srv/ap20
+    cd /srv/ap20 
+    git clone git@github.com:foundersandsurvivors/ap20-ands
+    cd ap20-ands
+</pre>
+
 From the repo as a user with sudo permissions:
 * in the repo, cd bin
 * cp .env.sample ,env and edit .env as required
-* run bin/local-deploy.sh (copies from repo to deployment locations and sets user/permissions)
+* run bin/local-deploy.sh (copies from repo to deployment locations and sets user/permissions; contains sudo commands)
 * add the fragment in src/etc/sudoers to your /etc/sudoers file (allows user www-data to run a setup script)
 * add the fragment in src/etc/environment to your /etc/environment (sets env vars AP20_HOME, AP20_DISTRO, AP20_WEBROOT and FASHOST)
 * To enable the first time web config script to run, as root:

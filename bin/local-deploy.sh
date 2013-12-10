@@ -58,7 +58,13 @@ makedir $YGGDEP_WEBROOT/test          $YGGDEP_DEFAULT_PERMS             775
 cd $DIR
 copy ../src/cgi-bin/first              $YGGDEP_CGIBIN_DIR/first         $YGGDEP_DEFAULT_PERMS 775 "$1"
 copy ../src/usr-local-bin/ap20init.sh  /usr/local/bin/ap20init.sh       root:root             700 "$1"
-copy ../src/usr-local-bin/ycodegrep.sh /usr/local/bin/ycodegrep.sh      $YGGDEP_DEFAULT_PERMS 775 "$1"
+for F in ../src/usr-local-bin/*
+do
+   B=`basename $F`
+   if ! [ "$B" == "ap20init.sh" ]; then copy $F /usr/local/bin/$B $YGGDEP_DEFAULT_PERMS 775 "$1"; fi
+done
+
+####copy ../src/usr-local-bin/ycodegrep.sh /usr/local/bin/ycodegrep.sh      $YGGDEP_DEFAULT_PERMS 775 "$1"
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
