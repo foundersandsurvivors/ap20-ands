@@ -1,0 +1,54 @@
+<spec desc="Yggdrasil dynamic report specifications file">
+<head>
+ <desc><p>XML specifications read by reports.php for generating Yggdrasil dynamic reports.</p></desc>
+</head>
+<text>
+  <reportGrp><head>Population quality assurance reports</head>
+      <report id="p1" target="persons">
+          <head>All people with unknown death</head>
+          <desc>
+<div class="rpthelp"><p>All people whom are:</p>
+<ul><li>known to be dead but with no date (i.e. have death event but no date); or</li>
+    <li>too old to be alive and no death event.</li>
+</ul>
+</div></desc>
+          <sql></sql>
+          <format type="html"/>
+          <format type="txt"/>
+          <batch>overnight</batch>
+      </report>
+      <report id="p2" target="persons">
+          <head>All people with unknown birth</head>
+          <desc><div class="rpthelp"><p>All people whose birth date is unknown.</p></div></desc>
+          <sql></sql>
+          <format type="html"/>
+          <format type="txt"/>
+          <batch>overnight</batch>
+      </report>
+  </reportGrp>
+  <reportGrp domain="khrd"><head>Koori family/clan groups</head>
+      <report id="f1" target="sources.GROUP">
+          <head>List of families and headcounts</head>
+          <sql></sql>
+          <format type="html"/>
+          <batch>overnight</batch>
+      </report>
+      <report id="f2" target="sources.GROUP">
+          <head>Non-aboriginal persons</head>
+          <desc><div class="rpthelp"><p>entity[GROUP] stree[cohorts.notA] part_type[1004] label[GROUP] ch_part_type[1004] subtype_label[GROUP].</p></div></desc>
+          <sql></sql>
+          <format type="html"/>
+          <batch>overnight</batch>
+      </report>
+  </reportGrp>
+  <reportGrp><head>Sources reports</head>
+      <report id="s1" target="sources">
+          <head>Source branch tree</head>
+          <desc><div class="rpthelp"><p>All branches of sources tree.</p></div></desc>
+          <sql></sql>
+          <format type="html"/>
+          <batch>overnight</batch>
+      </report>
+  </reportGrp>
+</text>
+</spec>
