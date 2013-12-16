@@ -75,10 +75,18 @@ do
    if ! [ "$B" == "ap20init.sh" ]; then copy $F /usr/local/bin/$B $YGGDEP_DEFAULT_PERMS 775 "$1"; fi
 done
 
+# xquery
+for F in ../src/xml/xquery-lib/*
+do
+   B=`basename $F`
+   copy $F $YGGDEP_XQUERYLIB/$B $YGGDEP_DEFAULT_PERMS 664 "$1"
+done
+
 # src/webwork
 for F in ../src/webwork/bin/*
 do
-   copy $F $YGGDEP_WEBWORK/ap20/bin $YGGDEP_DEFAULT_PERMS 775 "$1"
+   B=`basename $F`
+   copy $F $YGGDEP_WEBWORK/ap20/bin/$B $YGGDEP_DEFAULT_PERMS 775 "$1"
 done
 copy ../src/webwork/xml_export/run.sh          $YGGDEP_WEBWORK/ap20/xml_export/run.sh $YGGDEP_DEFAULT_PERMS 775 "$1"
 copy ../src/webwork/xml_export/list_tables.sql $YGGDEP_WEBWORK/ap20/xml_export/list_tables.sql $YGGDEP_DEFAULT_PERMS 664 "$1"
@@ -87,24 +95,32 @@ copy ../src/webwork/xml_export/list_tables.sql $YGGDEP_WEBWORK/ap20/xml_export/l
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
-# xquery
-for F in ../src/xml/xquery-lib/*
-do
-   B=`basename $F`
-   copy $F $YGGDEP_XQUERYLIB/$B $YGGDEP_DEFAULT_PERMS 664 "$1"
-done
-
-# manual copies/ancilliary web stuff
+# code, manual copies/ancilliary web stuff, keep newer
+RSYNCOPTS="-vax -u -i"
 DRYRUN="-n"
 if ! [ "$1" == "" ]; then
    DRYRUN=""
 fi
 echo ""
-echo "-- (web support files) rsync $DRYRUN -vax ../src/www/css $YGGDEP_WEBROOT"
-sudo rsync $DRYRUN -vax ../src/www/css $YGGDEP_WEBROOT                  
+echo "-- (web support files) rsync $DRYRUN $RSYNCOPTS ../src/www/css $YGGDEP_WEBROOT"
+sudo rsync $DRYRUN $RSYNCOPTS ../src/www/css $YGGDEP_WEBROOT                  
 echo ""
-echo "-- (demo database files) rsync $DRYRUN -vax ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init"
-sudo rsync $DRYRUN -vax ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init
+echo "-- (demo database files) rsync $DRYRUN $RSYNCOPTS ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init"
+sudo rsync $DRYRUN $RSYNCOPTS ../src/webwork/db_init/demo $YGGDEP_WEBWORK/ap20/db_init
+# main phpapp
+XCLUDE="--exclude *.sample"
+OPTS="$DRYRUN $RSYNCOPTS $XCLUDE"
+echo ""
+echo "-- (phpapp Repo->Deployment) rsync $OPTS ../src/www/ap20/yggdrasil/ $YGGDEP_PHPAPP"
+sudo rsync $OPTS ../src/www/ap20/yggdrasil/ $YGGDEP_PHPAPP
+rc=$?
+echo "-- rc[$rc]"
+echo ""
+OPTS2="-n $RSYNCOPTS $XCLUDE --exclude-from rsync.phpapp.dep2repo.exclusions"
+echo "-- (phpapp Deployment->Repo) rsync $OPTS2 $YGGDEP_PHPAPP/ ../src/www/ap20/yggdrasil"
+sudo rsync $OPTS2 $YGGDEP_PHPAPP/ ../src/www/ap20/yggdrasil
+rc2=$?
+echo "-- rc[$rc2]"
 
 # make a bunch of symlinks for the xquery modules
 cd $YGGDEP_XQUERYLIB

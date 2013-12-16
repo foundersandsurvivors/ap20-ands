@@ -43,6 +43,4 @@ if ($enable_zebraforms) {
    echo "<script src=\"x/zf/public/javascript/zebra_form.js\"></script>\n";
 }
 echo "</body>\n</html>\n\n";
-
 ?>
-

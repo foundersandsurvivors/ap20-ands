@@ -5,6 +5,6 @@
  ***************************************************************************/
 
 echo "<!-- Local Navigation Sidebar additions-->\n";
-echo menu_item("./reports.php", "Overnight Reports");
+echo menu_item("./reports.php", "Reporting");
 echo "<!-- Local Navigation Sidebar additions -->\n";
 ?>

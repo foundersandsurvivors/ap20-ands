@@ -1,0 +1,6 @@
+# exclusions for when reporting deployed variations from the repo
+xxxx
+.htaccess*
+# fas specific domain materials
+diggers
+khrd

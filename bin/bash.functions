@@ -55,7 +55,7 @@ function checkenv {
   for V in $1
   do
       eval current_value=\$$V
-echo "........................... V[$V] current_value[$current_value]"
+      #echo "........................... V[$V] current_value[$current_value]"
       if [ -z "$current_value" ] ; then
          bad="Failed checkenv."
          echo ""
@@ -64,7 +64,7 @@ echo "........................... V[$V] current_value[$current_value]"
              echo -n "     Suggestion(see ../src/etc/environment): ";grep "export $V" ../src/etc/environment|perl -pe 's/^.+=//g'
          fi
       else
-         echo "Ok: envt var[$V]=[$current_value]"
+         echo "   Ok envt var[$V]=[$current_value]"
       fi
       #default_value "ALREADY_SET" "Need to set environment var [$V]"
   done
@@ -119,10 +119,9 @@ function copy {
   
   # if target does not exist, do it unless excluded host
   # if they are different 
-  echo ""
-  echo -- copy $FROM $TO [$DO]
+  message="copy $FROM $TO [$DO] "
   if ! [ -f $FROM ]; then
-     echo "BUG: Does not exist FROM[$FROM]. Please correct repo or this script!"
+     echo "##BUG## Does not exist FROM[$FROM]. Please correct repo or this script! $message"
      exit 9
   fi
   if [ -f $TO ]; then
@@ -131,8 +130,9 @@ function copy {
      sudo chmod $PERMS $TO
      DIFF=`sudo diff -C0 $FROM $TO`
      if [ "$DIFF" == "" ]; then
-         echo "   Exists and is identical - good."
+         echo "-- Ok $message"
      else
+         echo "** $message"
          echo "   *****************"
          echo "   * MANUAL ACTION * Please resolve DIFFERENCES and commit changes to the local repo. Differences:"
          echo "   *****************"
@@ -142,13 +142,13 @@ function copy {
   else
        # it doesn't exist
        if [ "$DO" == "do" ]; then
-          echo "   Creating with $OWNER $PERMS"
+          echo "++Created++ with $OWNER $PERMS $message"
           sudo cp $FROM $TO
           sudo chown $OWNER $TO
           sudo chmod $PERMS $TO
           ls -la $TO
        else
-       echo "   To be created with $OWNER $PERMS"
+          echo "++To Create++ with $OWNER $PERMS $message"
        fi
   fi
 }

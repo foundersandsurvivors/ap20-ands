@@ -56,6 +56,8 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
 // application path ( If its not same as REQUEST_URI then auto configure using top 2 dirs )
     $mydb = $dbname;
     $mydomain = $dbname;
+    $myversion = "";
+    $myreports = "";
     $app_path = "/ap20/yggdrasil"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
     $l = strlen($app_path);
     if ( substr($_SERVER['PHP_SELF'],0,$l) != $app_path ) {
@@ -67,8 +69,10 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
          //      Alias /khrd2/dbdev/   /srv/fasweb/httpdocs/khrd/yggdrasil/    ==> $app_path = "/khrd2/dbdev"; $dbname="khrd2dev"
          $parts = preg_split('~/~', $_SERVER['PHP_SELF'], -1);
          $mydb = $mydomain = $parts[1];
-         if ( substr($parts[2],0,2) == 'db' ) { $mydb .= substr($parts[2],2); }
-         else $mydb .= $parts[2];
+         $myreports = "domain/$mydomain/rpt";
+         $myversion = substr($parts[2],2);
+         if ( substr($parts[2],0,2) == 'db' ) { $mydb .= $myversion; } else { $mydb .= $parts[2]; }
+         if ($myversion) { $myreports .= "/$myversion/"; } else { $myreports .= "/db/"; }
          #$log->debug("do autoconf mydomain[$mydomain] mydb[$mydb] PHP_SELF[".$_SERVER['PHP_SELF']."] l[$l] app_path[$app_path]");
          // reset app_path to first 2 dirs
          $app_path = "/" . $parts[1] . "/" . $parts[2];
@@ -96,7 +100,6 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
             $authtokens = $m[1].",demo";
             # check if the cookie domain is the fas sso
             # debugging: file_put_contents("/tmp/sms",$_COOKIE['auth_pubtkt']."\n");
-file_put_contents("/tmp/yyyy1","tokens:".$authtokens."\n");
         }
 
         # we might have a cookie from fas sso, but want the demo db
@@ -108,7 +111,6 @@ file_put_contents("/tmp/yyyy1","tokens:".$authtokens."\n");
             $authuser = $_SERVER['PHP_AUTH_USER'];
             if ( isset($_SERVER['REMOTE_USER_TOKENS']) ) { $authtokens = $_SERVER['REMOTE_USER_TOKENS']; }
             else { $authtokens = "demo"; }
-file_put_contents("/tmp/yyyy2","tokens:".$authtokens."\n");
         }
         # see if the tokens match this dbname
         $tokens = explode(",", $authtokens);

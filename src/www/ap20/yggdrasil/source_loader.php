@@ -7,6 +7,7 @@
 
 /*
 This script will display possible xml trees to load up sources
+Allow display if source already populated an query string=model
 */
 
 // *****************************************************************************

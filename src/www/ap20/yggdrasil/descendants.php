@@ -101,7 +101,8 @@ echo "</ul>\n";
 echo "<p>$_There_are $descendants $_descendants $_and $coparents $_coparents $_in_this_report.</p>\n";
 echo '<p class="bmd">As at ' . mydate(date("Y-m-d")) . "</p>\n";
 // this report is a great handout, and I include my name and address here (or other relevant info)
-researcher_info('leif.txt');
+// sms. Place acccess.txt statement in domain/$domain/access.txt to support multiple domains
+if (file_exists("domain/$mydomain/access.txt")) researcher_info("domain/$mydomain/access.txt");
 echo "</div>\n";
 include "./footer.php";
 ?>
