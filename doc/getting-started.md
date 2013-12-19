@@ -26,7 +26,9 @@ Manual Installation
 
 [SKIP this if running a Nectar VM]
 
-You need a webserver with postgresql and php installed. See the Installation-guide.md for complete details of core and optional components. 
+This section provides a quick overview. For COMPLETE details, see doc/developer/Installation-guide.md.
+
+You'll need a webserver with postgresql and php installed. See the Installation-guide.md for complete details of core and optional components. 
 
 This repository includes the php web application code and supporting shell/perl/saxon utilities which assist in automating the creation of empty Yggdrasil databases. 
 
@@ -39,107 +41,20 @@ Clone the repo into a convenient location e.g. /srv/ap20/ap20-ands, for example 
     cd ap20-ands
 </pre>
 
-From the repo as a user with sudo permissions:
-* in the repo, cd bin
-* cp .env.sample ,env and edit .env as required
-* run bin/local-deploy.sh (copies from repo to deployment locations and sets user/permissions; contains sudo commands)
+Switch to the dev branch as explained in doc/developer/Installation-guide.md for the latest version.
+
+From the repo as a user with sudo permissions (the deployment script contains sudo commands), run _bin/./local-deploy.sh check_ and follow the instructions given to construct your preferred Yggdrasil environment variables. These will determine locations iand unix permissions for the php code, workareas and various related files.
+
+When you have setup the environment correctly and are happy with what is reported by _bin/./local-deploy.sh_ you can run the deployment for real (change "check" to "do"). This will copy files to the appropriate locations for your web server and set permissions as you have specified.
+
+Finally, you will also need to:
 * add the fragment in src/etc/sudoers to your /etc/sudoers file (allows user www-data to run a setup script)
-* add the fragment in src/etc/environment to your /etc/environment (sets env vars AP20_HOME, AP20_DISTRO, AP20_WEBROOT and FASHOST)
-* To enable the first time web config script to run, as root:
-<pre>
-   echo -n "" > /srv/.first
-   chown www-data:www-data /srv/.first
-   chmod 600 /srv/.first
-</pre>
-* install postgresql for your installation if not already installed
-* run these commands so we have users
-<pre>
-cd /var/webwork/ap20/db_init/             # init dir (to be moved into repo)
-sudo -u postgres psql -f init_roles.sql   # creates users
-sudo -u postgres createuser ubuntu
-psql postgres -tAc "alter user ubuntu with password '*****'" # password must match password in yggdrasil/settings/.settings.php
-</pre>
+* add the fragment in src/etc/environment to your /etc/environment (sets operational environment variables AP20_HOME, AP20_DISTRO, AP20_WEBROOT and FASHOST)
+* run the first time configuration and postgresql users are created, as described in detail in the Installation manual
+* modify your apache2 config as decribed in the Installation manual
+* modify settings.php for your database access userid/password
 
-VERY IMPORTANT: First time configuration of username/password
--------------------------------------------------------------
+Yggdrasil should now be ready at: _http://IPNUM/demo/db/_
 
-You ___MUST___ do this to protect your web application from unauthorised public access.
+For how to create other domains, create databases, and other installation/setup information, refer to the detailed installetion guide.
 
-In your web browser, enter ___http://IPNUM/cgi-bin/first___
-
-This runs the script at /usr/local/bin/ap20init.sh, which in turn, if new credentials are sumbitted, will execute /usr/local/bin/ap20init.sh.
-
-You will be prompted for a username and password. This will be used as the default username when generating initial .htaccess files which protect the system documentation and the demo application. 
-
-The initial configuration script will generate .htaccess files using the credentials you supply.  You can of course modify .htaccess files and the web server configuration to meet your particular security requirements. 
-
-If you need/want to rerun the initial configuration again, see above the section "Manual Installation" under the dot point "To enable the first time web config script to run" and then go to ___http://IPNUM/cgi-bin/first___. 
-
-Accessing the "demo" domain database
-------------------------------------
-
-Creating your own new domain
-----------------------------
-Add a line to your apache2 config and restart apache like so:
-
-<pre>
-sudo vi /etc/apache2/sites-enabled/000-default
-After the definition of <Macro YGGDRASIL_DOMAIN $domain> add a line:
-Use YGGDRASIL_DOMAIN yourDomainName
-:wq (save your changes)
-sudo /etc/init.d/apache2 restart
-</pre>
-
-That will provide 3 new URLS confifured to access to ap20/yggdrasil php application:
-
-* http://YOURIP/yourDomainName/dbdev/ (for development)
-* http://YOURIP/yourDomainName/dbtest/ (for testing)
-* http://YOURIP/yourDomainName/db/ (for production usage)
-
-By default, the domain is protected by the same htaccess file which was created for you above (See the "VERY IMPORTANT" section above).
-
-Creating database(s) in your new domain
----------------------------------------
-
-When you access new domain URLSs you will be advised the database needs to be created. The system generates a script in /tmp for you. Login and as use "ubuntu" run that script; the database will be created and an empty instance of Yggdrasil will be ready for you to use.
-
-If you STILL get a message like:
-<pre>
- Connection refused Is the server running on host "localhost" (127.0.0.1) and accepting TCP/IP 
- connections on port 5432? in /var/www/ap20/khrd-dev/settings/settings.php on line 82 Create db
-</pre>
-
-you will need to check the postgresql configuration file (/etc/postgresql/9.X/main/postgresql.conf). For example, you may inadvertantly have multiple versions of postgres running and the one you want might be on a different port than that which is expected in the ap20/yggdrasil/settings/settings.php file.
-
-Adding other Users
-------------------
-
-To do.
-
-Database backups
-----------------
-
-Normal postgresql system administration is required.
-
-Nectar host administration
---------------------------
-
-Once you have everything running the way you want, you should take a snapshot.
-
-If your database gets too large for the single volume, follow the instructions here:
-
-<pre>
-    https://github.com/foundersandsurvivors/nectar-admutils/tree/master/vdb-initialise
-</pre>
-
-NOTE: https://github.com/foundersandsurvivors/nectar-admutils has been installed already into your VM but a second volume, /dev/vdb, has NOT yet been created. 
-
-Updating the codebase from the github repository
-------------------------------------------------
-
-To do.
-
-Contributing changes to the github repository
----------------------------------------------
-
-To do.
