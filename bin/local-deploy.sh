@@ -68,7 +68,7 @@ cd $DIR
 copy ../src/cgi-bin/first              $YGGDEP_CGIBIN_DIR/first         $YGGDEP_DEFAULT_PERMS 775 "$1"
 
 # src/usr-local-bin
-copy ../src/usr-local-bin/ap20init.sh  /usr/local/bin/ap20init.sh       root:root             700 "$1"
+copy ../src/usr-local-bin/ap20init.sh  /usr/local/bin/ap20init.sh       root:root             744 "$1"
 for F in ../src/usr-local-bin/*
 do
    B=`basename $F`
