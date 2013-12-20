@@ -260,6 +260,7 @@ System prerequisites
 ### Apache2
 
 The following apache packages were installed and modules enabled:
+<pre>
 ii  apache2                              2.2.22-1ubuntu1.4                   Apache HTTP Server metapackage
 ii  apache2-mpm-prefork                  2.2.22-1ubuntu1.4                   Apache HTTP Server - traditional non-threaded model
 ii  apache2-threaded-dev                 2.2.22-1ubuntu1.4                   Apache development headers - threaded MPM
@@ -272,6 +273,7 @@ ii  libapache2-mod-macro                 1.1.4-3.2                           Cre
 ii  libapache2-mod-perl2                 2.0.5-5ubuntu1                      Integration of perl with the Apache2 web server
 ii  libapache2-mod-php5                  5.3.10-1ubuntu3.8                   server-side, HTML-embedded scripting language (Apache 2 module)
 ii  libapache2-reload-perl               0.11-2                              module for reloading Perl modules when changed on disk
+</pre>
 
 To enable some advanced BaseX rest functionality you need to enable macros and mod-rewrite:
 * sudo a2enmod rewrite
