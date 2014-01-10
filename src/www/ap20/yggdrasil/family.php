@@ -4,7 +4,7 @@
  *   family.php                                                            *
  *   Yggdrasil: Interactive Family Group Sheet                             *
  *                                                                         *
- *   Copyright (C) 2006-2011 by Leif B. Kristensen <leif@solumslekt.org>   *
+ *   Mod: Jan 2014 sms: hack for $dbname=khrd2test (legacy data from xml)  *
  *   All rights reserved. For terms of use, see LICENSE.txt                *
  ***************************************************************************/
 
@@ -19,6 +19,16 @@
 /**************************************************************************
  ***             Functions used only in this script                     ***
  **************************************************************************/
+
+function pg_array_parse($literal) {
+    if ($literal == '') return;
+    preg_match_all('/(?<=^\{|,)(([^,"{]*)|\s*"((?:[^"\\\\]|\\\\(?:.|[0-9]+|x[0-9a-f]+))*)"\s*)(,|(?<!^\{)(?=\}$))/i', $literal, $matches, PREG_SET_ORDER);
+    $vals = array();
+    foreach ($matches as $match) {
+        $vals[] = $match[3] != '' ? stripcslashes($match[3]) : (strtolower($match[2]) == 'null' ? null : $match[2]);
+    }
+    return $vals;
+}
 
 function print_bd($p, $g) {
     // This func prints birth and death events for spouses and children,
@@ -292,6 +302,7 @@ $row = fetch_row_assoc("
 $gender = $row['gender'];
 $last_edited = $row['last_edit'];
 $is_public = $row['is_public'];
+$lkt_keys = pg_array_parse($row['keys']);
 $family = true;
 require "./header.php";
 
@@ -622,7 +633,18 @@ if (has_spouses($person) || has_descendants($person)) {
             }
         }
     }
+
 }
+// special for khrd
+if ($dbname == "khrd2test") {
+    echo "</hr>";
+    # parse the khrd legacy id as AAAA999
+    $legacyid = $lkt_keys[1];
+    $rest = get_url('http://y1/rx/?run=q/khrd3lid.xq&$LID='.$legacyid);
+    file_put_contents("/tmp/k3_001", $lkt_keys . $rest[1]);
+    echo $rest[0];
+}
+
 echo "</div>\n";
 include "./footer.php";
 ?>

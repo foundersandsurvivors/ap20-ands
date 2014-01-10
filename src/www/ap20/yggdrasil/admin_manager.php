@@ -44,7 +44,9 @@ $instructions = $data->xpath('/*/header/child::*');
 $xpath_str = '/*/text';
 $con = $data->xpath($xpath_str);
 
+echo "<hr/>";
 foreach( $instructions as $node ) { echo $node->asXML(); }
+echo "<hr/>";
 echo "<pre>";
 text_eac("",$con,'list',array('all'=>1));
 

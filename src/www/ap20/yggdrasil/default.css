@@ -342,6 +342,11 @@ div.localhelp {
     background-color: #ccccff;
     font-size : smaller;
 }
+div.external {
+    /* margin-top : 10px; */
+    background-color: #ffccff;
+    font-size : smaller;
+}
 
 /* print style */
 
