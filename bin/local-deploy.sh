@@ -95,8 +95,8 @@ copy ../src/webwork/xml_export/list_tables.sql $YGGDEP_WEBWORK/ap20/xml_export/l
 copy ../src/www/index-first.html       $YGGDEP_WEBROOT/index-first.html root:root             644 "$1"
 copy ../src/www/index-app.html         $YGGDEP_WEBROOT/index-app.html   root:root             644 "$1"
 
-# code, manual copies/ancilliary web stuff, keep newer
-RSYNCOPTS="-vax -u -i"
+# code, manual copies/ancilliary web stuff, keep newer, handle symlinks
+RSYNCOPTS="-vax -u -i -l"
 DRYRUN="-n"
 if ! [ "$1" == "" ]; then
    DRYRUN=""

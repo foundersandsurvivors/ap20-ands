@@ -1,4 +1,5 @@
 # exclusions for when reporting deployed variations from the repo
+.svn
 xxxx
 .htaccess*
 # fas specific domain materials
