@@ -34,7 +34,8 @@ a.deemphasized:visited {color: #cc66cc;}
 .overline {font-family: verdana,calibri,arial,helvetica,geneva,sans-serif; margin-bottom: -2ex;}
 .updatecomment {font-size: 100%; background: #00ffff;}
 .outsidecomment {font-size: 100%; background: #e9e9e9;}
-.microtext {font-size: 10% ; }
+.microtext {font-size: 60% ; }
+.dbg {font-size: 60% ; color: brown; }
 .useem {color: #cc0000 ;}
 .csssmallgray {font-size: xx-small; color: #999999;}
 .boxquote {border: solid 1px gray; padding: 1ex;}
