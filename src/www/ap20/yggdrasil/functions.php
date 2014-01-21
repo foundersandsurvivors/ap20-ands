@@ -668,6 +668,7 @@ function get_curl_fasprot_restxq_uri($uri) {
 // http://mondaybynoon.com/20091123/avoiding-iframes-via-php-and-curl/
 function get_url( $url,  $javascript_loop = 0, $timeout = 30 )
 {
+    global $authuser,$dbname;
     $url = str_replace( "&", "&", urldecode(trim($url)) );
 
 //$cookie = tempnam ("/tmp", "CURLCOOKIE");
@@ -697,6 +698,7 @@ foreach( $_COOKIE as $key => $value ) {
     curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
     curl_setopt( $ch, CURLOPT_TIMEOUT, $timeout );
     curl_setopt( $ch, CURLOPT_MAXREDIRS, 1 );
+    curl_setopt( $ch, CURLOPT_USERAGENT, "YggAp20Php.$dbname.$authuser" );
     $content = curl_exec( $ch );
     $response = curl_getinfo( $ch );
     curl_close ( $ch );
