@@ -1,0 +1,11 @@
+-- internal shortlinks and their expansions to full external URLs
+-- see _my_expand() in functions.sql
+-- se also: http://solumslekt.org/blog/?p=151
+
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('sk', E'\\[sk=(.+?)\\|(.+?)\\|(.+?)\\]', E'<a href="//www.arkivverket.no/URN:sk_read/\\1/\\2" title="Lenke til bilde av skifteprotokollside">\\3</a>', 'Scanned probate registers [sk=protocol|image id|link text]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('kb', E'\\[kb=(.+?)\\|(.+?)\\|(.+?)\\]', E'<a href="//www.arkivverket.no/URN:kb_read?idx_kildeid=\\1&amp;uid=ny&amp;idx_side=\\2" title="Lenke til bilde av kirkebokside">\\3</a>', 'Scanned church books [kb=book id|image id|link text]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('tl', E'\\[tl=(.+?)\\|(.+?)\\|(.+?)\\]', E'<a href="//www.arkivverket.no/URN:tl_read?idx_id=\\1&amp;uid=ny&amp;idx_side=\\2" title="Lenke til bilde av pantebokside">\\3</a>', 'Scanned deed ("pantebok") registers [tl=protocol|image id|link text]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('dc', E'\\[dc=(.+?)\\|(\\d+?)\\|(.+?)\\]', E'<a href="//digitalarkivet.uib.no/cgi-win/webcens.exe?slag=visbase&amp;sidenr=1&amp;filnamn=\\1&amp;gardpostnr=\\2" title="Lenke til tellinga i Digitalarkivet">\\3</a>', 'Digitalarkivet Census transcript [dc=table|farm/house|head of household]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('ps', E'\\[ps=(.+?)\\|(.+?)\\]', E'<a href="//www.porsgrunn.folkebibl.no/bok/vessia/\\1.html" title="Lenke til beskrivelse av hus">\\2</a>', 'Chr. Abrahamsen: Solum - Porsgrund [ps=chapter|link text]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('pe', E'\\[pe=(.+?)\\|(.+?)\\]', E'<a href="//www.porsgrunn.folkebibl.no/bok/fck/ep/\\1.html" title="Lenke til beskrivelse av hus">\\2</a>', 'Finn C. Knudsen: Eidanger - Porsgrund [pe=chapter|link text]');
+INSERT INTO my_links (link_type, short_link, long_link, description) VALUES ('pg', E'\\[pg=(.+?)\\|(.+?)\\]', E'<a href="//www.porsgrunn.folkebibl.no/bok/fck/gp/\\1.html" title="Lenke til beskrivelse av hus">\\2</a>', 'Finn C. Knudsen: Gjerpen - Porsgrund [pg=chapter|link text]');

@@ -1,0 +1,5 @@
+user <username> <password>
+cd path/to/backup/
+bin
+put pgslekt.sql.gz
+bye

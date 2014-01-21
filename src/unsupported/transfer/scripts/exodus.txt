@@ -1,0 +1,4 @@
+user <username> <password>
+cd path/to/backup/
+put exodus.tgz
+bye
