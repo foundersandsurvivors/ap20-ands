@@ -80,7 +80,7 @@ table.nav {
  margin : 0;
  padding : 0;
  float : left;
- clear : left;
+ clear : left; 
 }
 
 td.nav {
@@ -342,11 +342,18 @@ div.localhelp {
     background-color: #ccccff;
     font-size : smaller;
 }
-div.external {
-    /* margin-top : 10px; */
-    background-color: #ffccff;
-    font-size : smaller;
+
+/* sms2014-01-13: external div to right of normal yggdrasil */
+.leftcolumn { width: 60%; float: left; }
+.rightcolumn { border: 1px dashed red; background-color: LightGoldenrodYellow;
+               width: 39%; float: right; font-size : smaller; 
 }
+.external {
+    /* margin-top : 10px; */
+    background-color: LightGoldenrodYellow;
+    /* font-size : smaller; */
+}
+.clear { clear: both;}
 
 /* print style */
 
@@ -407,3 +414,8 @@ div.external {
             margin-right : 0;
     }
 }
+/* added for angular.js views */
+.r { float:right; }
+ul.person { list-style-image: url('/img/glyphicons_003_user.png'); }
+li.person { margin-left: 30px; }
+
