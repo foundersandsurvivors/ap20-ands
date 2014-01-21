@@ -5,5 +5,9 @@ xxxx
 # fas specific domain materials
 diggers
 khrd
-# exclude the reports dir
+# exclude the reports dir (now use domains)
 reports
+domain
+# misc
+easyrdf-0.7.2
+xx_remove_check
