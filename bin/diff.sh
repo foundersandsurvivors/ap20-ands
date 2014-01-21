@@ -9,7 +9,7 @@ if [[ "$AP20_WEBPATH" == "" ]]; then
 fi
 echo "##==== $0: Whole dir diff for Yggdrasil webapp"
 echo "-- from   distro[$DISTRO]"
-echo "-- to   deployed[$AP20_WEBPATH]"
-diff -Naur -X rsync.phpapp.dep2repo.exclusions ../src/www/ap20/yggdrasil $AP20_APP > $OUT 2>&1
+echo "-- to   deployed[$AP20_WEBPATH/]"
+diff -Naur -X rsync.phpapp.dep2repo.exclusions ../src/www/ap20/yggdrasil $AP20_WEBPATH > $OUT 2>&1
 grep '^--- ' $OUT > $OUT2
 ls -la $OUT $OUT2
