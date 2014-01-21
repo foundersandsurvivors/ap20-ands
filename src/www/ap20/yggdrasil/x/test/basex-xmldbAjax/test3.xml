@@ -1,0 +1,33 @@
+<source id="kgd93166" dbkey="13093166" parent="13" type="kgd">
+      <head>KGD:VDL/Zeehan 1899-12-19 [0000012040] Shears, Charlotte (32; Wife of George Shears, Tailor; Zeehan)</head>
+      <district>Zeehan</district>
+      <V3>1204</V3>
+      <srcDate>1899-12-19</srcDate>
+      <sequence>0000012040</sequence>
+      <ref>035/68/01</ref>
+      <deathRegDate deathRegDateX="1899-12-19" daynum="89106">Tue 19-Dec-1899</deathRegDate>
+      <event citation="KGD:VDL/Zeehan:1899-12-19_0000012040" when="1899-12-17" where="?"
+             type="DEAT">
+         <deathDate deathDateX="1899-12-17" daynum="89104">Sun 17-Dec-1899</deathDate>
+         <citation_test>VDL:RGD:Zeehan:12040__1899__035/68/01</citation_test>
+         <participant dbkey="130931661" role="deceased" bornYr="1867" diedYr="1899" sex="2">
+            <persName>Shears, Charlotte</persName>
+            <forename>Charlotte</forename>
+            <surname>Shears</surname>
+            <rank>Wife of George Shears, Tailor</rank>
+            <deathAge>32</deathAge>
+            <deathCause>Pancreas and Gastric Ulcer</deathCause>
+            <residenc>Zeehan</residenc>
+            <categories>
+               <rankocc>279100</rankocc>
+               <agegrp>30</agegrp>
+               <agernd>32</agernd>
+            </categories>
+         </participant>
+      </event>
+      <dbg>
+         <deathRegBy_forename>E.</deathRegBy_forename>
+         <deathRegBy_surname>Goldsmid</deathRegBy_surname>
+         <depreg>Deputy Registrar</depreg>
+      </dbg>
+</source>

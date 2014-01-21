@@ -150,7 +150,7 @@ echo "</div>";
 echo "<hr/>";
 
 
-echo '<iframe src="nyi" width="760" height="1632" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>';
+echo '<iframe src="nyi.php" width="760" height="300" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>';
 
 echo '</div>';
 
