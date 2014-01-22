@@ -1,21 +1,22 @@
-<?php echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="no" lang="no">
-<?php
-
+<?php 
 /***************************************************************************
- *   form_header.php                                                       *
+ *   form_header_editarea.php (version for form_header.php with            *
+ *                             editArea controls)                          *
  *   Yggdrasil: Common Form Header                                         *
- *                                                                         *
- *   Copyright (C) 2006-2011 by Leif B. Kristensen <leif@solumslekt.org>   *
+ *   sms: Jan 2014 cleaned up language setting                             *
  *   All rights reserved. For terms of use, see LICENSE.txt                *
  ***************************************************************************/
 
-?>
+echo <<<FORM_HEADER
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$language" lang="$language">
 <head>
-<?php echo ("<title>$title</title>\n"); ?>
+<title>$title</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Author" content="Leif Biberg Kristensen" />
+<link rel="stylesheet" type="text/css" href="../default.css" />
+<link rel="stylesheet" type="text/css" href="../useit_style.css" />
 <link rel="stylesheet" type="text/css" href="form.css" />
 <link rel="shortcut icon" href="http://localhost/~leif/yggdrasil/forms/favicon.ico" />
 <script type="text/javascript" src="forms.js"></script>
@@ -38,11 +39,9 @@ function my_load(id){
 
 </script>
 </head>
-<?php
-    require_once "../langs/$language.php";
-    echo "<body lang=\"$_lang\"";
+<body lang="$language"
+FORM_HEADER;
     if (isset($form) && isset($focus)) // place cursor
         echo " onload=\"document.forms['$form'].$focus.focus()\"";
-    echo ">\n";
+    echo ">\n<!-- form_header_editarea.php end -->\n";
 ?>
-<!-- Header slutter her -->

@@ -1,5 +1,7 @@
 <?php
 
+require_once "./forms.php";
+
 /***************************************************************************
  *   source_edit_ap20.php  (AP20 extensions)                               *
  *   Yggdrasil: Extra data in sources to support actions and workflows     *
@@ -16,6 +18,7 @@ function apply_key_to_template ($i,$tpl,$n) {
     else               { return $tpl; }
 }
 
+$me = __FILE__;
 if (!isset($_POST['posted'])) {
 
     $_help['sdata'] = "AP20 extension: (hstore) structured data mined from text. Comma delimited field/value pairs. Formatting: f1=&gt;val1, f2=&gt; val2, .... (note re quotes)";
@@ -23,6 +26,7 @@ if (!isset($_POST['posted'])) {
 
     $_help['stree'] = "AP20 extension: Source label as an stree e.g. aot.c31a";
     text_input('Entity:', 100, 'stree', $row['stree'] );
+
 }
 else {
     $error = 0;
