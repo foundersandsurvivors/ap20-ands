@@ -10,7 +10,7 @@
      * links back to this dump script.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2009-2011 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -36,17 +36,24 @@
 
 <?php
     if (isset($_REQUEST['uri'])) {
-        $graph = EasyRdf_Graph::newAndLoad( $_REQUEST['uri'] );
+        $graph = EasyRdf_Graph::newAndLoad($_REQUEST['uri']);
         if ($graph) {
             if (isset($_REQUEST['format']) && $_REQUEST['format'] == 'text') {
-                print "<pre>".$graph->dump(false)."</pre>";
+                print "<pre>".$graph->dump('text')."</pre>";
             } else {
-                $dump = $graph->dump(true);
-                print preg_replace("/ href='([^#][^']*)'/e",'" href=\'?uri=".urlencode("$1")."#$1\'"', $dump);
+                $dump = $graph->dump('html');
+                print preg_replace_callback("/ href='([^#][^']*)'/", 'makeLinkLocal', $dump);
             }
         } else {
             print "<p>Failed to create graph.</p>";
         }
+    }
+
+    # Callback function to re-write links in the dump to point back to this script
+    function makeLinkLocal($matches)
+    {
+        $href = $matches[1];
+        return " href='?uri=".urlencode($href)."#$href'";
     }
 ?>
 </body>

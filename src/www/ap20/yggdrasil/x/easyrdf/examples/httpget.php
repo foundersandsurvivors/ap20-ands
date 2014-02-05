@@ -7,7 +7,7 @@
      * headers and body.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2009-2011 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -58,7 +58,7 @@
     </p>
 
     <p class="headers">
-    <?
+    <?php
         foreach ($response->getHeaders() as $name => $value) {
             echo "<b>$name</b>: $value<br />\n";
         }
@@ -66,7 +66,7 @@
     </p>
 
     <p class="body">
-      <?
+      <?php
         if (defined('ENT_SUBSTITUTE')) {
             // This is needed for PHP 5.4+
             print nl2br(htmlentities($response->getBody(), ENT_SUBSTITUTE | ENT_QUOTES));

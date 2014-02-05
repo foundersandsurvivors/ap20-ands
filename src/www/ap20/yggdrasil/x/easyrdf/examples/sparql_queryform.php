@@ -13,7 +13,7 @@
      * string.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2009-2012 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -65,9 +65,9 @@
       try {
           $results = $sparql->query($_REQUEST['query']);
           if (isset($_REQUEST['text'])) {
-              print "<pre>".htmlspecialchars($results->dump(false))."</pre>";
+              print "<pre>".htmlspecialchars($results->dump('text'))."</pre>";
           } else {
-              print $results->dump(true);
+              print $results->dump('html');
           }
       } catch (Exception $e) {
           print "<div class='error'>".$e->getMessage()."</div>\n";

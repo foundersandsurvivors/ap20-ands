@@ -2,7 +2,7 @@
     /**
      * Using EasyRdf with the Zend Framework
      *
-     * This example demonstrates using Zend_Http_Client and 
+     * This example demonstrates using Zend_Http_Client and
      * Zend_Loader_Autoloader with EasyRdf.
      *
      * It creates a simple graph in memory, saves it to a local graphstore
@@ -10,7 +10,7 @@
      * Zend's curl HTTP client adaptor is used to perform the HTTP requests.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2009-2012 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -23,7 +23,8 @@
 
     // use the CURL based HTTP client adaptor
     $client = new Zend_Http_Client(
-        null, array(
+        null,
+        array(
             'adapter' => 'Zend_Http_Client_Adapter_Curl',
             'keepalive' => true,
             'useragent' => "EasyRdf/zendtest"

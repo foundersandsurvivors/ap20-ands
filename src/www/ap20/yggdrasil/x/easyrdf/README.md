@@ -29,14 +29,14 @@ an [EasyRdf_Graph] object.
 Downloads
 ---------
 
-The latest version of EasyRdf can be [downloaded from GitHub].
+The latest _stable_ version of EasyRdf can be [downloaded from the EasyRdf website].
 
 
 Links
 -----
 
 * [EasyRdf Homepage](http://www.easyrdf.org/)
-* [API documentation](http://www.easyrdf.org/docs/)
+* [API documentation](http://www.easyrdf.org/docs/api)
 * [Change Log](http://github.com/njh/easyrdf/blob/master/CHANGELOG.md)
 * Source Code: <http://github.com/njh/easyrdf>
 * Issue Tracker: <http://github.com/njh/easyrdf/issues>
@@ -64,31 +64,6 @@ Features
 * Comes with a number of examples
 
 
-Property Paths
---------------
-
-EasyRdf supports querying the data in a graph using basic property paths.
-This is a small subset of the property paths described in [SPARQL 1.1 query language].
-
-
-You may use the caret character (^) to get an inverse property, for example:
-
-    $person = $homepage->get('^foaf:homepage');
-
-You can use the pipe character (|) to get alternate properties, for example:
-
-    $title = $document->get('dc:title|dc11:title');
-
-You can use a forward slash (/) to follow a property sequence, for example to get
-the names of all my friends:
-
-    $names = $me->all('foaf:knows/foaf:name');
-
-Finally, in order to use a full property URI, enclose it in angle brackets:
-
-    $name = $me->get('<http://xmlns.com/foaf/0.1/name>');
-
-
 More Examples
 -------------
 
@@ -111,6 +86,7 @@ More Examples
 * [zend_framework.php](https://github.com/njh/easyrdf/blob/master/examples/zend_framework.php#slider) - Example of using Zend_Http_Client and Zend_Loader_Autoloader with EasyRdf
 
 
+
 Licensing
 ---------
 
@@ -119,14 +95,14 @@ The examples are in the public domain, for more information see [UNLICENSE].
 
 
 
-[EasyRdf_Graph]:http://www.easyrdf.org/docs/EasyRdf/EasyRdf_Graph.html
-[EasyRdf_GraphStore]:http://www.easyrdf.org/docs/EasyRdf/EasyRdf_GraphStore.html
-[EasyRdf_Sparql_Client]:http://www.easyrdf.org/docs/EasyRdf/EasyRdf_Sparql_Client.html
-[EasyRdf_Sparql_Result]:http://www.easyrdf.org/docs/EasyRdf/EasyRdf_Sparql_Result.html
+[EasyRdf_Graph]:http://www.easyrdf.org/docs/api/EasyRdf_Graph.html
+[EasyRdf_GraphStore]:http://www.easyrdf.org/docs/api/EasyRdf_GraphStore.html
+[EasyRdf_Sparql_Client]:http://www.easyrdf.org/docs/api/EasyRdf_Sparql_Client.html
+[EasyRdf_Sparql_Result]:http://www.easyrdf.org/docs/api/EasyRdf_Sparql_Result.html
 
 [ARC2]:http://github.com/semsol/arc2/
 [BSD-3-Clause]:http://www.opensource.org/licenses/BSD-3-Clause
-[downloaded from github]:https://github.com/njh/easyrdf/downloads
+[downloaded from the EasyRdf website]:http://www.easyrdf.org/downloads
 [GraphViz]:http://www.graphviz.org/
 [rapper]:http://librdf.org/raptor/rapper.html
 [RDF]:http://en.wikipedia.org/wiki/Resource_Description_Framework

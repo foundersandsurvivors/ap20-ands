@@ -2,11 +2,18 @@ PACKAGE = easyrdf
 VERSION = $(shell php -r "print json_decode(file_get_contents('composer.json'))->version;")
 distdir = $(PACKAGE)-$(VERSION)
 PHP = $(shell which php)
-PHPUNIT = $(PHP) $(shell which phpunit) -d zend.enable_gc=0 --strict --log-junit ./reports/test-results.xml
-PHPCS = phpcs --standard=Zend --tab-width=4 --encoding=utf8 -n
-PHPDOC = phpdoc --title "EasyRdf $(VERSION) API Documentation" \
-                --output "HTML:frames:default" \
-                --undocumentedelements on
+COMPOSER_FLAGS=--no-ansi --no-interaction
+PHPUNIT = vendor/bin/phpunit 
+PHPUNIT_FLAGS = -c config/phpunit.xml
+PHPCS = vendor/bin/phpcs
+PHPCS_FLAGS = --standard=./config/phpcs_ruleset.xml --encoding=utf8 --extensions=php
+SAMI = vendor/bin/sami.php
+
+# Composer doesn't work with bsdtar - try and use GNU tar
+TAR = $(shell which gtar || which gnutar || which tar)
+
+# Disable copying extended attributes and resource forks on Mac OS X
+export COPYFILE_DISABLE=true
 
 EXAMPLE_FILES = examples/*.php
 SOURCE_FILES = lib/EasyRdf.php \
@@ -20,56 +27,59 @@ TEST_SUPPORT = Makefile test/cli_example_wrapper.php \
                test/EasyRdf/Http/MockClient.php \
                test/EasyRdf/Serialiser/NtriplesArray.php \
                test/fixtures/*
-DOC_FILES = composer.json \
-            doap.rdf \
-            docs \
-            README.md \
-            LICENSE.md \
-            CHANGELOG.md
+DOC_FILES = docs/*.md \
+            docs/api
+INFO_FILES = composer.json \
+             doap.rdf \
+             README.md \
+             LICENSE.md \
+             CHANGELOG.md
 
 DISTFILES = $(EXAMPLE_FILES) $(SOURCE_FILES) $(TEST_FILES) \
-            $(TEST_SUPPORT) $(DOC_FILES)
+            $(TEST_SUPPORT) $(INFO_FILES) $(DOC_FILES)
+
 
 .DEFAULT: help
 all: help
 
 # TARGET:test                Run all the PHPUnit tests
 .PHONY: test
-test:
+test: $(PHPUNIT)
 	mkdir -p reports
-	$(PHPUNIT) test
+	$(PHP) $(PHPUNIT) $(PHPUNIT_FLAGS)
 
 # TARGET:test-examples       Run PHPUnit tests for each of the examples
 .PHONY: test-examples
-test-examples:
+test-examples: $(PHPUNIT)
 	mkdir -p reports
-	$(PHPUNIT) test/examples
+	$(PHP) $(PHPUNIT) $(PHPUNIT_FLAGS) --testsuite "EasyRdf Examples"
 
 # TARGET:test-lib            Run PHPUnit tests for the library
 .PHONY: test-lib
-test-lib:
+test-lib: $(PHPUNIT)
 	mkdir -p reports
-	$(PHPUNIT) test/EasyRdf
+	$(PHP) $(PHPUNIT) $(PHPUNIT_FLAGS) --testsuite "EasyRdf Library"
 
-# TARGET:coverage            Run the library tests and generate a code coverage report
+# TARGET:coverage            Run library tests and generate coverage report
 .PHONY: coverage
-coverage:
+coverage: $(PHPUNIT)
 	mkdir -p reports/coverage
-	$(PHPUNIT) --coverage-html ./reports/coverage test/EasyRdf
+	$(PHP) $(PHPUNIT) $(PHPUNIT_FLAGS) --coverage-html ./reports/coverage --testsuite "EasyRdf Library"
 
-# TARGET:docs                Generate HTML documentation
-.PHONY: docs
-docs:
-	mkdir -p docs
-	$(PHPDOC) -d lib -t docs
+# TARGET:apidocs             Generate HTML API documentation
+.PHONY: apidocs
+apidocs: $(SAMI)
+	$(PHP) $(SAMI) update config/sami.php -n -v --force
 
-doap.rdf: doap.php composer.json
+docs/api: apidocs
+
+doap.rdf: doap.php composer.json vendor/autoload.php
 	$(PHP) doap.php > doap.rdf
 
 # TARGET:cs                  Check the code style of the PHP source code
 .PHONY: cs
-cs: $(SOURCE_FILES) $(TEST_FILES)
-	$(PHPCS) $^
+cs: $(PHPCS)
+	$(PHPCS) $(PHPCS_FLAGS) lib test
 
 # TARGET:lint                Perform basic PHP syntax check on all files
 .PHONY: lint
@@ -78,35 +88,39 @@ lint: $(EXAMPLE_FILES) $(SOURCE_FILES) $(TEST_FILES)
 	  $(PHP) -l $$file || exit -1; \
 	done
 
-# TARGET:dist                Build tarball for distribution
+# TARGET:dist                Build archives for distribution
 .PHONY: dist
-dist: $(distdir)
-	tar zcf $(distdir).tar.gz $(distdir)
+dist: $(distdir).tar.gz
 	rm -Rf $(distdir)
-	@echo "Created $(distdir).tar.gz"
+	@echo "Done."
+
+%.tar.gz: %
+	$(TAR) zcf $@ $^
 
 $(distdir): $(DISTFILES)
+	$(gatherfiles)
+
+define gatherfiles
 	@for file in $^; do  \
-		dir=$(distdir)/`dirname "$$file"`; \
+		dir=$@/`dirname "$$file"`; \
 		test -d "$$dir" || mkdir -p "$$dir" || exit -1; \
-		cp -Rfp "$$file" "$(distdir)/$$file" || exit -1; \
+		cp -Rfp "$$file" "$@/$$file" || exit -1; \
 	done
+endef
 
 # TARGET:clean               Delete any temporary and generated files
 .PHONY: clean
 clean:
-	-rm -Rf $(distdir) docs reports
+	find . -name '.DS_Store' -type f -delete
+	-rm -Rf $(distdir) reports vendor
+	-rm -Rf docs/api samicache
+	-rm -f composer.phar composer.lock
 	-rm -f doap.rdf
 
 # TARGET:check-fixme         Scan for files containing the words TODO or FIXME
 .PHONY: check-fixme
 check-fixme:
 	@git grep -n -E 'FIXME|TODO' || echo "No FIXME or TODO lines found."
-
-# TARGET:check-whitespace    Scan for files with trailing whitespace
-.PHONY: check-whitespace
-check-whitespace:
-	@git grep -n -E '[ 	]+$$' || echo "No trailing whitespace found."
 
 # TARGET:help                You're looking at it!
 .PHONY: help
@@ -119,3 +133,20 @@ help:
 	#
 	# Options:
 	#   PHP                 Path to php
+
+
+
+# Composer rules
+composer.phar:
+	curl -s -z composer.phar -o composer.phar http://getcomposer.org/composer.phar
+
+composer-install: composer.phar
+	$(PHP) composer.phar $(COMPOSER_FLAGS) install --dev
+
+composer-update: clean composer.phar
+	$(PHP) composer.phar $(COMPOSER_FLAGS) update --dev
+
+vendor/autoload.php: composer-install
+vendor/bin/phpunit: composer-install
+vendor/bin/phpcs: composer-install
+vendor/bin/sami.php: composer-install

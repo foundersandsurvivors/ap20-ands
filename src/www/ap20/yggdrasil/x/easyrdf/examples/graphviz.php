@@ -12,7 +12,7 @@
      * GraphViz 'dot' command installed.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2012 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2012-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -46,12 +46,11 @@
 
     // Create a GraphViz serialiser
     $gv = new EasyRdf_Serialiser_GraphViz();
-    $gv->setUseLabels( isset($_REQUEST['ul']) );
-    $gv->setOnlyLabelled( isset($_REQUEST['ol']) );
+    $gv->setUseLabels(isset($_REQUEST['ul']));
+    $gv->setOnlyLabelled(isset($_REQUEST['ol']));
 
     // If this is a request for the image, just render it and exit
-    if (isset($_REQUEST['image']))
-    {
+    if (isset($_REQUEST['image'])) {
         header("Content-Type: ".$format->getDefaultMimeType());
         echo $gv->renderImage($graph, $format);
         exit;

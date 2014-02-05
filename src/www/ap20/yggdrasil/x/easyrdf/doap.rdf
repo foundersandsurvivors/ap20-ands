@@ -6,7 +6,7 @@
   <doap:Project rdf:about="http://www.easyrdf.org/doap.rdf#easyrdf">
     <doap:name>EasyRDF</doap:name>
     <doap:shortname>easyrdf</doap:shortname>
-    <doap:revision>0.7.2</doap:revision>
+    <doap:revision>0.8.0</doap:revision>
     <doap:shortdesc xml:lang="en">EasyRdf is a PHP library designed to make it easy to consume and produce RDF.</doap:shortdesc>
     <doap:homepage rdf:resource="http://www.easyrdf.org/"/>
     <doap:programming-language>PHP</doap:programming-language>
@@ -17,8 +17,8 @@
     <doap:mailing-list rdf:resource="http://groups.google.com/group/easyrdf"/>
     <doap:category rdf:resource="http://dbpedia.org/resource/Resource_Description_Framework"/>
     <doap:category rdf:resource="http://dbpedia.org/resource/PHP"/>
-    <doap:category rdf:resource="http://dbpedialite.org/things/24131#id"/>
-    <doap:category rdf:resource="http://dbpedialite.org/things/53847#id"/>
+    <doap:category rdf:resource="http://www.dbpedialite.org/things/24131#id"/>
+    <doap:category rdf:resource="http://www.dbpedialite.org/things/53847#id"/>
     <doap:repository>
       <doap:GitRepository>
         <doap:browse rdf:resource="http://github.com/njh/easyrdf"/>

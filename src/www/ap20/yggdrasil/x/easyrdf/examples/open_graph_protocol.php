@@ -3,7 +3,7 @@
      * Example of reading Open Graph Protocol properties
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2012 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2012-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 

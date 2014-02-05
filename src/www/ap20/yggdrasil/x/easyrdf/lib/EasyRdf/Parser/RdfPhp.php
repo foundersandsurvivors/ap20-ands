@@ -5,7 +5,7 @@
  *
  * LICENSE
  *
- * Copyright (c) 2009-2010 Nicholas J Humfrey.  All rights reserved.
+ * Copyright (c) 2009-2013 Nicholas J Humfrey.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,9 +31,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @package    EasyRdf
- * @copyright  Copyright (c) 2009-2010 Nicholas J Humfrey
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
  * @license    http://www.opensource.org/licenses/bsd-license.php
- * @version    $Id$
  */
 
 /**
@@ -42,7 +41,7 @@
  * http://n2.talis.com/wiki/RDF_PHP_Specification
  *
  * @package    EasyRdf
- * @copyright  Copyright (c) 2009-2010 Nicholas J Humfrey
+ * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
 class EasyRdf_Parser_RdfPhp extends EasyRdf_Parser
@@ -95,6 +94,6 @@ class EasyRdf_Parser_RdfPhp extends EasyRdf_Parser
             }
         }
 
-        return $this->_tripleCount;
+        return $this->tripleCount;
     }
 }

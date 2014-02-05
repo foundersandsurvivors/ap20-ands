@@ -11,7 +11,7 @@
      * person's friends.
      *
      * @package    EasyRdf
-     * @copyright  Copyright (c) 2009-2012 Nicholas J Humfrey
+     * @copyright  Copyright (c) 2009-2013 Nicholas J Humfrey
      * @license    http://unlicense.org/
      */
 
@@ -34,7 +34,7 @@
         $graph = EasyRdf_Graph::newAndLoad($_REQUEST['uri']);
         if ($graph->type() == 'foaf:PersonalProfileDocument') {
             $person = $graph->primaryTopic();
-        } else if ($graph->type() == 'foaf:Person') {
+        } elseif ($graph->type() == 'foaf:Person') {
             $person = $graph->resource();
         }
     }
@@ -44,7 +44,7 @@
 
 <dl>
   <dt>Name:</dt><dd><?= $person->get('foaf:name') ?></dd>
-  <dt>Homepage:</dt><dd><?= link_to( $person->get('foaf:homepage') ) ?></dd>
+  <dt>Homepage:</dt><dd><?= link_to($person->get('foaf:homepage')) ?></dd>
 </dl>
 
 <?php
@@ -56,10 +56,10 @@
                 $label = $friend->getUri();
             }
 
-            if ($friend->isBnode()) {
+            if ($friend->isBNode()) {
                 echo "<li>$label</li>";
             } else {
-                echo "<li>".link_to_self( $label, 'uri='.urlencode($friend) )."</li>";
+                echo "<li>".link_to_self($label, 'uri='.urlencode($friend))."</li>";
             }
         }
         echo "</ul>\n";
@@ -69,7 +69,7 @@
         foreach ($person->all('foaf:interest') as $interest) {
             $label = $interest->label();
             if ($label) {
-                if ($interest->isBnode()) {
+                if ($interest->isBNode()) {
                     echo "<li>$label</li>";
                 } else {
                     echo "<li>".$interest->htmlLink($label)."</li>";
