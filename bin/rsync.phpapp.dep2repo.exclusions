@@ -2,9 +2,14 @@
 .svn
 xxxx
 .htaccess*
-# fas specific domain materials
-diggers
-khrd
+# models for source bulk loading generated xml
+generated
+# fas specific domain materials - exclude
+*ngaitahu*
+*diggers*
+*khrd*
+# partials is for diggers angular stuff
+partials
 # exclude the reports dir (now use domains)
 reports
 domain
