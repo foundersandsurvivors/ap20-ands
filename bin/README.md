@@ -17,10 +17,10 @@ Copy this to ".env", modify that to suit your needs, before running local-deploy
 bash.functions
 --------------
 
-Bash functions used in local-deploy.sh
+Bash functions used in by these shell scripts.
 
-diff.sh and rsync.phpapp.dep2repo.exclusions
---------------------------------------------
+diff.sh
+-------
 
 A script to show differences between this repository and the deployed application.
 
@@ -28,14 +28,31 @@ Differences are written to files in `/tmp`.
 
 Sample output of `./diff.sh`:
 
-    ubuntu@ap20y1: /srv/ap20/ap20-ands/bin $ ./diff.sh
-    ##==== ./diff.sh: Whole dir diff for Yggdrasil webapp
-    -- from deployed[/var/www/ap20/yggdrasil/]
-    -- to   distro[../src/www/ap20/yggdrasil]
-    -rw-rw-r-- 1 ubuntu ubuntu 8110129 Aug 14 16:54 /tmp/diff.log
-    -rw-rw-r-- 1 ubuntu ubuntu  350286 Aug 14 16:54 /tmp/diff-summary.log
+    -- dir deployed[/var/www/ap20/yggdrasil/] Environment variable: $AP20_WEBPATH
+    -- dir   distro[../src/www/ap20/yggdrasil/]
+    ............................................. admin_manager.php:
+    -rw-rw-r-- 1 ubuntu ubuntu 5224 2014-01-07 ../src/www/ap20/yggdrasil/admin_manager.php
+    -rw-rw-r-- 1 ubuntu ubuntu 5224 2014-01-07 /var/www/ap20/yggdrasil/admin_manager.php
+    rc[0] No difference.
+    .. and so on.
+    ..Files present in the deployed dir NOT in this repo will be listed at end.
 
-Exclusions used in diff.sh are in file `rsync.phpapp.dep2repo.exclusions`.
+Optionally, you can pass the name of a different deployed directory to check that against this repository.
+
+diff-webwork.sh
+---------------
+Show differences between webwork utility files in this repository and deployed webwork files 
+(as defined by environment variable: $AP20__WEBWORK).
+
+Sample output of `./diff-xqlib.sh`:
+    ##==== ./diff-webwork.sh: differences between repo and deployed
+    -- dir deployed[/var/webwork/ap20] Using: $AP20_WEBWORK
+    -- dir   distro[../src/webwork/]
+    ============================================================================ $AP20_WEBWORK/bin dir:
+    ............................................. create_and_init_ap20_database.sh:
+    -rwxrwxr-x 1 ubuntu ubuntu 5724 2013-12-10 ../src/webwork/bin/create_and_init_ap20_database.sh
+    -rwxrwxr-x 1 ubuntu ubuntu 5724 2013-12-10 /var/webwork/ap20/bin/create_and_init_ap20_database.sh
+    rc[0] No difference.
 
 diff-xqlib.sh
 -------------

@@ -30,6 +30,8 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
 
     $administrator = array("yggdemo"=>1);
     $icd10_googleIntegration = 0;
+    $is_administrator = 0; # initialised below
+    $google_authtoken = ""; # initialised below
     $enable_zebraforms = 0;
     $bdm_source_search = 1; // for khrd & diggers but let it be turned off; branch filter on existing search cleaner/easier.
     $webwork = "/var/webwork/ap20"; // __ set by ./ap20_deployer.pl for khrd on smstest2 __
@@ -125,7 +127,7 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
             if ( $_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR'] ) {
                 $authuser = "khrdbot";
             }
-            else {           
+            else {
                 // if here, apache authentication has been removed or is broken!
                 header('HTTP/1.0 401 Unauthorized');
                 echo "<h4>Sorry, you($authuser) are not authorised at this time to access this database($dbname). You may go to the <a href=\"http://founders-and-survivors.org/y/\">AP20 Project page</a>.</h4>";
@@ -133,8 +135,10 @@ error_reporting(E_ALL); // change to (E_ALL ^ E_NOTICE) later
             }
         }
     }
-  
 
+// set administrator flag
+    if (array_key_exists($authuser,$administrator)) { $is_administrator = 1; }
+ 
 // application root
     $app_root = 'http://' . $_SERVER['SERVER_NAME'] . $app_path;
 
@@ -212,7 +216,8 @@ $log = Logger::getLogger('ap20_logger');
         SELECT
             initials,
             user_lang,
-            show_delete
+            show_delete,
+            last_selected_source
         FROM
             user_settings
         WHERE
@@ -233,6 +238,7 @@ $log = Logger::getLogger('ap20_logger');
         // user initials
         $_initials = $row['initials'];
         $_show_delete = $row['show_delete'];
+        $_last_selected_source = $row['last_selected_source'];
 
         // user language
         $language = $row['user_lang'];
@@ -320,5 +326,8 @@ $log = Logger::getLogger('ap20_logger');
     $pedigree = false;
     $descendants = false;
     $source_manager = false;
+    // $volMode is for diggers volunteers
+    $volMode = 0;
+    if (preg_match('/^diggers/',$mydomain) && ( !$is_administrator || isset($_GET['vol']) ) ) $volMode = 1;
 
 ?>
