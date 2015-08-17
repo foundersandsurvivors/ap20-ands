@@ -27,7 +27,7 @@ do
    deployed=$AP20_XQLIB/$fname
    distro="$DISTRO/$fname"
    echo "............................................. $fname:"
-   ls -la $distro $deployed
+   ls -la --time-style="+%Y-%m-%d" $distro $deployed
    diff -y --suppress-common-lines $distro $deployed
    rc=$?
    #echo "rc[$rc]"
