@@ -48,9 +48,12 @@ fr     ./fasrecode-1.0.xqm             General purpose recoding and xml rewritin
 fui    ./fasuserinterface-1.0.xqm      BaseX Web User Interface library
 
 fu     ./fasutil-1.0.xqm               FAS xml to ap20 recid mapping and misc/common utilities
-       ./fasutil-1.0-SAXONEE.xqm       (saxon version)
+       ./fasutil-1.0-SAXONEE.xqm       (Saxon version)
 
 functx ./functx-1.0.xqm                Local copy of Priscilla Walmsley's excellent FunctX library (see http://www.xqueryfunctions.com/)
+                                       The copy here provided for convenience is identical to:
+                                       http://www.xqueryfunctions.com/xq/functx-1.0-doc-2007-01.xq as at 14 Aug 2015
+                                       Copyright over this module: Datypic (http://www.datypic.com/)
 
 psql   ./psql-1.0.xqm                  Basex xquery utilities for talking with postgresql (connect; table to xml,html functions)
 

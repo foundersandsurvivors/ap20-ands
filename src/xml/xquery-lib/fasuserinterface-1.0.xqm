@@ -6,6 +6,12 @@ import module namespace request = "http://exquery.org/ns/request";
 import module namespace session = "http://basex.org/modules/session";
 import module namespace fu = "http://fas/fu" at '/usr/local/lib/xquery/fu';
 import module namespace fenv = "http://fas/fenv" at "/usr/local/lib/xquery/fenv";
+import module namespace myjson = "http://fas/myjson" at "/usr/local/lib/xquery/myjson";
+import module namespace str-compare = "http://fas/str-compare" at "/usr/local/lib/xquery/str-compare";
+import module namespace functx="http://www.functx.com" at "/usr/local/lib/xquery/functx";
+(:
+import module namespace simc = "http://www.zorba-xquery.com/modules/data-cleaning/character-based-string-similarity" at "/usr/local/lib/xquery/simc";
+:)
 
 declare variable $fui:users_who_can_update := $fenv:users_who_can_update;
 declare variable $fui:staffsearch := "http://dev.founders-and-survivors.org/prot/staffsearch";
@@ -41,6 +47,10 @@ declare variable $fui:mapHeightDiv := $fui:mapHeight - 4;
   <link rel="stylesheet" type="text/css" href="/css/default.css"/>
   <link rel="stylesheet" type="text/css" href="/css/useit_style.css"/>
 :)
+
+declare function fui:request-from-yggdrasil-source () as xs:string? {
+   if (matches(request:header("Referer"),"/source_manager.php")) then "1" else ""
+};
 
 declare function fui:is-human() as xs:string? {
    (: Note in apache ip restricted requests to /rx/ /rxq/; humans login and access via /restxq/ and /rest/ :)
@@ -208,12 +218,14 @@ declare function fui:fasgaz_post ( $placename as xs:string, $anchor_text as xs:s
     return <button onclick="window.location.href='{$uri}';">{$anchor_text}</button>
 };
 
-declare function fui:fasgaz_uri ( $placename as xs:string, $anchor_text as xs:string*, $n2mark as xs:integer ) {
+declare function fui:fasgaz_uri ( $placename as xs:string*, $anchor_text as xs:string*, $n2mark as xs:integer ) {
+  if ($placename) then
     let $anchor_text := if ($anchor_text) then $anchor_text else $placename
     let $pass_n2mark := if ($n2mark = 0 ) then "" else ":StyleMARK"||xs:string($n2mark)
     let $uri := concat($fui:perl-fasgaz-service,$placename,$pass_n2mark,"?html") (:old:)
     let $uri := concat($fui:fasgaz-service,$placename,$pass_n2mark) (:new:)
     return <a href="{$uri}" title="View place [{$placename}] on map">{$anchor_text}</a>
+  else ()
 };
 
 declare function fui:proxiedHostUri () as xs:string {
@@ -225,26 +237,27 @@ declare function fui:proxiedHostUri () as xs:string {
 (: NOTE: using <base href="{$base}"/> breaks all releative uri's :)
 declare function fui:common_jquery ($here as xs:string* ) as  node()* {
    let $base := fui:proxiedHostUri()
+   let $here := if (matches($here,"localhost")) then "" else $here
    return
   (<!-- fui:common_jquery -->,
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>,
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>,
   <meta name="apple-mobile-web-app-capable" content="yes"/>,
   <link rel="stylesheet" type="text/css" href="{$here}/css/default.css"/>,
-  <script type="text/javascript" src="{$here}/bootstrap/js/jquery.js"></script>,
-  <script type="text/javascript" src="{$here}/bootstrap/js/jquery.xpath.js"></script>)
+  <script type="text/javascript" src="{$here}/bootstrap/js/jquery.js"><!-- xxx --></script>,
+  <script type="text/javascript" src="{$here}/bootstrap/js/jquery.xpath.js"><!-- xxx --></script>)
 };
 
 declare function fui:xqib_head ( $title as xs:string*, $javascripts ) as element()* {
 let $here := fui:proxiedHostUri()
-let $incJs := <script type="text/javascript" src="{$here}/bootstrap/js/sms/gaz-frag0.js"></script>
+let $incJs := <script type="text/javascript" src="{$here}/bootstrap/js/sms/gaz-frag0.js"> </script>
 let $x_incJs := string($incJs)
 let $js := $javascripts
 return
 <head>
   <title>{ $title }</title>
   {fui:common_jquery($here)}
-  <script type="text/javascript" src="{$here}/bootstrap/xqib/mxqueryjs/mxqueryjs.nocache.js"></script>
+  <script type="text/javascript" src="{$here}/bootstrap/xqib/mxqueryjs/mxqueryjs.nocache.js"> <!-- seems ok on y1 now? --> </script>
   {$js}
 </head>
 };
@@ -284,7 +297,7 @@ declare function fui:inline_css_for_xml ( $color as xs:string* ) as element() {
 
 declare function fui:myJavascripts ( ) as element()* {
    let $here := fui:proxiedHostUri()
-   return <script src="{$here}/bootstrap/js/sms/form-field-set.js"></script>
+   return <script src="{$here}/bootstrap/js/sms/form-field-set.js"><!-- xxx --></script>
 };
 
 declare function fui:xxxmyJavascripts ( ) as element()* {
@@ -349,13 +362,15 @@ declare function fui:session_recid () as element()* {
 };
 
 declare function fui:whenwhatauth ($auth as element()) as element()* {
+  let $auth := if (local-name($auth)="auth") then $auth else $auth//auth
+  let $username := $auth/uid/text()
   let $whenwhat := fui:whenwhat()
   let $ui := <input type="button" value="AuthInfo" onclick="$('#auth').toggleClass('hide')" />
   let $ui := <p style="font-size:small;"><a href="javascript:$('#auth').toggleClass('hide')">[ User info ]</a>
              </p>
-  let $genBy := if ($auth/uid/text()=($fenv:system_administrators))
-                then <pre style="font-size:small;">Sysadmin user: {$auth/uid/text()} Host: {environment-variable('FASHOST')} GeneratedBy: {static-base-uri()}</pre>
-                else ()
+  let $genBy := if ($username=($fenv:system_administrators))
+                then <pre style="font-size:small;">Sysadmin user: {$username} Host: {environment-variable('FASHOST')} GeneratedBy: {static-base-uri()}</pre>
+                else <pre style="font-size:small;">User: {$username} Host: {environment-variable('FASHOST')} GeneratedBy: {static-base-uri()}</pre>
   let $auth := if (local-name($auth)="auth") then <div id="auth" class="hide">{$auth}</div> else $auth
   return ($whenwhat,$ui,$auth,$genBy)
 };
@@ -673,10 +688,11 @@ declare function fui:kgb2html-table ( $xmlid_1 as xs:string*,
   let $detail := <ol>{for $b at $i in $possible_births//source
                       return <li><a name="PB{$i}"/>{fui:kgb2html($b,$xmlid_1,"found")}</li>}</ol>
   let $index := <table class="kgb"><tr>{
-                 for $e in ("Birth RecId","Registered","Yr/No","Place of birth","Birthdate","Baby","Father","Mother","Informant")
+                 for $e in ("Birth RecId","Registered","Yr/No","Place of birth","Birthdate","Baby","Father","Mother","Informant","System")
                  return <th>{$e}</th>
                 }</tr>{
                 for $b at $i in $possible_births//source
+let $x := file:write("/tmp/kgbXXX",$b)
                   let $baby := $b/event/participant[@role="Baby"]
                   let $sex := if ($baby/@sex="1") then "boy"
                               else if ($baby/@sex="2") then "girl"
@@ -686,6 +702,13 @@ declare function fui:kgb2html-table ( $xmlid_1 as xs:string*,
                   let $inf := $b/event/participant[@role="informant"]
                   let $inf := if ($inf) then concat($inf/persName," (", $inf/rank,") @",$inf/resides)
                               else $b/event/descInformant1/text()
+                  let $lsd := xs:integer(data($b/@ana-lsd))
+                  let $lsd := if ($lsd > 20) then <span class="error">False?</span>
+                              else if ($lsd > 10) then "Unlikely?"
+                              else if ($lsd > 4) then "Possible?"
+                              else if ($lsd > 0) then "Probable?"
+                              else ()
+
                 return <tr><td>{$i}. <a href="#PB{$i}">{data($b/@id)}</a></td>
                            <td>{$b/regDistrict/text()}</td>
                            <td>{concat($b/regYr,"/",$b/regNo)}</td>
@@ -695,6 +718,7 @@ declare function fui:kgb2html-table ( $xmlid_1 as xs:string*,
                            <td>{concat($f/persName," (", $f/rank,")")}</td>
                            <td>{concat($m/maidenname,", ", $m/forename," (", $m/rank,")")}</td>
                            <td>{$inf}</td>
+                           <td>{$lsd} {data($b/@ana-lsd)}</td>
                        </tr>
                 }</table>
    let $placenames := distinct-values(($originalPlaces,$possible_births//(place|regDistrict)//text()))
@@ -1254,9 +1278,15 @@ let $x := file:write("/tmp/ap20xx_54b",<x>{$exact}</x>)
    let $fuzzy := ()
 
    let $found := ($exact,$semiexact,$looser,$vloose,$fuzzy)
+   let $n-found := count($found)
+
+   (: calculate name distance :)
        
-   return <matches zz="2" xmlns="" n="{count($found)}" info="{$info} sorted by most recent birth year"><xp>{$xp}</xp>{
-       for $birth in $found order by data($birth/event/@date) descending return $birth
+   return <matches zz="2" xmlns="" n="{$n-found}" info="{$info} sorted by most recent birth year"><xp>{$xp}</xp>{
+       for $birth in $found 
+         let $lsd := str-compare:lsd($persName, $birth//partipant[@role="Baby"]/persName/text())
+       order by $lsd,data($birth/event/@date) descending 
+       return functx:add-attributes ($birth, (xs:QName('ana-lsd')), ($lsd) )
    }</matches>
 };
 

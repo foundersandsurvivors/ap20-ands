@@ -2,6 +2,34 @@
 
 module namespace ap20 = "http://fas/ap20";
 
+declare variable $ap20:date_type := <select name = "date_type">
+<option value="0">before</option>
+<option value="1">say</option>
+<option value="2">ca.</option>
+<option value="3">exact</option>
+<option value="4">after</option>
+<option value="5">between</option>
+<option value="6">or</option>
+<option value="7">from-to</option>
+</select>;
+
+declare function ap20:pad-string-to-length ( $stringToPad as xs:string? , $padChar as xs:string , $length as xs:integer )  as xs:string {
+   substring(
+     string-join (
+       ($stringToPad, for $i in (1 to $length) return $padChar)
+       ,'')
+    ,1,$length)
+ } ;
+
+declare function ap20:make_event_date ( $date_1 as xs:string*, $date_type as xs:string, $date_2 as xs:string* ) as xs:string* {
+   let $d1 := ap20:pad-date($date_1)
+   let $d2 := ap20:pad-date($date_2)
+   let $type := data($ap20:date_type//option[text()=$date_type]/@value)
+   return $d1||$type||$d2||"1"
+};
+
+declare function ap20:pad-date ( $d as xs:string* ) as xs:string { ap20:pad-string-to-length($d,'0',8) };
+
 declare function ap20:comment ( $c as xs:string* ) as element()* {
    let $cmmt := for $s in $c return <s>--- {$s}</s>
    return (<s>---</s>,$cmmt,<s>---</s>)
@@ -28,6 +56,7 @@ declare function ap20:elements_to_hstore ( $sdata as element()* ) as xs:string* 
    let $str := for $e in $sdata
                let $h := local-name($e)
                let $v := ap20:escape($e/text())
+               where $v (: do NOT supply empties :)
                return concat(',"',$h,'"=&gt;"',$v,'"')
    let $str := string-join($str,"")
    return substring($str,2)
@@ -62,8 +91,6 @@ declare function ap20:add_source (
 }</s>
 
 };
-
-
 
 declare function ap20:event_date( $type as xs:string, $s as xs:string* ) as xs:string* {
    (: return 2 dates - the string and a valid date and perhaps some text/task:)
@@ -139,7 +166,7 @@ declare function ap20:add_event (
 
 <s eid="{$event_id}">
     {concat(
-                       'INSERT into events VALUES(',
+                       'INSERT into events(event_id,tag_fk,place_fk,event_date,sort_date,event_note,ev_sdata) VALUES(',
                        $event_id,',',
                        $tag_fk,',',
                        $place_fk,',',

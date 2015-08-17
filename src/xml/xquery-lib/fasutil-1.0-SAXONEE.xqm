@@ -136,10 +136,11 @@ declare function fu:anyid2xmlid ( $xmlid as xs:string* ) as xs:string {
    let $xmlid := if ( matches($xmlid,"^\d+$") ) then fu:p2x( xs:integer($xmlid) ) else $xmlid
    let $m := fu:xmlid2map_entry($xmlid)
 
-
+(: saxon no understand file:write
 let $x := if ($m and matches($xmlid,"^[a-zA-Z][0-9]*[a-zA-Z]+\d+[a-zA-Z]*\d*$"))
           then file:write("/tmp/fu1","MATCHES $orig-id=["||$orig-id||"] $xmlid="|| $xmlid ||" m["|| $m ||"]")
           else file:write("/tmp/fu1","NOT-MATCHES $orig-id=["||$orig-id||"] $xmlid="|| $xmlid ||" m["|| $m ||"]")
+:)
 
    return if ( $m and matches($xmlid,"^[a-zA-Z][0-9]*[a-zA-Z]+\d+[a-zA-Z]*\d*$") ) 
           then fu:normalise_xmlid($xmlid) (: ensure its valid too :)
@@ -219,7 +220,10 @@ let $t1 := if ($dbid > $fu:ManagedHi_above) then "XXX" else ()
    let $mapkey := xs:string(xs:integer($dbid div $divisor))
    let $map := if ($fu:fas//rec[@key=$mapkey]) then $fu:fas//rec[@key=$mapkey] else $fu:fas//rec[role/@key=$mapkey]
 
+(:
 let $x := file:write("/tmp/fu","$dbid=["||$dbid||"] $t1["||$t1||"] $special["||$special||"] $is-branch="||$is-branch ||" $dbg-divisor="||$dbg-divisor||" $divisor="||$divisor||"] mapkey["||$mapkey||"] map["|| $map ||"]")
+:)
+
    let $map := if ($fu:fas//rec[@key=$mapkey]) then $fu:fas//rec[@key=$mapkey] else $fu:fas//rec[role/@key=$mapkey]
    return      if (not($map) and $dbid > $fu:ManagedHi_above )
                then let $divisor := $fu:ManagedHi_divisor1
