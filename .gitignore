@@ -5,3 +5,7 @@
 # Logs #
 ########
 *.log
+
+# Miscellanea #
+###############
+.y1-ignore

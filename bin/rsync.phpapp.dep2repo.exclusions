@@ -15,4 +15,6 @@ reports
 domain
 # misc
 easyrdf-0.7.2
+easyrdf*
 xx_remove_check
+angular-snippets
