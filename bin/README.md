@@ -39,6 +39,19 @@ Sample output of `./diff.sh`:
 
 Optionally, you can pass the name of a different deployed directory to check that against this repository.
 
+diff-webapp-quick.sh
+--------------------
+
+A quick and dirty varient of diff.sh limited to the web application code.
+
+Sample output of `./diff-webapp-quick.sh`:
+
+    ##==== bin/diff-webapp-quick.sh: Whole dir diff for Yggdrasil webapp
+    -- from deployed[/srv/fasweb/httpdocs/khrd/yggdrasil/]
+    -- to   distro[../src/www/ap20/yggdrasil]
+    -rw-rw-r-- 1 ubuntu ubuntu 3301929 2017-02-20 19:04 /tmp/diff.log
+    -rw-rw-r-- 1 ubuntu ubuntu  56994 2017-02-20 19:04 /tmp/diff-summary.log
+
 diff-webwork.sh
 ---------------
 Show differences between webwork utility files in this repository and deployed webwork files 
